@@ -1,0 +1,102 @@
+Received command: -help.  Processing with 268435456 bits.
+convert.js?e3b6:134 ffmpeg version git-2013-11-21-d1760dd Copyright (c) 2000-2013 the FFmpeg developers
+convert.js?e3b6:134   built on Nov 21 2013 20:03:34 with emcc (Emscripten GCC-like replacement) 1.7.5 (commit 42fdcd5e0f7410d34d57fbf883c4e8039ec4d824)
+convert.js?e3b6:134   configuration: --cc=emcc --enable-cross-compile --target-os=none --arch=x86_32 --cpu=generic --disable-ffplay --disable-ffprobe --disable-ffserver --disable-asm --disable-doc --disable-devices --disable-pthreads --disable-w32threads --disable-network --disable-hwaccels --disable-parsers --disable-bsfs --disable-debug --disable-zlib --disable-protocols --disable-indevs --disable-outdevs --enable-protocol=file --enable-pic --enable-small
+convert.js?e3b6:134   libavutil      52. 52.100 / 52. 52.100
+convert.js?e3b6:134   libavcodec     55. 41.100 / 55. 41.100
+convert.js?e3b6:134   libavformat    55. 21.100 / 55. 21.100
+convert.js?e3b6:134   libavdevice    55.  5.100 / 55.  5.100
+convert.js?e3b6:134   libavfilter     3. 90.102 /  3. 90.102
+convert.js?e3b6:134   libswscale      2.  5.101 /  2.  5.101
+convert.js?e3b6:134   libswresample   0. 17.104 /  0. 17.104
+convert.js?e3b6:134 Hyper fast Audio and Video encoder
+convert.js?e3b6:134 usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+convert.js?e3b6:134 
+convert.js?e3b6:134 Getting help:
+convert.js?e3b6:134     -h      -- print basic options
+convert.js?e3b6:134     -h long -- print more options
+convert.js?e3b6:134     -h full -- print all options (including all format and codec specific options, very long)
+convert.js?e3b6:134     See man ffmpeg for detailed description of the options.
+convert.js?e3b6:134 
+convert.js?e3b6:134 Print help / information / capabilities:
+convert.js?e3b6:134 -L                  show license
+convert.js?e3b6:134 -h topic            show help
+convert.js?e3b6:134 -? topic            show help
+convert.js?e3b6:134 -help topic         show help
+convert.js?e3b6:134 --help topic        show help
+convert.js?e3b6:134 -version            show version
+convert.js?e3b6:134 -formats            show available formats
+convert.js?e3b6:134 -codecs             show available codecs
+convert.js?e3b6:134 -decoders           show available decoders
+convert.js?e3b6:134 -encoders           show available encoders
+convert.js?e3b6:134 -bsfs               show available bit stream filters
+convert.js?e3b6:134 -protocols          show available protocols
+convert.js?e3b6:134 -filters            show available filters
+convert.js?e3b6:134 -pix_fmts           show available pixel formats
+convert.js?e3b6:134 -layouts            show standard channel layouts
+convert.js?e3b6:134 -sample_fmts        show available audio sample formats
+convert.js?e3b6:134 -colors             show available color names
+convert.js?e3b6:134 
+convert.js?e3b6:134 Global options (affect whole program instead of just one file:
+convert.js?e3b6:134 -loglevel loglevel  set logging level
+convert.js?e3b6:134 -v loglevel         set logging level
+convert.js?e3b6:134 -report             generate a report
+convert.js?e3b6:134 -max_alloc bytes    set maximum size of a single allocated block
+convert.js?e3b6:134 -y                  overwrite output files
+convert.js?e3b6:134 -n                  never overwrite output files
+convert.js?e3b6:134 -stats              print progress report during encoding
+convert.js?e3b6:134 -max_error_rate ratio of errors (0.0: no errors, 1.0: 100% error  maximum error rate
+convert.js?e3b6:134 -bits_per_raw_sample number  set the number of bits per raw sample
+convert.js?e3b6:134 -vol volume         change audio volume (256=normal)
+convert.js?e3b6:134 
+convert.js?e3b6:134 Per-file main options:
+convert.js?e3b6:134 -f fmt              force format
+convert.js?e3b6:134 -c codec            codec name
+convert.js?e3b6:134 -codec codec        codec name
+convert.js?e3b6:134 -pre preset         preset name
+convert.js?e3b6:134 -map_metadata outfile[,metadata]:infile[,metadata]  set metadata information of outfile from infile
+convert.js?e3b6:134 -t duration         record or transcode "duration" seconds of audio/video
+convert.js?e3b6:134 -to time_stop       record or transcode stop time
+convert.js?e3b6:134 -fs limit_size      set the limit file size in bytes
+convert.js?e3b6:134 -ss time_off        set the start time offset
+convert.js?e3b6:134 -timestamp time     set the recording timestamp ('now' to set the current time)
+convert.js?e3b6:134 -metadata string=string  add metadata
+convert.js?e3b6:134 -target type        specify target file type ("vcd", "svcd", "dvd", "dv", "dv50", "pal-vcd", "ntsc-svcd", ...)
+convert.js?e3b6:134 -apad               audio pad
+convert.js?e3b6:134 -frames number      set the number of frames to record
+convert.js?e3b6:134 -filter filter_graph  set stream filtergraph
+convert.js?e3b6:134 -filter_script filename  read stream filtergraph description from a file
+convert.js?e3b6:134 -reinit_filter      reinit filtergraph on input parameter changes
+convert.js?e3b6:134 
+convert.js?e3b6:134 Video options:
+convert.js?e3b6:134 -vframes number     set the number of video frames to record
+convert.js?e3b6:134 -r rate             set frame rate (Hz value, fraction or abbreviation)
+convert.js?e3b6:134 -s size             set frame size (WxH or abbreviation)
+convert.js?e3b6:134 -aspect aspect      set aspect ratio (4:3, 16:9 or 1.3333, 1.7777)
+convert.js?e3b6:134 -bits_per_raw_sample number  set the number of bits per raw sample
+convert.js?e3b6:134 -vn                 disable video
+convert.js?e3b6:134 -vcodec codec       force video codec ('copy' to copy stream)
+convert.js?e3b6:134 -timecode hh:mm:ss[:;.]ff  set initial TimeCode value.
+convert.js?e3b6:134 -pass n             select the pass number (1 to 3)
+convert.js?e3b6:134 -vf filter_graph    set video filters
+convert.js?e3b6:134 -b bitrate          video bitrate (please use -b:v)
+convert.js?e3b6:134 -dn                 disable data
+convert.js?e3b6:134 
+convert.js?e3b6:134 Audio options:
+convert.js?e3b6:134 -aframes number     set the number of audio frames to record
+convert.js?e3b6:134 -aq quality         set audio quality (codec-specific)
+convert.js?e3b6:134 -ar rate            set audio sampling rate (in Hz)
+convert.js?e3b6:134 -ac channels        set number of audio channels
+convert.js?e3b6:134 -an                 disable audio
+convert.js?e3b6:134 -acodec codec       force audio codec ('copy' to copy stream)
+convert.js?e3b6:134 -vol volume         change audio volume (256=normal)
+convert.js?e3b6:134 -af filter_graph    set audio filters
+convert.js?e3b6:134 
+convert.js?e3b6:134 Subtitle options:
+convert.js?e3b6:134 -s size             set frame size (WxH or abbreviation)
+convert.js?e3b6:134 -sn                 disable subtitle
+convert.js?e3b6:134 -scodec codec       force subtitle codec ('copy' to copy stream)
+convert.js?e3b6:134 -stag fourcc/tag    force subtitle tag/fourcc
+convert.js?e3b6:134 -fix_sub_duration   fix subtitles duration
+convert.js?e3b6:134 -canvas_size size   set canvas size (WxH or abbreviation)
+convert.js?e3b6:134 -spre preset        set the subtitle options to the indicated preset
