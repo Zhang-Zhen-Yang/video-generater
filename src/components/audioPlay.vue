@@ -91,8 +91,8 @@ export default {
     position: fixed;
     left: 10px;
     top: 10px;
-    width: 300px;
-    height: 30px;
     background-color: #aaaaaa;
+    display: none;
+
   }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <header id="top-bar">
-    <span>mainpic</span>
+    <div class="video-logo"></div>
+    <span>主图视频</span>
     <h2 style="float: left;"></h2>
     <!--<span>主图视频</span>-->
     <button id="generate-btn" class="pointer" @click="generate">
@@ -42,19 +43,20 @@ export default {
   header {
     margin: 0;
     height: 56px;
-    padding: 0 0 0 24px;
+    padding: 0 0 0 0px;
     background-color: #35495E;
     color: #ffffff;
   }
   header span {
     display: inline-block;
     position: relative;
-    font-size: 20px;
-    line-height: 1;
+    font-size: 22px;
+    line-height: 1em;
     letter-spacing: .02em;
-    font-weight: 400;
+    // font-weight: bold;
     box-sizing: border-box;
     padding-top: 16px;
+    color: #1284e7;
   }
   #generate-btn{
     background-color: #1284e7;
@@ -66,5 +68,16 @@ export default {
     height: 100%;
     outline: none;
     border: none;
+  }
+  .video-logo{
+    display: inline-block;
+    width: 70px;
+    height: 100%;
+    // background-color: red;
+    vertical-align: middle;
+    background-image: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cstyle/%3E%3C/defs%3E%3Cpath d='M170.667 768H768a42.667 42.667 0 0 1 0 85.333H128a42.667 42.667 0 0 1-42.667-42.666V213.333A42.667 42.667 0 0 1 128 170.667h768a42.667 42.667 0 0 1 42.667 42.666v597.334a42.667 42.667 0 0 1-85.334 0V256H170.667v512zm234.069-347.435a42.667 42.667 0 1 1 43.861-73.13l213.334 128a42.667 42.667 0 0 1 0 73.13l-213.334 128A42.667 42.667 0 0 1 384 640V512a42.667 42.667 0 0 1 85.333 0v52.65L557.056 512l-152.32-91.435z' fill='%231296db'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center -2px;
+    background-repeat: no-repeat;
   }
 </style>

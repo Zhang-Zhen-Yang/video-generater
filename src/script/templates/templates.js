@@ -314,6 +314,13 @@ const list = [
 					type: 'image',
 					transition: 'photo3',
 					duration: 2000,
+					pic_url: 'http://imgs.aixifan.com/content/2019_1_28/1.5486864778916757E9.png',
+	
+				},
+				{	
+					type: 'image',
+					transition: 'photo3',
+					duration: 2000,
 					pic_url: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042735289507E9.png',
 	
 				},

@@ -18,7 +18,7 @@
             <div v-if="false" class="template-item" :style="{backgroundImage: `url(${item.cover})`}" @click="setTemplate(item)">
               {{ item.name }}
             </div>
-            <div class="template-item" :style="{backgroundImage: `url(${emptyImg})`}" @click="setTemplate(item)">
+            <div class="template-item pointer" :style="{backgroundImage: `url(${emptyImg})`}" @click="setTemplate(item)">
               {{ item.name }}
             </div>
           </div>
@@ -71,6 +71,7 @@ export default {
     },
     setTemplate(temp) {
       this.$store.dispatch('setTemplate', temp);
+      this.modal.show = false;
     }
 
 
