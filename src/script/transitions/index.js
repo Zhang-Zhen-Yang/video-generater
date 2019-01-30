@@ -6,6 +6,8 @@ import fadeInOut from './fadeInOut';
 import monochromatic from './monochromatic';
 import upDownAndScale from './upDownAndScale';
 import photo1 from './photo1';
+import photo2 from './photo2';
+import photo3 from './photo3';
 
 let c = createjs;
 let transitions = {
@@ -109,11 +111,16 @@ let transitions = {
 	},
 	upDownAndScale: function({stage, timeline, item, index, wait }) {
 		upDownAndScale({stage, timeline, item, index, wait });
-		
 	},
 	photo1: function({stage, timeline, item, index, wait }) {
 		photo1({stage, timeline, item, index, wait });
-	}
+	},
+	photo2: function({stage, timeline, item, index, wait }) {
+		photo2({stage, timeline, item, index, wait });
+	},
+	photo3: function({stage, timeline, item, index, wait }) {
+		photo3({stage, timeline, item, index, wait });
+	},
 
 }
 export default transitions;

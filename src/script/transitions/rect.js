@@ -56,7 +56,7 @@ const fun = function({stage, timeline, item, index, wait }) {
 			.to({
 				// x: -canvas.width / 2,
 				// alpha: 0.1
-				visible: false
+				visible: true
 			}, duration * 0.2)
 		timeline.addTween(tween);
 		

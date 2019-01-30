@@ -55,8 +55,10 @@ export default {
   },
   mounted() {
     this.audio = this.$refs.audio;
+    // console.log('this.audio.paused', this.audio.paused);
   },
   watch: {
+    // 监听是否播放
     playing(nVal, oVal) {
       if(!this.src) return;
       if(nVal) {
@@ -65,6 +67,7 @@ export default {
         this.audio.pause();
       }
     },
+    // 监听播放位置的改变
     position(nVal, oVal) {
       if(!this.src) {
         return;

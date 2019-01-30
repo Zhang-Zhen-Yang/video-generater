@@ -27,4 +27,4 @@ window.p = new Vue({
   store,
   render: h => h(App)
 })
-console.log('2019-01-26 09:32:35');
+console.log('2019-01-30 08:52:16');

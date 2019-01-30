@@ -36,8 +36,8 @@ const fun = function({stage, timeline, item, index, wait }) {
 			regY: ih / 2,
 			x: cw / 2,
 			y: ch / 2,
-			scaleX: scale - 0.1,
-			scaleY: scale - 0.1,
+			scaleX: scale ,
+			scaleY: scale,
 			alpha: 0,
 			// shadow: new createjs.Shadow("rgba(0,0,0,0.5)", 5, 5, 10),
 		})
@@ -45,12 +45,10 @@ const fun = function({stage, timeline, item, index, wait }) {
 			.wait(wait)
 			.to({
 				alpha: 1,
-				scaleX: scale - 0.1,
-				scaleY: scale - 0.1,
 			}, 10)
 			.to({
-				scaleX: scale,
-				scaleY: scale,
+				scaleX: scale + 0.1,
+				scaleY: scale + 0.1,
 			}, duration * 0.6, c.Ease.linear)
 			.wait(duration * 0.1)
 			.to({
@@ -74,7 +72,7 @@ const fun = function({stage, timeline, item, index, wait }) {
 	
 	// 遮罩
 	let mask = new c.Shape();
-	mask.graphics.beginFill("#000000").drawRect(0, 0, cw, cw);
+	mask.graphics.beginFill("rgba(0, 0, 0, 0.5)").drawRect(0, 0, cw, cw);
 	mask.set({
 		x: cw / 2,
 		y: ch / 2,

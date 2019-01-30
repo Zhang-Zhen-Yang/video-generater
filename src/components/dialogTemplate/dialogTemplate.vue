@@ -15,7 +15,11 @@
         <div class="dialog-template-content">
 
           <div class="template-item-wrap" v-for="item,index in list">
-            <div class="template-item" :style="{backgroundImage: `url(${item.cover})`}" @click="setTemplate(item)">
+            <div v-if="false" class="template-item" :style="{backgroundImage: `url(${item.cover})`}" @click="setTemplate(item)">
+              {{ item.name }}
+            </div>
+            <div class="template-item" :style="{backgroundImage: `url(${emptyImg})`}" @click="setTemplate(item)">
+              {{ item.name }}
             </div>
           </div>
         </div>
@@ -48,6 +52,9 @@ export default {
     }
   },
   computed: {
+    emptyImg() {
+      return `${window.assets}empty.jpg`;
+    },
     modal(){
       return this.$store.state.dialogTemplate;
     },
@@ -94,6 +101,8 @@ export default {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    text-align: center;
+    line-height: 150px;
   }
   .modal-dialog-footer{
     background-color: white;
