@@ -3273,11 +3273,14 @@ function CanvasRecorder(htmlElement, config) {
             // CanvasCaptureMediaStream
             var canvasMediaStream;
             if ('captureStream' in globalCanvas) {
-                canvasMediaStream = globalCanvas.captureStream(25); // 25 FPS
+                // canvasMediaStream = globalCanvas.captureStream(25); // 25 FPS
+                canvasMediaStream = globalCanvas.captureStream();
             } else if ('mozCaptureStream' in globalCanvas) {
-                canvasMediaStream = globalCanvas.mozCaptureStream(25);
+                // canvasMediaStream = globalCanvas.mozCaptureStream(25);
+                canvasMediaStream = globalCanvas.mozCaptureStream();
             } else if ('webkitCaptureStream' in globalCanvas) {
-                canvasMediaStream = globalCanvas.webkitCaptureStream(25);
+                // canvasMediaStream = globalCanvas.webkitCaptureStream(25);
+                canvasMediaStream = globalCanvas.webkitCaptureStream();
             }
 
             try {
@@ -3364,6 +3367,7 @@ function CanvasRecorder(htmlElement, config) {
              *     var blob = recorder.blob;
              * });
              */
+            // var startT = ('compile', Date.now());
             whammy.compile(function(blob) {
                 if (!config.disableLogs) {
                     console.log('Recording finished!');
@@ -3382,7 +3386,9 @@ function CanvasRecorder(htmlElement, config) {
                 }
 
                 whammy.frames = [];
+                // console.log(('compile',Date.now() - startT) / 1000);
             });
+            
         });
     };
 

@@ -148,6 +148,8 @@ function convertStreams(videoBlob, audioBlob, {t}) {
 		let args = audioBlob ? [
 			'-i', 'video.webm',
 			'-i', 'audio.wav',
+			'-i', 'audio.wav',
+			'-i', 'audio.wav',
 			'-t', t,
 			'-q:v', '4',
 			'-strict', 'experimental',

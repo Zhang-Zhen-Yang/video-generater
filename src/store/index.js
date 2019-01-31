@@ -11,8 +11,9 @@ import util from '../script/util';
 import templates from '../script/templates/templates';
 import {convertStreams, accessWorder, convertImageToVideo} from '../script/convert.js';
 
-// import {convertStreamsNew, accessWorderNew} from '../script/convertNew.js';
+import {convertStreamsNew, accessWorderNew} from '../script/convertNew.js';
 
+import {covertNew} from '../script/termimal.js';
 
 
 import dialogGoods from './dialogGoods';
@@ -44,7 +45,8 @@ const store = {
 			text: '',
 			timeout: '',
 			show: false,
-		}
+		},
+		stage: null
 
 		
 	},
@@ -123,6 +125,17 @@ const store = {
 
 				state.update();
 			}
+		},
+		setAudioPosition(state) {
+			try{
+				let audio = document.getElementById('audio');
+				
+				let audioDuration = audio.duration * 1000;
+				let shouldPosition = state.position % audioDuration;
+				audio.currentTime =  shouldPosition / 1000;
+			}catch(e){
+				console.log(e);
+			}
 		}
 		
 	},
@@ -130,12 +143,12 @@ const store = {
 	actions: {
 		// 初始化 网络请求
 		init({state, commit, dispatch, getters}){
-			accessWorder().then(()=>{
+			/*accessWorderNew().then(()=>{
 				// alert('ddddd');
 				state.asmInitedStatus = 'success';
 			}, ()=>{
 				state.asmInitedStatus = 'error';
-			})
+			})*/
 			// 如果有numIid
 			let numIid = getters.queryObj.numIid
 			if(numIid) {
@@ -198,6 +211,8 @@ const store = {
 		},
 		// 开始生成
 		generate({state, commit, dispatch, getters}) {
+			dispatch('generateNew');
+			return;
 			console.time('startRecord')
 			/* dispatch('testImgToVideo', {});
 			return;*/
@@ -208,8 +223,11 @@ const store = {
 				// 开始录制
 				var recordRTC = RecordRTC(canvas, {
 					type: 'canvas',
+					// recorderType: RecordRTC.WhammyRecorder,
+					// frameInterval: 5,
 					// mimeType: 'video/h264',
 					// frameRate: 5,
+					useWhammyRecorder: true,
 				});
 				state.timeline.gotoAndStop(0);
 				state.playing = false;
@@ -252,8 +270,9 @@ const store = {
 			
 								var recordedBlob = recordRTC.getBlob();
 								console.log('d2', Date.now());
-								// util.funDownload(null, recordedBlob, 'video.webm');
+								util.funDownload(null, recordedBlob, 'video.webm');
 								
+								return;
 								// dispatch('convert', {recordedBlob});
 
 								let audioCode = '';
@@ -299,9 +318,96 @@ const store = {
 						prevPosition = currentPositon;
 					});
 
-				}, 100)
+				}, 200)
 			}
 			
+		},
+		// 生成（新）
+		generateNew({state, commit, dispatch, getters}) {
+			let datas = [];
+			console.log('new');
+
+			state.timeline.removeAllEventListeners();
+			
+	
+			const duration = state.timeline.duration
+			let currentPosition = 0;
+			state.timeline.gotoAndStop(0.1);
+			
+			let tseperate = 1000 / 24;
+			var tickHandler = state.timeline.on('change', () => {
+				const thisPosition = state.timeline.position;
+				console.log('positon', thisPosition);
+				state.stage.update();
+				const base64str = window.canvas.toDataURL('image/jpeg', 1);
+				
+	
+				var imgdata =  base64str.slice(23)
+				var bytes = atob(imgdata);
+				//var bytes = base64;
+				var bytesCode = new ArrayBuffer(bytes.length);
+				// 转换为类型化数组
+				var byteArray = new Uint8Array(bytesCode);
+				// 将base64转换为ascii码
+				for (var i = 0; i < bytes.length; i++) {
+					byteArray[i] = bytes.charCodeAt(i);
+				}
+
+				datas.push(byteArray);
+				
+				if(thisPosition + tseperate < duration) {
+					setTimeout(()=>{
+						state.timeline.gotoAndStop(thisPosition + tseperate);
+					}, 0);
+				} else {
+					state.timeline.off('change',tickHandler);
+					console.log(datas.length);
+					console.log('生成完毕');
+					let audioCode = null;
+					try{
+						if(state.dialogAudio.audioFrom == 'net') {
+							if(state.dialogAudio.selectedAudioID != null) {
+								audioCode = getters.idMapAudio[state.dialogAudio.selectedAudioID];
+							}
+						} else if(state.dialogAudio.audioFrom == 'local'){
+							audioCode = state.dialogAudio.audioData;
+						}
+
+						if(audioCode) {
+							let bytes = atob(audioCode);
+							var bytesCode = new ArrayBuffer(bytes.length);
+							// 转换为类型化数组
+							var byteArray = new Uint8Array(bytesCode);
+							
+							// 将base64转换为ascii码
+							for (var i = 0; i < bytes.length; i++) {
+								byteArray[i] = bytes.charCodeAt(i);
+							}
+							audioCode = byteArray;
+						}
+
+					}catch(e) {
+						console.error(e);
+					}
+					
+					// convertStreamsNew(datas, null, {t: state.timeline.duration / 1000 });
+					let {width, height} = state.stage.canvas;
+					let total = width * height;
+					let bit = (total / 1000 * 5) | 0;
+					// alert(bit);
+					covertNew(datas, audioCode, {t: state.timeline.duration / 1000, b: bit});
+				}
+				
+			});
+			state.timeline.gotoAndStop(0);
+
+
+
+
+
+
+
+
 		},
 		// 更新时间轴
 		updateTimeline({state, commit, dispatch, getters}, {timeline}) {

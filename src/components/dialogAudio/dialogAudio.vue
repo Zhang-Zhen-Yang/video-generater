@@ -102,11 +102,13 @@ export default {
     fetchAutio() {
       this.$store.state.dialogAudio.audioFrom = 'net';
       this.$store.dispatch('fetchAudio');
+      
     },
     selectAudio(item) {
       // alert(item.url);
       this.$store.state.dialogAudio.audioFrom = 'net';
-      this.$store.dispatch('fetchAudioNew', {item})
+      this.$store.dispatch('fetchAudioNew', {item});
+      this.dismiss();
     },
     audioChange({file}) {
       let fileReader = new FileReader();
@@ -117,6 +119,7 @@ export default {
         this.$store.state.dialogAudio.audioType = data[0];
         this.$store.state.dialogAudio.audioFrom = 'local';
         // console.warn(fileReader.result);
+        this.dismiss();
       }
       fileReader.onerror = function(e){
         console.warn(e);

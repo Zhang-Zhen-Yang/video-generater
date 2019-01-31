@@ -39,6 +39,7 @@ export default {
       }*/
 
       let stage = this.stage || new createjs.Stage(this.canvas);
+      this.$store.state.stage = stage;
       stage.clear();
       stage.children = [];
       this.stage = stage;
@@ -154,6 +155,10 @@ export default {
       }
     }, 40);
     this.$store.state.update = this.render;
+
+
+
+    console.log(this.canvas.captureStream);
   },
   watch:{
     project:{

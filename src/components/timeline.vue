@@ -96,7 +96,7 @@ export default {
       for(let i = 0; i < this.duration / 100; i++) {
         data.push(i/10);
       }
-      console.log(data);
+      // console.log(data);
       return data;
     },
     range() {
@@ -144,6 +144,7 @@ export default {
     clickSet(e) {
       // console.log(e);
       this.$store.commit('setPosition', {position: e*1000});
+      this.$store.commit('setAudioPosition');
     },
     callbackRange(e) {
       // let val = parseFloat(e.label) * 1000;

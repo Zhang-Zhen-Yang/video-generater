@@ -1,6 +1,6 @@
 <template>
   <div id="audio-play">
-    <audio :src="src" controls ref="audio" loop></audio>
+    <audio :src="src" controls ref="audio" loop id="audio"></audio>
   </div>
 </template>
 
@@ -23,18 +23,19 @@ export default {
       return this.dialogAudio.selectedAudioID;
     },
     src() {
+      let aurl = '';
       if(this.$store.state.dialogAudio.audioFrom == 'net') {
         if(this.selectedAudioID != null) {
-          return `data:audio/mp3;base64,${this.idMapAudio[this.selectedAudioID]}`;
+          aurl =  `data:audio/mp3;base64,${this.idMapAudio[this.selectedAudioID]}`;
         }
-        return '';
-
       } else if(this.$store.state.dialogAudio.audioFrom == 'local'){
         let audioData = this.$store.state.dialogAudio.audioData;
         let audioType = this.$store.state.dialogAudio.audioType;
-        return `${audioType},${audioData}`;
+        this.checkPaused();
+        aurl =  `${audioType},${audioData}`;
       }
-      return '';
+      // this.checkPaused();
+      return aurl;
     },
     // 播放到的位置
     position() {
@@ -48,7 +49,13 @@ export default {
     }
   },
   methods: {
-
+    checkPaused(){
+      if(this.playing) {
+        this.audio.play();
+      } else {
+        this.audio.pause();
+      }
+    }
   },
   created() {
     
@@ -76,11 +83,15 @@ export default {
       let shouldPosition = this.position % audioDuration;
       // console.log(shouldPosition);
       let audiocurrentTime = this.audio.currentTime * 1000;
-      if(Math.abs(shouldPosition - audiocurrentTime) > 100) {
+      if((Math.abs(shouldPosition - audiocurrentTime) > 500) || (nVal < oVal)) {
         this.audio.currentTime =  shouldPosition / 1000;
       }
-
       // console.log(this.audio.currentTime);
+    },
+    src(nVal, oVal) {
+      setTimeout(()=>{
+        this.checkPaused();
+      }, 100)
     }
   }
 }
