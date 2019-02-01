@@ -200,7 +200,7 @@ export default {
       max-width: 90%;
       max-height: 90%;
       vertical-align: middle;
-      box-shadow: 1px 1px 100px rgba(0, 0, 0, 0.2);
+      box-shadow: 1px 1px 100px rgba(0, 0, 0, 0.1);
       /*position: absolute;
       left: 50%;
       top: 50%;

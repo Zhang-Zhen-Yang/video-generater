@@ -182,40 +182,6 @@ function convertStreams(videoBlob, audioBlob, {t}) {
 		worker.postMessage({
 			type: 'command',
 			arguments:  args,
-			
-			/* [
-				// '-help',
-				'-i', 'video.webm',
-				'-i', 'audio.wav',
-				'-t', t,
-				// '-c:v', 'mpeg4',
-				// '-vcodec', 'copy',
-				//'-c:a', 'vorbis', // or aac
-				// '-b:v', '1450k',  // or 1450k
-				// '-b:a', '96k',  // or 96k
-				//'-pix_fmt', 'yuv420p',
-				//'-preset', 'slow',
-				// '-profile:v', 'baseline',
-				// '-pre','slow',
-				'-q:v', '4',
-				// '-crf', '51',
-				'-strict', 'experimental',
-				// '-c:v', 'libx264',
-				// '-vframes', '24',
-				// '-c:v', 'mpeg4',
-				// '-vcodec', 'h264',
-				'-r', 24,
-				'output.mp4'
-			],*/
-			/* arguments: [
-				'-i', 'video.webm',
-				'-i', 'audio.wav',
-				'-c:v', 'mpeg4',
-				'-c:a', 'vorbis', // or aac
-				'-b:v', '6400k',  // or 1450k
-				'-b:a', '4800k',  // or 96k
-				'-strict', 'experimental', 'output.mp4'
-			],*/
 			files: files
 		});
 	};
@@ -223,7 +189,8 @@ function convertStreams(videoBlob, audioBlob, {t}) {
 
 function PostBlob(blob) {
 	var h2 = document.querySelector('#log');
-	h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="Recorded Audio+Canvas File.mp4">Download Recorded Audio+Canvas file in MP4 container and play in VLC player!</a>';
+	// h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="Recorded Audio+Canvas File.mp4">Download Recorded Audio+Canvas file in MP4 container and play in VLC player!</a>';
+	h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="Recorded Audio+Canvas File.mp4">点击下载视频文件!<div id="video-download-icon"></div></a>';
 	h2.setAttribute('contenteditable', 'false');
 }
 function log(message) {
@@ -232,43 +199,45 @@ function log(message) {
 	console.log(message);
 }
 
-function convertImageToVideo({images}) {
+// 将图片生成视频
+function convertImageToVideo(imagesArray, audio, {f, t, b}, callback) {
 	var worker;	
 	if (!worker) {
 		worker = processInWebWorker();
 	}
-	let args =[
-		'-r', 10,
-		'-t', 3,
-		// '-f', 'image2',
-		'-i', 'canvas%d.png',
-		// '-c:v', 'mpeg4',
-		// '-q:v', '4',
-		// '-probesize', 100,
-		// '-codec', 'image/png',
-		// '-strict', 'experimental',
-		'output.mp4'
-	];
-	let files = images.map((item, index)=>{
+	let files = imagesArray.map((item, index)=>{
+		console.log(`input${index}.jpeg`);
 		return {
-			data: new Uint8Array(item),
-			name: `canvas${index}.png`,
+			name: `input${index}.jpeg`,
+			data: item,
 		}
 	})
-	console.log(files);
+	files.push({
+		"name": "input.wav",
+		"data": audio
+	})
+
+	let commands = `-r ${f}  -f image2 -i input%d.jpeg ${audio? '-i input.wav' :  '' }  -strict -2 -b:v ${b}k -t ${t} output.mp4`;
+
+	let args = util.parseArguments(commands);
+
+	let postMessage = ()=>{
+		worker.postMessage({
+			type: 'command',
+			arguments:  args,
+			files
+		})
+	}
+	// console.log(files);
 	worker.onmessage = function(event) {
 		var message = event.data;
+		if(callback) {
+			callback(message);
+		}
 		if (message.type == "ready") {
 			log('<a href="'+ workerPath +'" download="ffmpeg-asm.js">ffmpeg-asm.js</a> file has been loaded.');
 			// workerReady = true;
-			worker.postMessage({
-				type: 'command',
-				arguments:  args,
-				files: files
-			});
-
-
-
+			postMessage();
 		} else if (message.type == "stdout") {
 			log(message.data);
 		} else if (message.type == "start") {
@@ -285,16 +254,6 @@ function convertImageToVideo({images}) {
 			worker = null;
 		}
 	};
-	/*[
-		{
-			data: new Uint8Array(vab),
-			name: 'video.webm'
-		}
-	];*/
-
-
-
-	
 
 
 }

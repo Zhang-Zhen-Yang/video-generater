@@ -8,6 +8,7 @@
     <dialogImage v-if="dialogImage.show"></dialogImage>
     <dialogTemplate v-if="dialogTemplate.show"></dialogTemplate>
     <dialogAudio v-if="dialogAudio.show"></dialogAudio>
+    <dialogGenerate v-if="dialogGenerate.show"></dialogGenerate>
     <bottom-bar></bottom-bar>
     <audio-play></audio-play>
     <snackbar ref="snackbar"></snackbar>
@@ -20,11 +21,21 @@ import workSpace from './components/workSpace';
 import dialogImage from './components/dialogImage/dialogImage';
 import dialogTemplate from './components/dialogTemplate/dialogTemplate';
 import dialogAudio from './components/dialogAudio/dialogAudio';
+import dialogGenerate from './components/dialogGenerate/dialogGenerate';
 import bottomBar from './components/bottomBar';
 import audioPlay from './components/audioPlay';
 export default {
   name: 'app',
-  components: {topBar, workSpace, dialogImage, dialogTemplate, dialogAudio, bottomBar, audioPlay},
+  components: {
+    topBar,
+    workSpace,
+    dialogImage,
+    dialogTemplate,
+    dialogAudio,
+    dialogGenerate,
+    bottomBar,
+    audioPlay
+  },
   computed: {
     dialogImage() {
       return this.$store.state.dialogImage;
@@ -34,6 +45,9 @@ export default {
     },
     dialogAudio() {
       return this.$store.state.dialogAudio;
+    },
+    dialogGenerate() {
+      return this.$store.state.dialogGenerate;
     },
     snackbar(){
       return this.$store.state.snackbar;

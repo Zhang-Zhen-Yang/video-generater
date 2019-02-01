@@ -50,10 +50,14 @@ export default {
   },
   methods: {
     checkPaused(){
-      if(this.playing) {
-        this.audio.play();
-      } else {
-        this.audio.pause();
+      try{
+        if(this.playing) {
+          this.audio.play();
+        } else {
+          this.audio.pause();
+        }
+      }catch(e){
+        console.warn(e);
       }
     }
   },

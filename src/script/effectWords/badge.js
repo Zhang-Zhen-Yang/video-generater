@@ -188,7 +188,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		bar.graphics.beginFill('#eeeeee').drawRect(0, 0, rectSize * 0.5, rectSize * 0.01);
 		bar.set({
 			x: -50 * 2,
-			y: rectSize * 2 / 3,
+			y: rectSize * (2 / 3 + 0.02),
 			alpha: 0,
 		})
 		var barTween = createjs.Tween.get(bar)

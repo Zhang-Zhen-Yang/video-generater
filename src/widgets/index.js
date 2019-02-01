@@ -21,6 +21,7 @@ import slideBar from './slideBar/slideBar.vue';
 import colorPicker from './colorPicker/colorPicker.vue';
 import aspect from './aspect/aspect.vue';
 import snackbar from './snackbar/snackbar.vue';
+import progressBar from './progressBar/progressBar.vue';
 
 const options = {
 	pageBottom,
@@ -39,6 +40,7 @@ const options = {
 	colorPicker,
 	aspect,
 	snackbar,
+	progressBar,
 };
 options.install = (Vue) => {
     for (let component in options) {

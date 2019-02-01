@@ -11,15 +11,16 @@ import util from '../script/util';
 import templates from '../script/templates/templates';
 import {convertStreams, accessWorder, convertImageToVideo} from '../script/convert.js';
 
-import {convertStreamsNew, accessWorderNew} from '../script/convertNew.js';
+// import {convertStreamsNew, accessWorderNew} from '../script/convertNew.js';
 
-import {covertNew} from '../script/termimal.js';
+// import {covertNew} from '../script/termimal.js';
 
 
 import dialogGoods from './dialogGoods';
 import dialogImage from './dialogImage';
 import dialogTemplate from './dialogTemplate';
 import dialogAudio from './dialogAudio';
+import dialogGenerate from './dialogGenerate';
 
 const store = {
 	state: {
@@ -143,12 +144,12 @@ const store = {
 	actions: {
 		// 初始化 网络请求
 		init({state, commit, dispatch, getters}){
-			/*accessWorderNew().then(()=>{
+			accessWorder().then(()=>{
 				// alert('ddddd');
 				state.asmInitedStatus = 'success';
 			}, ()=>{
 				state.asmInitedStatus = 'error';
-			})*/
+			})
 			// 如果有numIid
 			let numIid = getters.queryObj.numIid
 			if(numIid) {
@@ -322,24 +323,26 @@ const store = {
 			}
 			
 		},
-		// 生成（新）
+		// 生成（new）
 		generateNew({state, commit, dispatch, getters}) {
 			let datas = [];
 			console.log('new');
 
 			state.timeline.removeAllEventListeners();
 			
-	
+			// 时长
 			const duration = state.timeline.duration
 			let currentPosition = 0;
 			state.timeline.gotoAndStop(0.1);
-			
-			let tseperate = 1000 / 24;
+			state.dialogGenerate.show = true;
+			state.dialogGenerate.step = 1;
+			let f = 12;
+			let tseperate = 1000 / f;
 			var tickHandler = state.timeline.on('change', () => {
 				const thisPosition = state.timeline.position;
 				console.log('positon', thisPosition);
 				state.stage.update();
-				const base64str = window.canvas.toDataURL('image/jpeg', 1);
+				const base64str = window.canvas.toDataURL('image/jpeg');
 				
 	
 				var imgdata =  base64str.slice(23)
@@ -361,8 +364,13 @@ const store = {
 					}, 0);
 				} else {
 					state.timeline.off('change',tickHandler);
-					console.log(datas.length);
-					console.log('生成完毕');
+					// console.log(datas.length);
+					console.log('获取图片帧完毕');
+					if(state.playing) {
+						state.timeline.gotoAndPlay(0);
+					} else{
+						state.timeline.gotoAndStop(0);
+					}
 					let audioCode = null;
 					try{
 						if(state.dialogAudio.audioFrom == 'net') {
@@ -385,17 +393,38 @@ const store = {
 							}
 							audioCode = byteArray;
 						}
-
 					}catch(e) {
 						console.error(e);
 					}
-					
-					// convertStreamsNew(datas, null, {t: state.timeline.duration / 1000 });
 					let {width, height} = state.stage.canvas;
 					let total = width * height;
 					let bit = (total / 1000 * 5) | 0;
-					// alert(bit);
-					covertNew(datas, audioCode, {t: state.timeline.duration / 1000, b: bit});
+					state.dialogGenerate.step = 2;
+					convertImageToVideo(
+						datas,
+						audioCode,
+						{
+							f: f,
+							t: state.timeline.duration / 1000,
+							b: bit
+						},
+						(msg)=>{
+							if (msg.type == "ready") {
+								
+							} else if (msg.type == "stdout") {
+								
+							} else if (msg.type == "start") {
+							} else if (msg.type == "done") {
+								state.dialogGenerate.show = false;
+								setTimeout(()=>{
+									commit('showSnackbar', {
+										text: '视频生成完毕,请点击下方的链接下载！',
+									});
+									// alert();
+								},0)
+							}
+						}
+					);
 				}
 				
 			});
@@ -508,6 +537,7 @@ const store = {
 		dialogImage,
 		dialogTemplate,
 		dialogAudio,
+		dialogGenerate,
 	}
 }
 export default store;

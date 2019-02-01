@@ -24,10 +24,10 @@
 </template>
 
 <script>
-import VueSlideBar from 'vue-slide-bar';
+// import VueSlideBar from 'vue-slide-bar';
 export default {
   name: 'time-line',
-  components: { VueSlideBar },
+  components: { /*VueSlideBar*/ },
   data () {
     return {
       msg: 'time-line',

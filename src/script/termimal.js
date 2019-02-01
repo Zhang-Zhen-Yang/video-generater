@@ -217,7 +217,7 @@ function retrieveSampleImage() {
 oReq.send(null);
 }
 
-function covertNew(imagesArray, audio, {t, b}) {
+function covertNew(imagesArray, audio, {f, t, b}) {
 	if(!sampleImageData){
 		alert('无图片');
 	}
@@ -262,7 +262,7 @@ function covertNew(imagesArray, audio, {t, b}) {
 		// `-r 24 -t ${t} -f image2 -i input%d.jpeg output.mp4`,
 		// `-r 24 -t ${t} -f image2 -i input%d.jpeg  -preset slow output.mp4`,
 		// `-r 24 -t ${t} -f image2 -i input%d.jpeg ${audio? '-i input.wav' :  '' } -vcodec mpeg4 output.mp4`,
-		`-r 24 -t ${t} -f image2 -i input%d.jpeg ${audio? '-i input.wav' :  '' }  -strict -2 -b:v ${b}k output.mp4`,
+		`-r ${f} -t ${t} -f image2 -i input%d.jpeg ${audio? '-i input.wav' :  '' }  -strict -2 -b:v ${b}k output.mp4`,
 		files);
 
 }

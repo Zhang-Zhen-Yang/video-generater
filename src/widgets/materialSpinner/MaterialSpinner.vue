@@ -1,12 +1,12 @@
 /*
  * @Author: zhangzhenyang 
  * @Date: 2018-10-31 15:42:36 
- * @Last Modified by:   zhangzhenyang 
- * @Last Modified time: 2018-10-31 15:42:36 
+ * @Last Modified by: zhangzhenyang
+ * @Last Modified time: yyyy-02-dd 13:45:28
  */
 <template>
     <svg viewBox="25 25 50 50" class="md-spinner-draw">
-        <circle cx="50" cy="50" r="20" stroke-width="3.5" stroke="#1284e7" class="md-spinner-path" fill="white">
+        <circle cx="50" cy="50" r="20" stroke-width="3.5" stroke="#1284e7" class="md-spinner-path" fill="rgba(255, 255, 255, 0)">
         </circle>
     </svg>
 </template>

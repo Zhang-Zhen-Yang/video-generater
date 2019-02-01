@@ -109,6 +109,20 @@ const util = {
 		}
 		
 		return scale;
+	},
+	parseArguments: function(text) {
+		text = text.replace(/\s+/g, ' ');
+		var args = [];
+		// Allow double quotes to not split args.
+		text.split('"').forEach(function(t, i) {
+		  t = t.trim();
+		  if ((i % 2) === 1) {
+			args.push(t);
+		  } else {
+			args = args.concat(t.split(" "));
+		  }
+		});
+		return args;
 	}
 
 }
