@@ -101,12 +101,13 @@ export default {
     }
   },
   methods: {
+    // 选择图片（弹出图片选择弹窗）
     select(e) {
       this.$store.state.dialogImage.selectedPic = this.item.pic_url;
       this.$store.state.dialogImage.itemData = this.item;
       this.$store.state.dialogImage.show = true;
     },
-
+    // 更改图片
     imageChange(index,e) {
       let file = new FileReader();
       file.readAsDataURL(e.file);
@@ -124,6 +125,7 @@ export default {
         this.wordEffectOptions[index].callback(e);
       }
     },
+    // 设置价格标签
     setEffectWords(item) {
       this.$store.dispatch('setEffectWords', {type: item});
     }

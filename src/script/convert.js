@@ -187,10 +187,11 @@ function convertStreams(videoBlob, audioBlob, {t}) {
 	};
 }
 
+// 生成下载链接
 function PostBlob(blob) {
 	var h2 = document.querySelector('#log');
 	// h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="Recorded Audio+Canvas File.mp4">Download Recorded Audio+Canvas file in MP4 container and play in VLC player!</a>';
-	h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="Recorded Audio+Canvas File.mp4">点击下载视频文件!<div id="video-download-icon"></div></a>';
+	h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="file.mp4">点击下载视频文件!<div id="video-download-icon"></div></a>';
 	h2.setAttribute('contenteditable', 'false');
 }
 function log(message) {

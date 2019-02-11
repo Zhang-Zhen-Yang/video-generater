@@ -10,7 +10,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	// alert();
 
 	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `¥ ${goodsPrice}`;
-	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `原价 ${goodsPromotionPrice}`;
+	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPromotionPrice}`;
 
 	let currentWait = wait + 0.2 * duration;
 	let currentDuration = 0.8 * duration;

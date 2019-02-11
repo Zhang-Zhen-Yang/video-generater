@@ -21,6 +21,7 @@ import dialogImage from './dialogImage';
 import dialogTemplate from './dialogTemplate';
 import dialogAudio from './dialogAudio';
 import dialogGenerate from './dialogGenerate';
+import dialogSetting from './dialogSetting';
 
 const store = {
 	state: {
@@ -85,23 +86,33 @@ const store = {
 
 			}
 		},
+		// 设置播放位置
 		setPosition(state, {position}) {
+			// 如果是正在录制 不做任何操作
 			if(state.recording) return;
 			if(state.timeline) {
-				state.timeline.gotoAndStop(position);
+				if(state.playing) {
+					state.timeline.gotoAndPlay(position);
+				} else {
+					state.timeline.gotoAndStop(position);
+				}
+				
 			}
 			// alert(position);
 		},
+		// 设置尺寸
 		setSize(state, {val}) {
 			state.project.width = val[0];
 			state.project.height = val[1];
 			state.update();
 		},
+		// 显示提示
 		showSnackbar(state,{text,timeout=2000}) {
 			state.snackbar.text = text;
 			state.snackbar.timeout = timeout;
 			state.snackbar.show = true;
 		},
+		// 更新舞台
 		update(state) {
 			state.update();
 		},
@@ -127,6 +138,7 @@ const store = {
 				state.update();
 			}
 		},
+		// 设置音频的播放位置
 		setAudioPosition(state) {
 			try{
 				let audio = document.getElementById('audio');
@@ -138,7 +150,6 @@ const store = {
 				console.log(e);
 			}
 		}
-		
 	},
 	// -------------------------------------------------------------------------------------------------------------
 	actions: {
@@ -184,6 +195,7 @@ const store = {
 				}
 			})
 		},
+		// 获取宝贝促销价
 		getPromotionRoot({state, commit, dispatch, getters},{numIid}){
 			let req = {
 				numIid: numIid,
@@ -214,6 +226,8 @@ const store = {
 		generate({state, commit, dispatch, getters}) {
 			dispatch('generateNew');
 			return;
+
+			// 弃用 (web RTC有不足之处)
 			console.time('startRecord')
 			/* dispatch('testImgToVideo', {});
 			return;*/
@@ -333,18 +347,22 @@ const store = {
 			// 时长
 			const duration = state.timeline.duration
 			let currentPosition = 0;
-			state.timeline.gotoAndStop(0.1);
+			state.timeline.gotoAndStop(0.05);
+			// 显示弹窗
 			state.dialogGenerate.show = true;
 			state.dialogGenerate.step = 1;
+			// 帧数
 			let f = 12;
+			// 每帧占用的时间
 			let tseperate = 1000 / f;
+			state.recording = true;
 			var tickHandler = state.timeline.on('change', () => {
 				const thisPosition = state.timeline.position;
 				console.log('positon', thisPosition);
+				//刷新 动画画面
 				state.stage.update();
+				// 获取图片数据
 				const base64str = window.canvas.toDataURL('image/jpeg');
-				
-	
 				var imgdata =  base64str.slice(23)
 				var bytes = atob(imgdata);
 				//var bytes = base64;
@@ -362,7 +380,8 @@ const store = {
 					setTimeout(()=>{
 						state.timeline.gotoAndStop(thisPosition + tseperate);
 					}, 0);
-				} else {
+				} else { // 播放结束
+					state.recording = false;
 					state.timeline.off('change',tickHandler);
 					// console.log(datas.length);
 					console.log('获取图片帧完毕');
@@ -398,8 +417,10 @@ const store = {
 					}
 					let {width, height} = state.stage.canvas;
 					let total = width * height;
+					// 比特率
 					let bit = (total / 1000 * 5) | 0;
 					state.dialogGenerate.step = 2;
+					// 转换图片到视频
 					convertImageToVideo(
 						datas,
 						audioCode,
@@ -429,14 +450,6 @@ const store = {
 				
 			});
 			state.timeline.gotoAndStop(0);
-
-
-
-
-
-
-
-
 		},
 		// 更新时间轴
 		updateTimeline({state, commit, dispatch, getters}, {timeline}) {
@@ -485,10 +498,11 @@ const store = {
 			fetchImage();
 
 		},
-		setAction({state,commit}, {type, index}) {
+		// 删除，左移，右移
+		setAction({state,commit, dispatch}, {type, index}) {
 			let pickItem;
 			switch(type) {
-				// 向上
+				// 向左
 				case 'left':
 					if(index == 0) {
 						return;
@@ -500,13 +514,15 @@ const store = {
 					}
 					pickItem = state.project.queue.splice(index, 1);
 					state.project.queue.splice(index - 1,0,pickItem[0]);
+					commit('update');
 					break;
-				// 向下
+				// 向右
 				case 'right':
 					// dispatch('addStep');
 					pickItem = state.project.queue.splice(index + 1, 1)
 					state.project.queue.splice(index,0,pickItem[0]);
 					commit('setActiveIndex',{activeIndex: index + 1});
+					commit('update');
 					break;
 				// 删除
 				case 'delete':
@@ -521,10 +537,12 @@ const store = {
 						}
 						pickItem = state.project.queue.splice(index, 1);
 					}
+					commit('update');
 					break;
 				default: break;
 			}
 		},
+		// 设置价格标签
 		setEffectWords({state,commit}, {type}) {
 			if(state.project.wordEffect != type) {
 				state.project.wordEffect = type;
@@ -538,6 +556,7 @@ const store = {
 		dialogTemplate,
 		dialogAudio,
 		dialogGenerate,
+		dialogSetting,
 	}
 }
 export default store;

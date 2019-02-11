@@ -141,6 +141,7 @@ export default {
     dragEnd(){
       this.dragging = false;
     },
+    // 点击
     clickSet(e) {
       // console.log(e);
       this.$store.commit('setPosition', {position: e*1000});

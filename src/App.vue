@@ -9,6 +9,7 @@
     <dialogTemplate v-if="dialogTemplate.show"></dialogTemplate>
     <dialogAudio v-if="dialogAudio.show"></dialogAudio>
     <dialogGenerate v-if="dialogGenerate.show"></dialogGenerate>
+    <dialogSetting v-if="dialogSetting.show"></dialogSetting>
     <bottom-bar></bottom-bar>
     <audio-play></audio-play>
     <snackbar ref="snackbar"></snackbar>
@@ -22,6 +23,7 @@ import dialogImage from './components/dialogImage/dialogImage';
 import dialogTemplate from './components/dialogTemplate/dialogTemplate';
 import dialogAudio from './components/dialogAudio/dialogAudio';
 import dialogGenerate from './components/dialogGenerate/dialogGenerate';
+import dialogSetting from './components/dialogSetting/dialogSetting';
 import bottomBar from './components/bottomBar';
 import audioPlay from './components/audioPlay';
 export default {
@@ -33,6 +35,7 @@ export default {
     dialogTemplate,
     dialogAudio,
     dialogGenerate,
+    dialogSetting,
     bottomBar,
     audioPlay
   },
@@ -52,6 +55,9 @@ export default {
     snackbar(){
       return this.$store.state.snackbar;
     },
+    dialogSetting() {
+      return this.$store.state.dialogSetting;
+    }
   },
   data () {
     return {

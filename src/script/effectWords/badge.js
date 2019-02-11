@@ -18,7 +18,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	// alert();
 
 	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `¥ ${goodsPromotionPrice}`;
-	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `原价 ${goodsPrice}`;
+	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPrice}`;
 
 	let currentWait = wait + 0.2 * duration;
 	let currentDuration = 0.8 * duration;
@@ -154,16 +154,16 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		let oPriceLH = oPrice.getMeasuredLineHeight ();
 		oPriceC.addChild(oPrice);
 		oPriceC.set({
-			x: rectSize / 2,
-			y: rectSize * 2 / 3,
+			x: parseInt(rectSize / 2),
+			y: parseInt(rectSize * 2 / 3),
 			alpha: 0,
 		})
 		oPrice.set({
 			color: '#ffffff',
 			regX: 0,
 			regY: 0,
-			x: -oPriceW / 2,
-			y: -oPriceH / 2,
+			x: parseInt(-oPriceW / 2),
+			y: parseInt(-oPriceH / 2),
 			scaleX: 1,
 			scaleY: 1,
 			alpha: 1,
@@ -220,7 +220,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	project.wordEffectOptions = [];
 
 	project.wordEffectOptions.push({
-		name: '价格',
+		name: '促销价',
 		tag: 'promotionPrice',
 		type: 'input',
 		value: promotionPrice,
@@ -237,7 +237,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 
 	project.wordEffectOptions.push({
-		name: '原价',
+		name: '价格',
 		tag: 'price',
 		type: 'input',
 		value: price,
