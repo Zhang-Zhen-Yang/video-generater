@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-10 16:46:16 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-02-11 09:04:39
+ * @Last Modified time: 2019-02-11 10:08:54
  */
 
 
@@ -15,9 +15,8 @@ const store = {
 	state: {
 		show: false,
 		lastAction: 'loading',
-		quality: 60,
-
-
+		quality: 50,
+		frames: 12,
 	},
 	// ---------------------------------------------------------------------------------------------------------
 	getters: {
@@ -31,8 +30,17 @@ const store = {
 	},
 	// ------------------------------------------------------------------------------------------------------------
 	actions: {
-		
-
+		getSettingFromStorage({state, rootState}) {
+			let quality = localStorage.getItem('setting-quality');
+			let frames = localStorage.getItem('setting-frames');
+			
+			if(quality) {
+				state.quality = quality;
+			}
+			if(frames) {
+				state.frames = frames;
+			}
+		}
 		
 		
 	}// end actions 

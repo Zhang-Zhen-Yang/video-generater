@@ -35,6 +35,7 @@
               {{ item.name }}
             </div>
             <input class="content-item-input" type="text" v-model="item.value"  v-if="item.type == 'input'" @input="optionsCallback(index, $event)">
+            <color-picker v-if="item.type == 'color'" v-model="item.value" title="颜色" @input="optionsCallback(index, $event)"></color-picker>
           </div>
           
           <p>

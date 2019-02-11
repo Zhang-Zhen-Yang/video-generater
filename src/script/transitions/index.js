@@ -8,6 +8,7 @@ import upDownAndScale from './upDownAndScale';
 import photo1 from './photo1';
 import photo2 from './photo2';
 import photo3 from './photo3';
+import photo4 from './photo4';
 
 let c = createjs;
 let transitions = {
@@ -120,6 +121,9 @@ let transitions = {
 	},
 	photo3: function({stage, timeline, item, index, wait }) {
 		photo3({stage, timeline, item, index, wait });
+	},
+	photo4: function({stage, timeline, item, index, wait }) {
+		photo4({stage, timeline, item, index, wait });
 	},
 
 }

@@ -40,7 +40,8 @@ const store = {
 		position: 0,
 		playing: true,
 		recording: false,
-		project: {...templates[7].data},
+		// 
+		project: {...templates[8].data},
 		audio: null,
 
 		snackbar: {
@@ -155,6 +156,7 @@ const store = {
 	actions: {
 		// 初始化 网络请求
 		init({state, commit, dispatch, getters}){
+			dispatch('getSettingFromStorage');
 			accessWorder().then(()=>{
 				// alert('ddddd');
 				state.asmInitedStatus = 'success';
@@ -352,7 +354,8 @@ const store = {
 			state.dialogGenerate.show = true;
 			state.dialogGenerate.step = 1;
 			// 帧数
-			let f = 12;
+			// let f = 12;
+			let f = state.dialogSetting.frames;
 			// 每帧占用的时间
 			let tseperate = 1000 / f;
 			state.recording = true;
@@ -361,10 +364,13 @@ const store = {
 				console.log('positon', thisPosition);
 				//刷新 动画画面
 				state.stage.update();
-				// 获取图片数据
-				const base64str = window.canvas.toDataURL('image/jpeg');
+
+				
+				// 获取图片数据(1)
+				const base64str = window.canvas.toDataURL('image/jpeg', 0.9);
 				var imgdata =  base64str.slice(23)
 				var bytes = atob(imgdata);
+				//console.log('ddddddddddddddddddddddddddddddddddddddddddddddddd', bytes.slice(0, 100));
 				//var bytes = base64;
 				var bytesCode = new ArrayBuffer(bytes.length);
 				// 转换为类型化数组
@@ -373,8 +379,101 @@ const store = {
 				for (var i = 0; i < bytes.length; i++) {
 					byteArray[i] = bytes.charCodeAt(i);
 				}
-
 				datas.push(byteArray);
+
+
+				// 获取图片数据(2)
+				/*window.canvas.toBlob((res)=>{
+					// console.log('res', res.toString());
+					util.blobToUint8Array(res).then((r)=>{
+						datas.push(r);
+						//============================================
+						if(thisPosition + tseperate < duration) {
+							setTimeout(()=>{
+								state.timeline.gotoAndStop(thisPosition + tseperate);
+							}, 0);
+						} else { // 播放结束
+							state.recording = false;
+							state.timeline.off('change',tickHandler);
+							// console.log(datas.length);
+							console.log('获取图片帧完毕');
+							if(state.playing) {
+								state.timeline.gotoAndPlay(0);
+							} else{
+								state.timeline.gotoAndStop(0);
+							}
+							let audioCode = null;
+							try{
+								if(state.dialogAudio.audioFrom == 'net') {
+									if(state.dialogAudio.selectedAudioID != null) {
+										audioCode = getters.idMapAudio[state.dialogAudio.selectedAudioID];
+									}
+								} else if(state.dialogAudio.audioFrom == 'local'){
+									audioCode = state.dialogAudio.audioData;
+								}
+		
+								if(audioCode) {
+									let bytes = atob(audioCode);
+									var bytesCode = new ArrayBuffer(bytes.length);
+									// 转换为类型化数组
+									var byteArray = new Uint8Array(bytesCode);
+									
+									// 将base64转换为ascii码
+									for (var i = 0; i < bytes.length; i++) {
+										byteArray[i] = bytes.charCodeAt(i);
+									}
+									audioCode = byteArray;
+								}
+							}catch(e) {
+								console.error(e);
+							}
+							let {width, height} = state.stage.canvas;
+							let total = width * height;
+							// 比特率
+							// let bit = (total / 1000 * 5) | 0;
+							let bit = (total / 1000 * state.dialogSetting.quality / 10) | 0;
+							state.dialogGenerate.step = 2;
+							// 转换图片到视频
+							convertImageToVideo(
+								datas,
+								audioCode,
+								{
+									f: f,
+									t: state.timeline.duration / 1000,
+									b: bit
+								},
+								(msg)=>{
+									if (msg.type == "ready") {
+										
+									} else if (msg.type == "stdout") {
+										
+									} else if (msg.type == "start") {
+									} else if (msg.type == "done") {
+										state.dialogGenerate.show = false;
+										setTimeout(()=>{
+											commit('showSnackbar', {
+												text: '视频生成完毕,请点击下方的链接下载！',
+											});
+											// alert();
+										},0)
+									}
+								}
+							);
+						}
+
+
+
+						//============================================
+
+					});
+
+
+				}, 'image/jpeg', 0.9);
+
+
+				return; 
+				*/
+				
 				
 				if(thisPosition + tseperate < duration) {
 					setTimeout(()=>{
@@ -418,7 +517,8 @@ const store = {
 					let {width, height} = state.stage.canvas;
 					let total = width * height;
 					// 比特率
-					let bit = (total / 1000 * 5) | 0;
+					// let bit = (total / 1000 * 5) | 0;
+					let bit = (total / 1000 * state.dialogSetting.quality / 10) | 0;
 					state.dialogGenerate.step = 2;
 					// 转换图片到视频
 					convertImageToVideo(

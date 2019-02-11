@@ -5,7 +5,7 @@
     <div v-clickoutside="closePopup" @click="openPopup" class="relative">
       <input type="text" class="content-item-input" :value="value" readonly="readonly" @focus="focus">
       <div class="absolute" style="z-index: 1;">
-        <sketch-picker :value="value" @input="colorChange" v-show="showPicker"/>
+        <chrome-picker :value="value" @input="colorChange" v-show="showPicker"/>
       </div>
     </div>
   </div>
@@ -13,10 +13,10 @@
 
 <script>
 import clickoutside from '../../directives/clickoutside';
-import { Sketch } from 'vue-color'
+import { Sketch, Chrome } from 'vue-color'
 export default {
   name: 'color-picker',
-  components: {sketchPicker: Sketch},
+  components: {sketchPicker: Sketch, ChromePicker: Chrome},
   directives:{ clickoutside },
   props:{
     value: {
@@ -50,7 +50,6 @@ export default {
     },
     focus() {
       this.$emit('focus');
-      this.$store.dispatch('addStep');
     }
   },
   created() {

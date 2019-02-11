@@ -209,10 +209,10 @@ const list = [
 			]
 		}
 	},
-	// 6.相册效果
+	// 6.相片效果
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042773658206E9.png',
-		name: '相册效果',
+		name: '相片效果',
 		data: {
 			bgColor: '#ffffff',
 			width: 800,
@@ -253,10 +253,10 @@ const list = [
 			]
 		}
 	},
-	// 7.相册效果2
+	// 7.相片效果2
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042821718707E9.png',
-		name: '相册效果2',
+		name: '相片效果2',
 		data: {
 			bgColor: '#ffffff',
 			width: 800,
@@ -297,15 +297,15 @@ const list = [
 			]
 		}
 	},
-	// 8.相册效果3
+	// 8.相片效果3
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042821718707E9.png',
-		name: '相册效果3',
+		name: '相片效果3',
 		data: {
 			bgColor: '#ffffff',
-			width: 800,
+			width: 600,
 			height: 600,
-			wordEffect: 'badgeEffect',
+			wordEffect: 'bottomBar',
 			wordEffectOptions: [
 
 			],
@@ -341,6 +341,57 @@ const list = [
 				{
 					type: 'image',
 					transition: 'photo3',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: 'http://imgs.aixifan.com/content/2019_1_28/1.5486858052159495E9.png',
+				},
+			]
+		}
+	},
+	// 9.相片效果4
+	{
+		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042821718707E9.png',
+		name: '相片效果4',
+		data: {
+			bgColor: '#ffffff',
+			width: 600,
+			height: 600,
+			wordEffect: 'bottomBar',
+			wordEffectOptions: [
+
+			],
+			queue: [
+				{	
+					type: 'image',
+					transition: 'photo4',
+					duration: 2000,
+					pic_url: 'http://imgs.aixifan.com/content/2019_1_28/1.5486864778916757E9.png',
+	
+				},
+				{	
+					type: 'image',
+					transition: 'photo4',
+					duration: 2000,
+					pic_url: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042735289507E9.png',
+	
+				},
+				{
+					type: 'image',
+					transition: 'photo4',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: 'http://imgs.aixifan.com/content/2019_1_28/1.5486663585683255E9.png',
+				},
+				{
+					type: 'image',
+					transition: 'photo4',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: 'http://imgs.aixifan.com/content/2019_1_28/1.5486859542135582E9.png',
+				},
+				{
+					type: 'image',
+					transition: 'photo4',
 					// wordEffect: 'defaultEffect',
 					duration: 2000,
 					pic_url: 'http://imgs.aixifan.com/content/2019_1_28/1.5486858052159495E9.png',

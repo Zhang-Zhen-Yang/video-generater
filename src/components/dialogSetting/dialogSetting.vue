@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-10 16:43:16 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-02-11 09:05:21
+ * @Last Modified time: 2019-02-11 10:09:42
  */
 
 <template>
@@ -24,13 +24,19 @@
             <VueSlideBar
               v-model="quality"
               :lineHeight="8"
+              :min="1"
             ></VueSlideBar>
           </div>
           <p></p>
           <div>
             帧数
           </div>
-          
+          <VueSlideBar
+              v-model="frames"
+              :lineHeight="8"
+              :min="1"
+              :max="24"
+          ></VueSlideBar>
           
           
         </div>
@@ -76,6 +82,17 @@ export default {
       },
       set(val) {
         this.modal.quality = val;
+        localStorage.setItem('setting-quality', val);
+      },
+      
+    },
+    frames: {
+      get() {
+        return this.modal.frames;  
+      },
+      set(val) {
+        this.modal.frames = val;
+        localStorage.setItem('setting-frames', val);
       }
     }
     

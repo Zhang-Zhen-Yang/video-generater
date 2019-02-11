@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-01-23 17:32:23 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-01-28 11:16:32
+ * @Last Modified time: 2019-02-11 17:51:42
  */
 
 <template>
@@ -27,6 +27,10 @@ export default {
         {
           label: '400 × 400',
           value: [400, 400]
+        },
+        {
+          label: '600 × 600',
+          value: [600, 600]
         },
         {
           label: '800 × 800',
