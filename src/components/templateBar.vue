@@ -72,6 +72,7 @@ export default {
     width: 50px;
     height: 100%;
     background-color: #35495E;
+    z-index: 1;
     border-top: 1px solid #24384C;
     .side-bar-menu-wrap{
       text-align: center;

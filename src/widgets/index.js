@@ -22,6 +22,7 @@ import colorPicker from './colorPicker/colorPicker.vue';
 import aspect from './aspect/aspect.vue';
 import snackbar from './snackbar/snackbar.vue';
 import progressBar from './progressBar/progressBar.vue';
+import toggle from './toggle/toggle.vue';
 
 const options = {
 	pageBottom,
@@ -41,6 +42,7 @@ const options = {
 	aspect,
 	snackbar,
 	progressBar,
+	toggle,
 };
 options.install = (Vue) => {
     for (let component in options) {

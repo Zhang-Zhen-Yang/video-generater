@@ -41,7 +41,12 @@ function checkStatus (response) {
 function checkCode (res) {
   // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
   if (res.status === -404) {
-    alert(`${res.msg}${res.s ? '('+ res.s +')' : '' }`);
+    let msg = `${res.msg}${res.s ? '('+ res.s +')' : '' }`;
+    try{
+      window.p.$store.commit('showSnackbar', {text: msg});
+    } catch(e){
+      alert(msg);
+    }
   }
   if(res.data && res.data.author) {
     location.href = 'https://oauth.taobao.com/authorize?response_type=code&client_id=12020783&redirect_uri=http://2015.wonbao.net/authorize/web&scope=promotion,item,usergrade&view=web&state=%2Fmain';

@@ -1,11 +1,7 @@
 // 徽章
 let fun = function ({stage, wait, item, index, timeline, project, goods}) {
-	let badges = [
-		// `${window.assets}badge.svg`,
-		"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-47 48.3 500 500' width='200' height='200'%3E%3Cpath d='M313.3 73.3c7.7 34.5 9.5 50.8 18.1 57.7 8.7 6.9 24.3 4.5 59.6 1.6-6.1 34.9-10.7 50.6-5.3 60.2 5.4 9.7 20.7 13.4 54.4 24.3-19 29.9-29.2 42.6-28 53.6 1.3 11 14 20.3 41 43.2-29 20.3-43.3 28.2-46.4 38.8-3.1 10.7 5.2 24.1 21.3 55.6-34.6 7.7-50.8 9.5-57.7 18.1-6.9 8.7-4.5 24.3-1.6 59.6-34.8-6.1-50.5-10.7-60.2-5.3-9.7 5.4-13.4 20.7-24.3 54.4-29.9-19-42.6-29.2-53.6-28-11 1.3-20.3 14-43.2 41-20.3-29-28.2-43.3-38.8-46.4-10.7-3.1-24.1 5.2-55.6 21.3-7.7-34.5-9.5-50.8-18.1-57.7-8.7-6.9-24.3-4.5-59.6-1.6 6.1-34.9 10.7-50.6 5.3-60.3-5.6-9.5-20.9-13.2-54.6-24 19-29.9 29.2-42.6 28-53.6-1.2-11-14-20.3-41-43.2 29-20.3 43.3-28.2 46.4-38.8 3-10.8-5.2-24.3-21.3-55.8 34.5-7.7 50.8-9.5 57.7-18.1 6.9-8.7 4.5-24.3 1.6-59.5 34.9 6.1 50.6 10.7 60.3 5.3 9.7-5.4 13.4-20.7 24.3-54.4 29.9 19 42.6 29.2 53.6 28 11-1.2 20.3-14 43.2-41 20.3 29 28.2 43.3 38.8 46.4 10.7 3 24.2-5.2 55.7-21.4z' fill='%2302abc1'/%3E%3C/svg%3E",
 
-
-	];
+	
 	
 	let c = createjs;
 	let duration = item.duration;
@@ -19,6 +15,13 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `¥ ${goodsPromotionPrice}`;
 	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPrice}`;
+	let themeColor = project.wordEffectOptions[2] ? project.wordEffectOptions[2].value : `rgba(255,207,79,1)`;
+	let badgeOne = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-47 48.3 500 500' width='200' height='200'%3E%3Cpath d='M313.3 73.3c7.7 34.5 9.5 50.8 18.1 57.7 8.7 6.9 24.3 4.5 59.6 1.6-6.1 34.9-10.7 50.6-5.3 60.2 5.4 9.7 20.7 13.4 54.4 24.3-19 29.9-29.2 42.6-28 53.6 1.3 11 14 20.3 41 43.2-29 20.3-43.3 28.2-46.4 38.8-3.1 10.7 5.2 24.1 21.3 55.6-34.6 7.7-50.8 9.5-57.7 18.1-6.9 8.7-4.5 24.3-1.6 59.6-34.8-6.1-50.5-10.7-60.2-5.3-9.7 5.4-13.4 20.7-24.3 54.4-29.9-19-42.6-29.2-53.6-28-11 1.3-20.3 14-43.2 41-20.3-29-28.2-43.3-38.8-46.4-10.7-3.1-24.1 5.2-55.6 21.3-7.7-34.5-9.5-50.8-18.1-57.7-8.7-6.9-24.3-4.5-59.6-1.6 6.1-34.9 10.7-50.6 5.3-60.3-5.6-9.5-20.9-13.2-54.6-24 19-29.9 29.2-42.6 28-53.6-1.2-11-14-20.3-41-43.2 29-20.3 43.3-28.2 46.4-38.8 3-10.8-5.2-24.3-21.3-55.8 34.5-7.7 50.8-9.5 57.7-18.1 6.9-8.7 4.5-24.3 1.6-59.5 34.9 6.1 50.6 10.7 60.3 5.3 9.7-5.4 13.4-20.7 24.3-54.4 29.9 19 42.6 29.2 53.6 28 11-1.2 20.3-14 43.2-41 20.3 29 28.2 43.3 38.8 46.4 10.7 3 24.2-5.2 55.7-21.4z' fill='";
+	let badgeTwo = "'/%3E%3C/svg%3E";
+	let badges = [
+		// `${window.assets}badge.svg`,
+		`${badgeOne}${themeColor}${badgeTwo}`,
+	];
 
 	let currentWait = wait + 0.2 * duration;
 	let currentDuration = 0.8 * duration;
@@ -38,11 +41,11 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 	let badgeImg = new Image();
 	badgeImg.src = badges[0];
-
+	let bS = new c.Shape();
 	
 	badgeImg.onload = function() {
 		// alert(badgeImg.width);
-		let bS = new c.Shape();
+		// let bS = new c.Shape();
 		bS.graphics.bf(badgeImg, 'no-repeat', new c.Matrix2D(rectSize / badgeImg.width, 0, 0, rectSize / badgeImg.height, 0, 0)).dr(0, 0, rectSize, rectSize);
 		priceContainer.addChild(bS);
 		bS.set({
@@ -247,6 +250,26 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 			oPrice.set({
 				x: -oPriceW / 2,
 			})
+		}
+	})
+	project.wordEffectOptions.push({
+		name: '颜色',
+		tag: 'color',
+		type: 'color',
+		value: themeColor,
+		callback: (e)=>{
+			// console.log(e);
+			let bgGraphics = new c.Graphics();
+			let badgeImgSrc = `${badgeOne}${e}${badgeTwo}`;
+			let img = new Image();
+			img.onload= ()=>{
+				bgGraphics.bf(img, 'no-repeat', new c.Matrix2D(rectSize / img.width, 0, 0, rectSize / img.height, 0, 0)).dr(0, 0, rectSize, rectSize);
+				bS.graphics = bgGraphics;
+			}
+			img.src = badgeImgSrc;
+			img.onerror=()=>{
+				console.log('error');
+			}
 		}
 	})
 

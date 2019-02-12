@@ -16,6 +16,7 @@
 <script>
 import transitions from '../script/transitions/index.js';
 import effectWords from '../script/effectWords/index.js';
+import watermark from '../script/watermark.js';
 import canvasSizeOptions from './canvasSizeOptions.vue';
 export default {
   name: 'temp',
@@ -77,7 +78,7 @@ export default {
 
       // 价格标签
       let wordEffect = this.$store.state.project.wordEffect;
-      if(wordEffect && effectWords[wordEffect]) {
+      if(wordEffect && effectWords[wordEffect] && this.$store.state.project.useEffectWord) {
         effectWords[wordEffect]({
           stage,
           timeline,
@@ -88,6 +89,16 @@ export default {
           goods: this.$store.state.goods
         });
       }
+
+
+      // 水印
+     
+        watermark({
+          stage,
+          timeline,
+          project: this.$store.state.project,
+        });
+    
 
 
 

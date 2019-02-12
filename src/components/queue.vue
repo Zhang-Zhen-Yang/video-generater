@@ -12,28 +12,35 @@
         @click="setAciveIndex(index)"
       >
         <div class="queue-img-display relative" :style="{backgroundImage: `url(${item.pic_url})`}">
-          <!--delete-->
-          <div
-            v-if="queue.length > 1"
-            class="queue-item-delete"
-            @click.stop="action('delete',index)"
-            title="删除"
-          ></div>
-          <!--left-->
-          <div v-if="index !=0 "
-            class="queue-item-left queue-item-position"
-            @click.stop="action('left',index)"
-            title="左移"
-          ></div>
-          <!--right-->
-          <div
-            v-if="(queue.length > 1) && (index + 1 < queue.length)"
-            class="queue-item-right queue-item-position"
-            @click.stop="action('right', index)"
-            title="右移"
-          ></div>
+          <mask-replace :text="'选择图片'"  :showImageUpload="true" @select="select(item)" @change="imageChange(0, $event)" :btnSize="'small'">
+            <!--delete-->
+            <div
+              slot="after"
+              v-if="queue.length > 1"
+              class="queue-item-delete relative"
+              @click.stop="action('delete',index)"
+              title="删除"
+            ></div>
+            <!--left-->
+            <div v-if="index !=0 "
+              slot="after"
+              class="queue-item-left queue-item-position relative"
+              @click.stop="action('left',index)"
+              title="左移"
+            ></div>
+            <!--right-->
+            <div
+              slot="after"
+              v-if="(queue.length > 1) && (index + 1 < queue.length)"
+              class="queue-item-right queue-item-position relative"
+              @click.stop="action('right', index)"
+              title="右移"
+            ></div>
+          </mask-replace>
         </div>
       </div>
+
+      <!--添加图片-->
       <div class="pointer queue-item img-add-item" @click="addImage">
         <div class="queue-img-display " style="">
           +
@@ -110,7 +117,25 @@ export default {
     // 删除, 移动
     action(type, index) {
       this.$store.dispatch('setAction', {type, index});
-    }
+    },
+    select(item) {
+      this.$store.state.dialogImage.selectedPic = item.pic_url;
+      this.$store.state.dialogImage.itemData = item;
+      this.$store.state.dialogImage.show = true;
+    },
+    // 更改图片
+    imageChange(index,e) {
+      let file = new FileReader();
+      file.readAsDataURL(e.file);
+      file.onload = () => {
+        this.queue[this.activeIndex].pic_url = file.result;
+        this.queue[this.activeIndex].file = e.file;
+        this.$store.commit('update');
+        // console.log(file.result);
+      }
+      
+      // console.log([i,j]);
+    },
   },
   created() {
     
@@ -124,6 +149,9 @@ export default {
     background-color: #eeeeee;
     display: flex;
     border-top: 1px solid #cccccc;
+    .mask-replace{
+      height: 100%;
+    }
   }
   .queue-item-wrap{
     white-space: nowrap;

@@ -8,9 +8,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'defaultEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -49,9 +55,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -91,9 +103,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -133,9 +151,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -174,9 +198,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -218,9 +248,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: 'http://imgs.aixifan.com/content/2019_2_11/1.54989272154043E9.png?imageView2/1/w/200/h/110',
 			queue: [
 				{	
 					type: 'image',
@@ -262,9 +298,15 @@ const list = [
 			width: 800,
 			height: 600,
 			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -306,9 +348,15 @@ const list = [
 			width: 600,
 			height: 600,
 			wordEffect: 'bottomBar',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',
@@ -356,10 +404,17 @@ const list = [
 			bgColor: '#ffffff',
 			width: 600,
 			height: 600,
+			// 价格标签
 			wordEffect: 'bottomBar',
+			useEffectWord: true,
+			useWatermark: true,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
 			wordEffectOptions: [
 
 			],
+			// 水印
+			watermark: '',
 			queue: [
 				{	
 					type: 'image',

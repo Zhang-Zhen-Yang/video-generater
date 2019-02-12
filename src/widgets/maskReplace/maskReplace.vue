@@ -11,8 +11,8 @@
       <table>
         <tr>
           <td>
-          <button class="btn primary" @click.stop="select">{{ text }}</button>
-          <label class="btn primary upload-btn" v-if="showImageUpload">
+          <button :class="['btn', 'primary', btnSize]" @click.stop="select">{{ text }}</button>
+          <label :class="['btn', 'primary', 'upload-btn', btnSize]" v-if="showImageUpload">
             <span style="color:transparent;">图片</span><span>本地</span>
             <input type="file" accept=".jpg,.jpeg,.png,.gif,.bmp" @change="imagechange($event)">
           </label>
@@ -35,6 +35,7 @@
           :style="{backgroundImage: `url(${u})`}"></div>
       </div>
     </div>
+    <slot name="after"></slot>
   </div>
 </template>
 
@@ -61,6 +62,10 @@ export default {
     count: {
       type: Number,
       default: 1,
+    },
+    btnSize: {
+      type: String,
+      default: 'medium',
     }
   },
   data () {
@@ -128,6 +133,9 @@ export default {
     position: relative;
     width: 100%;
     max-width: 300px;
+    .btn{
+      margin: 5px 0;
+    }
   }
   .mask-view{
     background-color: rgba(0,0,0,0.2);
@@ -162,5 +170,9 @@ export default {
   }
   .upload-btn input{
     display: none;
+  }
+  .upload-btn.small{
+    background-position: 10px center;
+    background-size: 15px auto;
   }
 </style>

@@ -10,6 +10,7 @@ import api from '../script/api';
 import util from '../script/util';
 import templates from '../script/templates/templates';
 import {convertStreams, accessWorder, convertImageToVideo} from '../script/convert.js';
+import watermark from '../script/watermark';
 
 // import {convertStreamsNew, accessWorderNew} from '../script/convertNew.js';
 
@@ -41,7 +42,7 @@ const store = {
 		playing: true,
 		recording: false,
 		// 
-		project: {...templates[8].data},
+		project: {...templates[5].data},
 		audio: null,
 
 		snackbar: {
@@ -150,6 +151,10 @@ const store = {
 			}catch(e){
 				console.log(e);
 			}
+		},
+		// 更新水印
+		updateWatermark(state) {
+			watermark({stage: state.stage,timeline: state.timeline,project: state.project});			
 		}
 	},
 	// -------------------------------------------------------------------------------------------------------------
