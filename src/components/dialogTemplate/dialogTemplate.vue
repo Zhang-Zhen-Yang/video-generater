@@ -15,11 +15,13 @@
         <div class="dialog-template-content">
 
           <div class="template-item-wrap" v-for="item,index in list">
-            <div v-if="false" class="template-item" :style="{backgroundImage: `url(${item.cover})`}" @click="setTemplate(item)">
-              {{ item.name }}
-            </div>
-            <div class="template-item pointer" :style="{backgroundImage: `url(${emptyImg})`}" @click="setTemplate(item)">
-              {{ item.name }}
+            <div class="template-item pointer"  @click="setTemplate(item)">
+              <aspect>
+                <div :style="{height:'100%',backgroundSize: 'contain', backgroundImage: `url(${item.cover})`}">
+                
+                </div>
+              </aspect>
+              <div>{{ item.name }}</div>
             </div>
           </div>
         </div>
@@ -90,10 +92,10 @@ export default {
     padding: 50px 0 50px 0;
   }
   .template-item-wrap{
-    width: 33.3%;
-    height: 200px;
+    width: 25%;
     padding: 10px;
     display: inline-block;
+    text-align: center;
   }
   .template-item{
     width:100%;
@@ -103,7 +105,8 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
     text-align: center;
-    line-height: 150px;
+    line-height: 2em;
+    font-size: 14px;
   }
   .modal-dialog-footer{
     background-color: white;

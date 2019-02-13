@@ -39,6 +39,7 @@ let fun = ({stage,timeline,project})=>{
 			let scale = util.getImageScale({img, cw, ch, type: 'contain'});
 			let watermarkPosition = project.watermarkPosition;
 			let watermarkScale = project.watermarkScale;
+			let watermarkAlpha = project.watermarkAlpha;
 			// console.log([position, watermarkScale]);
 			let distImageW = scale * watermarkScale * img.width;
 			let distImageH = scale * watermarkScale * img.height;
@@ -104,6 +105,7 @@ let fun = ({stage,timeline,project})=>{
 				y: y,
 				scaleX: scale * watermarkScale,
 				scaleY: scale * watermarkScale,
+				alpha: watermarkAlpha,
 			})
 		},
 		(res)=>{

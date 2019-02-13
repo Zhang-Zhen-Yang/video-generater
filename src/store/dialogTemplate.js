@@ -35,7 +35,36 @@ const store = {
 		},
 		setTemplate({rootState, state, commit}, temp) {
 			// console.log(temp);
-			rootState.project = {...temp.data};
+			let currentProjectPics = rootState.project.queue.map((item)=>{
+				return item.pic_url;
+			});
+			// console.log(currentProjectPics);
+			let {useWatermark,
+				watermark,
+				watermarkPosition,
+				watermarkScale,
+				watermarkAlpha} = rootState.project;
+			let newProject = {...JSON.parse(JSON.stringify(temp.data))};
+
+			let saveItems = {useWatermark,
+				watermark,
+				watermarkPosition,
+				watermarkScale,
+				watermarkAlpha};
+			for(let i in saveItems) {
+				newProject[i] = saveItems[i];
+			}
+			currentProjectPics.forEach((item,index)=>{
+				if(newProject.queue[index]){
+					
+				} else {
+					newProject.queue[index] = JSON.parse(JSON.stringify(newProject.queue[index-1]));
+
+				}
+				newProject.queue[index].pic_url = item;
+			})
+			newProject.queue =  newProject.queue.splice(0, currentProjectPics.length)
+			rootState.project = newProject;
 			commit('update');
 		}
 		

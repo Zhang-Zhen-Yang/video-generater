@@ -282,7 +282,11 @@ export default {
       if(replace) {
         // alert(this.selectedPic);
         if(this.selectedPic){
-          this.itemData.pic_url = this.selectedPic;
+          if(typeof this.itemData.watermark != 'undefined') {
+            this.itemData.watermark = this.selectedPic;
+          } else {
+            this.itemData.pic_url = this.selectedPic;
+          }
           this.$store.commit('update');
         }
         // this.$store.dispatch('addStep');

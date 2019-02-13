@@ -27,6 +27,8 @@ export default {
       if(this.$store.state.dialogAudio.audioFrom == 'net') {
         if(this.selectedAudioID != null) {
           aurl =  `data:audio/mp3;base64,${this.idMapAudio[this.selectedAudioID]}`;
+        } else {
+          aurl = '';
         }
       } else if(this.$store.state.dialogAudio.audioFrom == 'local'){
         let audioData = this.$store.state.dialogAudio.audioData;
@@ -57,7 +59,7 @@ export default {
           this.audio.pause();
         }
       }catch(e){
-        console.warn(e);
+        // console.warn(e);
       }
     }
   },

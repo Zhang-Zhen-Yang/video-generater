@@ -23,12 +23,12 @@
             <div v-if="useWatermark" class="option-block-wrap" style="">
               <table cellspacing="0" cellpadding="0" style="width: 100%;" >
                 <tr>
-                  <td rowspan="2" style="width: 40%;">
+                  <td rowspan="3" style="width: 40%;">
                     <div style="width: 100%;">
                       <mask-replace
                         :text="'选择图片'"
                         :showImageUpload="true"
-                        @select="select(item)"
+                        @select="watermarkImageSelect"
                         @change="watermarkImageChange(0, $event)"
                       >
                         <img v-if="project.watermark":src="project.watermark" alt="" class="pic-item">
@@ -40,8 +40,16 @@
                   <td style="padding:0 0 0 10px;">
                     <span class="font14">大小</span>
                     <div class="relative">
-                      <input type="range" style="width: 100%;" min="0.1" max="1" step="0.01" v-model="watermarkScale">
+                      <input type="range" style="width: 100%;" min="0.01" max="1" step="0.01" v-model="watermarkScale">
                       
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:0 0 0 10px;">
+                    <span class="font14">不透明度</span>
+                    <div class="relative">
+                      <input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkAlpha">
                     </div>
                   </td>
                 </tr>
@@ -51,7 +59,6 @@
                     <select name="" id="" style="margin-top: 8px;" v-model="watermarkPosition">
                       <option v-for="item in wartermarkPositions" :value="item.value">{{ item.name }}</option>
                     </select>
-                    
                   </td>
                 </tr>
               </table>
@@ -217,6 +224,16 @@ export default {
         this.$store.commit('updateWatermark');
       }
     },
+    // 水印不透明度
+    watermarkAlpha: {
+      get() {
+        return this.project.watermarkAlpha;
+      },
+      set(val) {
+        this.project.watermarkAlpha = val;
+        this.$store.commit('updateWatermark');
+      }
+    },
     // 水印大小
     watermarkScale: {
       get() {
@@ -234,6 +251,11 @@ export default {
     select(e) {
       this.$store.state.dialogImage.selectedPic = this.item.pic_url;
       this.$store.state.dialogImage.itemData = this.item;
+      this.$store.state.dialogImage.show = true;
+    },
+    watermarkImageSelect() {
+      this.$store.state.dialogImage.selectedPic = this.project.watermark;
+      this.$store.state.dialogImage.itemData = this.project;
       this.$store.state.dialogImage.show = true;
     },
     // 更改图片
@@ -329,11 +351,13 @@ export default {
   .empty-water-mark{
     width: 200px;
     height: 160px;
-    background-image: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cstyle/%3E%3C/defs%3E%3Cpath d='M39.385 19.692h945.23v984.616H39.385z' fill='%23424A60'/%3E%3Cpath d='M185.71800000000002 267.205a89.974 89.974 0 1 0 179.948 0 89.974 89.974 0 1 0-179.948 0z' fill='%23EFCE4A'/%3E%3Cpath d='M39.385 807.385h945.23v196.923H39.385z' fill='%23E7ECED'/%3E%3Cpath d='M964.923 632.34l-19.692-21.878-236.308-216.616-206.77 226.462L610.128 728.28l79.104 79.104h275.692z' fill='%231A9172'/%3E%3Cpath d='M610.127 728.28L394.18 512.336 59.077 807.385H689.23z' fill='%2325AE88'/%3E%3C/svg%3E");
-    background-size: cover;
+    background-image: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cstyle/%3E%3C/defs%3E%3Cpath d='M39.153 69.27V972.8h963.765V69.27H39.153zm60.235 843.295V789.082l162.636-168.658 105.411 117.458-171.67 177.694H99.388zm843.294 0h-665.6l433.694-439.718 228.895 219.859v219.859zm-231.906-530.07L406.588 683.67 262.024 533.082 99.388 701.742V129.505h843.294v475.859l-231.906-222.87z' fill='%232c2c2c'/%3E%3Cpath d='M262.024 201.788c-51.2 0-90.353 39.153-90.353 90.353s39.153 90.353 90.353 90.353 90.352-39.153 90.352-90.353-39.152-90.353-90.352-90.353zm0 120.47c-18.071 0-30.118-12.046-30.118-30.117s12.047-30.117 30.118-30.117 30.117 12.047 30.117 30.117-12.047 30.118-30.117 30.118z' fill='%232c2c2c'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
   }
   .option-block-wrap{
-    background-color: #efefef;
+    background-color: #fefefe;
     padding: 10px;
     border: 1px solid #dddddd;
   }
