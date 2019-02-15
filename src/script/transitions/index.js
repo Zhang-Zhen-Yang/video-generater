@@ -1,5 +1,7 @@
 import util from '../util.js';
 // import { stat } from 'fs';
+
+import defaultEffect from './default';
 import camera from './camera';
 import rect from './rect';
 import fadeInOut from './fadeInOut';
@@ -9,6 +11,8 @@ import photo1 from './photo1';
 import photo2 from './photo2';
 import photo3 from './photo3';
 import photo4 from './photo4';
+import star from './star';
+import shutters from './shutters';
 
 let c = createjs;
 let transitions = {
@@ -51,79 +55,55 @@ let transitions = {
 		timeline.addTween(tween);
 		return tween;
 	},
-
+	// 1
 	default: function({stage, timeline, item, index, wait }) {
-		let pic_url = item.pic_url;
-		let canvas = stage.canvas;
-		let duration = item.duration;
-
-		let img = util.NImage(pic_url);
 		
-		let bitmap = new createjs.Bitmap(img);
-		stage.addChild(bitmap);
-		img.onload = function(){
-			bitmap.set({
-				regX: img.width / 2,
-				regY: img.height / 2,
-				x: canvas.width + img.width / 2,
-				y: canvas.height / 2,
-				width: canvas.width / 2,
-				height: canvas.height / 2,
-			})
-		}
-		bitmap.set({
-			regX: img.width / 2,
-			regY: img.height / 2,
-			x: canvas.width + img.width / 2,
-			y: canvas.height / 2,
-			rotation: index % 2 > 0 ? 10 : -10,
-			shadow: new createjs.Shadow("rgba(0,0,0,0.5)", 5, 5, 10),
-			scaleX: 0.5,
-			scaleY: 0.5,
-		});
-		let tween = c.Tween.get(bitmap, {})
-			.wait(wait)
-			.to({
-				x: canvas.width / 2,
-				y: canvas.height / 2,
-			}, duration * 0.7, c.Ease.backInOut)
-			.to({
-				x: -canvas.width / 2,
-				// alpha: 0.1
-			}, duration * 0.3)
-
-		timeline.addTween(tween);
-		return tween;
+		defaultEffect({stage, timeline, item, index, wait });
+		
 	},
+	// 2
 	// 照相====================================================================================================================================
 	camera: function({stage, timeline, item, index, wait }) {
 		camera({stage, timeline, item, index, wait });
 	},
-
+	// 3
 	// rect====================================================================================================================================
 	rect: function({stage, timeline, item, index, wait }) {
 		rect({stage, timeline, item, index, wait });
 	},
+	// 4
 	fadeInOut: function({stage, timeline, item, index, wait }) {
 		fadeInOut({stage, timeline, item, index, wait });
 	},
 	monochromatic: function({stage, timeline, item, index, wait }) {
 		monochromatic({stage, timeline, item, index, wait });
 	},
+	// 5
 	upDownAndScale: function({stage, timeline, item, index, wait }) {
 		upDownAndScale({stage, timeline, item, index, wait });
 	},
+	// 6
 	photo1: function({stage, timeline, item, index, wait }) {
 		photo1({stage, timeline, item, index, wait });
 	},
+	// 7
 	photo2: function({stage, timeline, item, index, wait }) {
 		photo2({stage, timeline, item, index, wait });
 	},
+	// 8
 	photo3: function({stage, timeline, item, index, wait }) {
 		photo3({stage, timeline, item, index, wait });
 	},
 	photo4: function({stage, timeline, item, index, wait }) {
 		photo4({stage, timeline, item, index, wait });
+	},
+	// 9
+	star: function({stage, timeline, item, index, wait }){
+		star({stage, timeline, item, index, wait });
+	},
+	// 10
+	shutters: function({stage, timeline, item, index, wait }){
+		shutters({stage, timeline, item, index, wait });
 	},
 
 }

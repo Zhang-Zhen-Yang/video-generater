@@ -7,6 +7,9 @@
     <button id="generate-btn" class="pointer" @click="generate">
       开始生成
     </button>
+    <button id="save-btn" class="pointer" @click="saveProject">
+      保存项目
+    </button>
   </header>
 </template>
 
@@ -24,7 +27,10 @@ export default {
   methods: {
     // 开始生成
     generate() {
-      this.$store.dispatch('generate', {})
+      this.$store.dispatch('generate', {});
+    },
+    saveProject() {
+      this.$store.dispatch('saveProject', {});
     }
   },
   created() {
@@ -39,6 +45,7 @@ export default {
     width: 100%;
     left: 0;
     top:0;
+    // border-bottom: 1px solid #dddddd;
   }
   header {
     margin: 0;
@@ -58,7 +65,7 @@ export default {
     padding-top: 16px;
     color: #1284e7;
   }
-  #generate-btn{
+  #generate-btn,#save-btn{
     background-color: #1284e7;
     color: #fff;
     float: right;
@@ -68,6 +75,10 @@ export default {
     height: 100%;
     outline: none;
     border: none;
+  }
+  #save-btn{
+    background-color: white;
+    color: #666666;
   }
   .video-logo{
     display: inline-block;

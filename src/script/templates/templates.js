@@ -26,20 +26,20 @@ const list = [
 				{	
 					type: 'image',
 					transition: 'fadeInOut',
-					duration: 2500,
+					duration: 2000,
 					pic_url:i1,
 
 				},
 				{
 					type: 'image',
 					transition: 'fadeInOut',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i2,
 				},
 				{
 					type: 'image',
 					transition: 'fadeInOut',
-					duration: 2500,
+					duration: 2000,
 					pic_url:  i3,
 				},
 				
@@ -69,20 +69,20 @@ const list = [
 				{	
 					type: 'image',
 					transition: 'camera',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i1,
 	
 				},
 				{
 					type: 'image',
 					transition: 'camera',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i2,
 				},
 				{
 					type: 'image',
 					transition: 'camera',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i3,
 				},
 				
@@ -113,20 +113,20 @@ const list = [
 				{	
 					type: 'image',
 					transition: 'rect',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i1,
 	
 				},
 				{
 					type: 'image',
 					transition: 'rect',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i2,
 				},
 				{
 					type: 'image',
 					transition: 'rect',
-					duration: 2500,
+					duration: 2000,
 					pic_url: i3,
 				},
 				
@@ -352,10 +352,10 @@ const list = [
 			]
 		}
 	},
-	// 9.相片效果4
-	/*{
-		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042821718707E9.png',
-		name: '相片效果4',
+	// 9.星形效果
+	{
+		cover: `${window.assets}t9.png`,
+		name: '星形效果',
 		data: {
 			bgColor: '#ffffff',
 			width: 600,
@@ -367,6 +367,7 @@ const list = [
 			watermarkPosition: 'SouthEast',
 			watermarkScale: 0.2,
 			watermarkAlpha: 1,
+			reverse: true,
 			wordEffectOptions: [
 
 			],
@@ -375,21 +376,21 @@ const list = [
 			queue: [
 				{	
 					type: 'image',
-					transition: 'photo4',
+					transition: 'star',
 					duration: 2000,
 					pic_url: i1,
 	
 				},
 				{	
 					type: 'image',
-					transition: 'photo4',
+					transition: 'star',
 					duration: 2000,
 					pic_url: i2,
 	
 				},
 				{
 					type: 'image',
-					transition: 'photo4',
+					transition: 'star',
 					// wordEffect: 'defaultEffect',
 					duration: 2000,
 					pic_url: i3,
@@ -397,7 +398,7 @@ const list = [
 				
 			]
 		}
-	},*/
+	},
 	/*// 4.拍照效果
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042735289507E9.png',

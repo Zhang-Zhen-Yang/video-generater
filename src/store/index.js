@@ -42,7 +42,7 @@ const store = {
 		playing: true,
 		recording: false,
 		// 
-		project: {...templates[5].data},
+		project: {...templates[8].data},
 		audio: null,
 
 		snackbar: {
@@ -653,6 +653,13 @@ const store = {
 				state.project.wordEffect = type;
 				commit('update');
 			}
+		},
+		// 保存项目到本地
+		saveProject({state, commit}) {
+			let project = JSON.stringify(state.project);
+			// console.log(project);
+			var blob = new Blob([project]);
+			util.funDownload('', blob, 'project.temp');
 		}
 	},
 	modules: {

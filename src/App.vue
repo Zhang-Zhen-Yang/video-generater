@@ -1,5 +1,13 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-02-15 09:17:39
+ * @LastEditTime: 2019-02-15 13:58:56
+ * @LastEditors: Please set LastEditors
+ -->
+
 <template>
-  <div id="app">
+  <div id="app" @dragover="dragover" @drop="drop">
     <topBar></topBar>
     <div class="work-space-wrap">
       <workSpace></workSpace>
@@ -68,6 +76,31 @@ export default {
     this.$store.dispatch('init');
     window.jsonpCallback = (data)=>{
       this.$store.dispatch('jsonpCallback', data);
+    }
+  },
+  methods:{
+    dragover(e) {
+      e.preventDefault();
+    },
+    drop(e) {
+      e.preventDefault();
+      let files = e.dataTransfer.files;
+      if(files.length > 0) {
+        // console.log(files[0]);
+        let fileName = files[0].name;
+        if(fileName.indexOf('.temp') + 5 == fileName.length) {
+          let fileReader = new FileReader();
+          fileReader.onload = () =>{
+            // console.log(fileReader.result);
+            this.$store.state.project = JSON.parse(fileReader.result);
+            this.$store.commit('update');
+          }
+          fileReader.readAsText(files[0]);
+          // alert('ddddd');
+        }
+      }
+      // console.log(e.dataTransfer);
+      
     }
   },
   watch:{

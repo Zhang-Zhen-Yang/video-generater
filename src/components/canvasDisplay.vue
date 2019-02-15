@@ -55,16 +55,26 @@ export default {
       let wait = 0;
 
       // 队列=======================
+
+      let reverse = false; // this.project.reverse;
+      let queueList = [];
       this.project.queue.forEach((item, index)=>{
         // 图片类型
         if(item.type == 'image') {
           let transition = item.transition;
           let wordEffect = item.wordEffect;
           // console.log('upDownAndScale', transition);
-          let tween = transitions[transition]({stage, timeline, item, index, wait});
+          let tweenFun = 
+            (function(stage, timeline, item, index, wait){
+              return ()=> {
+                transitions[transition]({stage, timeline, item, index, wait})
+              };
+            })(stage, timeline, item, index, wait)
           
+          queueList.push(tweenFun);
           if(wordEffect && effectWords[wordEffect]) {
-            effectWords[wordEffect]({stage, timeline, item, index, wait});
+            // queueList.push(()=>{effectWords[wordEffect]({stage, timeline, item, index, wait})});
+            
           }
           wait += item.duration;
           // timeline.addTween(tween);
@@ -75,6 +85,14 @@ export default {
 
         }
       });
+
+      if(reverse) {
+        // alert('ddd');
+        queueList.reverse()
+        queueList.forEach(item=>{item();})
+      } else {
+        queueList.forEach(item=>{item();})
+      }
 
       // 价格标签
       let wordEffect = this.$store.state.project.wordEffect;

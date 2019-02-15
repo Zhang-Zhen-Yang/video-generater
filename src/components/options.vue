@@ -305,6 +305,7 @@ export default {
     // overflow: auto;
     background-color: #F0F8FF;
     border-left: 1px solid #cccccc;
+    border-top: 1px solid #cccccc;
     .pic-item{
       max-width: 100%;
       max-height: 100%;
