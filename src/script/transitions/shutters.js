@@ -1,3 +1,11 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-02-15 09:21:23
+ * @LastEditTime: 2019-02-15 15:03:41
+ * @LastEditors: Please set LastEditors
+ */
+
 import util from '../util.js';
 const fun = function({stage, timeline, item, index, wait }) {
 	let c = createjs;
@@ -15,28 +23,15 @@ const fun = function({stage, timeline, item, index, wait }) {
 
 
 
-	let star = new c.Shape();
 	
-	star.graphics.beginFill("#FF0").drawPolyStar(0, 0, maxS, 5, 0.6, -90);
-
-	star.set({
-		regX: 0,
-		regY: 0,
-		x: maxS / 2,
-		y: maxS / 2,
-		scaleX: 2.2,
-		scaleY: 2.2,
-		rotation: 0,
-	})
-	star.cache(0, 0, cw, ch);
 
 	let img = util.NImage(pic_url);
 	
-	let bitmap = new c.Bitmap(img);
-
-	stage.addChildAt(bitmap, 1);
+	
+	stage.addChildAt(bitmapContainer, 1);
 	let scale = 1;
 	img.onload = function(){
+		let bitmap = new c.Bitmap(img);
 		scale = util.getImageScale({img, cw, ch, type: 'cover'});
 		let iw = img.width;
 		let ih = img.height;
@@ -54,18 +49,75 @@ const fun = function({stage, timeline, item, index, wait }) {
 			let baseBitmap = bitmap.clone();
 			stage.addChildAt(baseBitmap, 1);
 		}
-		bitmap.mask= star;
+		
+		for(let i = 0; i < 10; i++) {
+			let nBitmap = bitmap.clone();
+			bitmapContainer.addChild(nBitmap);
+
+			let type = index % 4;
+			let bar;
+			let toProps;
+			if(type == 0) {
+				bar = new c.Shape();
+				bar.graphics.beginFill("#FF0").drawRect(0, 0, cw / 10, ch);
+				bar.set({
+					x: i * cw /10,
+					y: 0,
+				})
+				bar.cache(0, 0, cw, ch);
+				toProps = {
+					y: -ch
+				};
+			} else if(type == 1){
+				bar = new c.Shape();
+				bar.graphics.beginFill("#FF0").drawRect(0, 0, cw, ch / 10);
+				bar.set({
+					x: 0,
+					y: i * ch / 10,
+				})
+				bar.cache(0, 0, cw, ch);
+				toProps = {
+					x: -cw
+				};
+			} else if(type == 2){
+				bar = new c.Shape();
+				bar.graphics.beginFill("#FF0").drawRect(0, 0, cw, ch / 10);
+				bar.set({
+					x: 0,
+					y: i * ch / 10,
+				})
+				bar.cache(0, 0, cw, ch);
+				toProps = {
+					x: cw
+				};
+			} else if (type == 3){
+				bar = new c.Shape();
+				bar.graphics.beginFill("#FF0").drawRect(0, 0, cw / 10, ch);
+				bar.set({
+					x: i * cw /10,
+					y: 0,
+				})
+				bar.cache(0, 0, cw, ch);
+				toProps = {
+					y: ch
+				};
+			}
+
+
+			nBitmap.mask= bar;
+			let timeBefore = duration * 0.3 /10 * i;
+			let timeAfter = duration * 0.7 - timeBefore;
+			let barTween = c.Tween.get(bar)
+			.wait(wait + timeBefore)
+			.to(toProps, duration * 0.3, c.Ease.cubicInOut)
+			.wait(timeAfter)
+
+
+			timeline.addTween(barTween);
+		}
 	}
 
-	let starTween = c.Tween.get(star)
-	.wait(wait)
-	.to({
-		scaleX: 0,
-		scaleY: 0,
-		rotation: 360,
-	}, duration, c.Ease.cubicOut);
-
-	timeline.addTween(starTween);
+	
 	// stage.addChild(star);
 
 }

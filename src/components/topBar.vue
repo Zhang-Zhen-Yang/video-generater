@@ -7,7 +7,7 @@
     <button id="generate-btn" class="pointer" @click="generate">
       开始生成
     </button>
-    <button id="save-btn" class="pointer" @click="saveProject">
+    <button v-if="false" id="save-btn" class="pointer" @click="saveProject">
       保存项目
     </button>
   </header>

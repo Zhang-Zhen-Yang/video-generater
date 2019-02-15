@@ -13,6 +13,8 @@ import photo3 from './photo3';
 import photo4 from './photo4';
 import star from './star';
 import shutters from './shutters';
+import blockSlice from './blockSlice';
+
 
 let c = createjs;
 let transitions = {
@@ -104,6 +106,9 @@ let transitions = {
 	// 10
 	shutters: function({stage, timeline, item, index, wait }){
 		shutters({stage, timeline, item, index, wait });
+	},
+	blockSlice: function({stage, timeline, item, index, wait }){
+		blockSlice({stage, timeline, item, index, wait });
 	},
 
 }

@@ -399,6 +399,100 @@ const list = [
 			]
 		}
 	},
+	// 10.百叶窗效果
+	{
+		cover: `${window.assets}t10.png`,
+		name: '百叶窗',
+		data: {
+			bgColor: '#ffffff',
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'shutters',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'shutters',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'shutters',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
+	// 10.块切割效果
+	{
+		cover: `${window.assets}t11.png`,
+		name: '块切割',
+		data: {
+			bgColor: '#ffffff',
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'blockSlice',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'blockSlice',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'blockSlice',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
 	/*// 4.拍照效果
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042735289507E9.png',
