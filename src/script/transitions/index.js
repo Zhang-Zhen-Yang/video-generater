@@ -5,6 +5,7 @@ import defaultEffect from './default';
 import camera from './camera';
 import rect from './rect';
 import fadeInOut from './fadeInOut';
+import fadeInOutN from './fadeInOutN';
 import monochromatic from './monochromatic';
 import upDownAndScale from './upDownAndScale';
 import photo1 from './photo1';
@@ -14,6 +15,9 @@ import photo4 from './photo4';
 import star from './star';
 import shutters from './shutters';
 import blockSlice from './blockSlice';
+import multipleShape from './multipleShape';
+import rotation from './rotation';
+import dissolve from './dissolve';
 
 
 let c = createjs;
@@ -58,57 +62,66 @@ let transitions = {
 		return tween;
 	},
 	// 1
-	default: function({stage, timeline, item, index, wait }) {
+	default: function({stage, timeline, item, index, wait, project }) {
 		
-		defaultEffect({stage, timeline, item, index, wait });
+		defaultEffect({stage, timeline, item, index, wait, project });
 		
 	},
 	// 2
 	// 照相====================================================================================================================================
-	camera: function({stage, timeline, item, index, wait }) {
-		camera({stage, timeline, item, index, wait });
+	camera: function({stage, timeline, item, index, wait , project}) {
+		camera({stage, timeline, item, index, wait , project});
 	},
 	// 3
 	// rect====================================================================================================================================
-	rect: function({stage, timeline, item, index, wait }) {
-		rect({stage, timeline, item, index, wait });
+	rect: function({stage, timeline, item, index, wait , project}) {
+		rect({stage, timeline, item, index, wait , project});
 	},
 	// 4
-	fadeInOut: function({stage, timeline, item, index, wait }) {
-		fadeInOut({stage, timeline, item, index, wait });
+	fadeInOut: function({stage, timeline, item, index, wait , project}) {
+		fadeInOutN({stage, timeline, item, index, wait , project});
 	},
-	monochromatic: function({stage, timeline, item, index, wait }) {
-		monochromatic({stage, timeline, item, index, wait });
+	monochromatic: function({stage, timeline, item, index, wait , project}) {
+		monochromatic({stage, timeline, item, index, wait , project});
 	},
 	// 5
-	upDownAndScale: function({stage, timeline, item, index, wait }) {
-		upDownAndScale({stage, timeline, item, index, wait });
+	upDownAndScale: function({stage, timeline, item, index, wait , project}) {
+		upDownAndScale({stage, timeline, item, index, wait , project});
 	},
 	// 6
-	photo1: function({stage, timeline, item, index, wait }) {
-		photo1({stage, timeline, item, index, wait });
+	photo1: function({stage, timeline, item, index, wait , project}) {
+		photo1({stage, timeline, item, index, wait , project});
 	},
 	// 7
-	photo2: function({stage, timeline, item, index, wait }) {
-		photo2({stage, timeline, item, index, wait });
+	photo2: function({stage, timeline, item, index, wait , project}) {
+		photo2({stage, timeline, item, index, wait , project});
 	},
 	// 8
-	photo3: function({stage, timeline, item, index, wait }) {
-		photo3({stage, timeline, item, index, wait });
+	photo3: function({stage, timeline, item, index, wait , project}) {
+		photo3({stage, timeline, item, index, wait , project});
 	},
-	photo4: function({stage, timeline, item, index, wait }) {
-		photo4({stage, timeline, item, index, wait });
+	photo4: function({stage, timeline, item, index, wait , project}) {
+		photo4({stage, timeline, item, index, wait , project});
 	},
 	// 9
-	star: function({stage, timeline, item, index, wait }){
-		star({stage, timeline, item, index, wait });
+	star: function({stage, timeline, item, index, wait , project}){
+		star({stage, timeline, item, index, wait , project});
 	},
 	// 10
-	shutters: function({stage, timeline, item, index, wait }){
-		shutters({stage, timeline, item, index, wait });
+	shutters: function({stage, timeline, item, index, wait , project}){
+		shutters({stage, timeline, item, index, wait , project});
 	},
-	blockSlice: function({stage, timeline, item, index, wait }){
-		blockSlice({stage, timeline, item, index, wait });
+	blockSlice: function({stage, timeline, item, index, wait , project}){
+		blockSlice({stage, timeline, item, index, wait , project});
+	},
+	multipleShape: function({stage, timeline, item, index, wait , project}){
+		multipleShape({stage, timeline, item, index, wait , project});
+	},
+	rotation: function({stage, timeline, item, index, wait , project}){
+		rotation({stage, timeline, item, index, wait , project});
+	},
+	dissolve: function({stage, timeline, item, index, wait , project}){
+		dissolve({stage, timeline, item, index, wait , project});
 	},
 
 }

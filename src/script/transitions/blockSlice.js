@@ -2,20 +2,21 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-02-15 15:12:40
- * @LastEditTime: 2019-02-15 16:03:42
+ * @LastEditTime: 2019-02-16 11:17:59
  * @LastEditors: Please set LastEditors
  */
 
 
 import util from '../util.js';
-const fun = function({stage, timeline, item, index, wait }) {
+const fun = function({stage, timeline, item, index, wait , project}) {
 	let c = createjs;
 	let pic_url = item.pic_url;
 	let canvas = stage.canvas;
 	let cw = canvas.width;
 	let ch = canvas.height;
 	let maxS = Math.max(cw, ch);
-	let duration = item.duration;
+	let { durationScale, durationDefault, durationFirst } = project;
+	let duration = index == 0 ? (durationFirst * durationScale) : (durationDefault * durationScale);
 
 	let bitmapContainer = new c.Container();
 

@@ -29,6 +29,7 @@ export default {
   },
   methods: {
     render() {
+      let project = this.project;
       this.canvas.width = this.project.width;
       this.canvas.height = this.project.height;
       /* this.ctx.font = '20px 黑体';
@@ -58,16 +59,20 @@ export default {
 
       let reverse = false; // this.project.reverse;
       let queueList = [];
+
+      let { durationScale, durationDefault, durationFirst } = this.project;
+
       this.project.queue.forEach((item, index)=>{
         // 图片类型
         if(item.type == 'image') {
           let transition = item.transition;
           let wordEffect = item.wordEffect;
+          let currentDuration = index == 0 ? durationFirst * durationScale : durationDefault * durationScale;
           // console.log('upDownAndScale', transition);
           let tweenFun = 
             (function(stage, timeline, item, index, wait){
               return ()=> {
-                transitions[transition]({stage, timeline, item, index, wait})
+                transitions[transition]({stage, timeline, item, index, wait, project: project})
               };
             })(stage, timeline, item, index, wait)
           
@@ -76,7 +81,7 @@ export default {
             // queueList.push(()=>{effectWords[wordEffect]({stage, timeline, item, index, wait})});
             
           }
-          wait += item.duration;
+          wait += currentDuration;
           // timeline.addTween(tween);
           // 视频类型
         } else if(item.type == 'video'){

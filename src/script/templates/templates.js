@@ -9,6 +9,9 @@ const list = [
 		name: '淡入淡出',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'defaultEffect',
@@ -52,6 +55,9 @@ const list = [
 		name: '拍照效果',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -96,6 +102,9 @@ const list = [
 		name: '线条',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -139,6 +148,9 @@ const list = [
 		name: '滑动',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -181,6 +193,9 @@ const list = [
 		name: '上下放大',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -225,6 +240,9 @@ const list = [
 		name: '相片效果',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -269,6 +287,9 @@ const list = [
 		name: '相片效果2',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -314,6 +335,9 @@ const list = [
 		name: '相片效果3',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			wordEffect: 'bottomBar',
@@ -358,6 +382,9 @@ const list = [
 		name: '星形效果',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -405,6 +432,9 @@ const list = [
 		name: '百叶窗',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -446,12 +476,15 @@ const list = [
 			]
 		}
 	},
-	// 10.块切割效果
+	// 11.块切割效果
 	{
 		cover: `${window.assets}t11.png`,
 		name: '块切割',
 		data: {
 			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -493,6 +526,156 @@ const list = [
 			]
 		}
 	},
+	// 12.多形状展现
+	{
+		cover: `${window.assets}t13.png`,
+		name: '多形状展现',
+		data: {
+			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 1000,
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'multipleShape',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'multipleShape',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'multipleShape',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
+	// 13.旋转旋转
+	{
+		cover: `${window.assets}t12.png`,
+		name: '旋转旋转',
+		data: {
+			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'rotation',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'rotation',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'rotation',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
+	// 13.溶解
+	/*{
+		cover: `${window.assets}t12.png`,
+		name: '溶解',
+		data: {
+			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 2000,
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'dissolve',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'dissolve',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'dissolve',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},*/
 	/*// 4.拍照效果
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042735289507E9.png',

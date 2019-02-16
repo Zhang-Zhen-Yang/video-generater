@@ -28,3 +28,4 @@ window.p = new Vue({
   render: h => h(App)
 })
 console.log('2019-02-15 16:50:35');
+// alert(typeof(Worker));

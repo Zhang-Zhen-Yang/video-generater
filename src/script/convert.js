@@ -57,10 +57,12 @@ function accessWorder() {
 	return new Promise((resolve, reject)=>{
 		let initWorder = processInWebWorker();
 		initWorder.onmessage = function(event) {
+			// alert(event);
 			resolve();
 			initWorder.terminate();
 		}
 		initWorder.onerror = function(e) {
+			// alert(e);
 			console.log(e);
 			reject();
 			initWorder.terminate();

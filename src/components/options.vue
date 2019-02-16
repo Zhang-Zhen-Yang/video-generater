@@ -15,6 +15,15 @@
       <div class="scrollbar-overwrite">
       <!--inner-->
         <div style="padding:20px 80px 20px 20px;">
+          <!--时长========================================-->
+          <div>
+            <div class="content-item-sub-title">
+              <span style="vertical-align: -4px;" class="font16 bold">时长</span> 
+            </div>
+            <div class="option-block-wrap" style="">
+              <input type="range" style="width: 100%;" v-model="durationScale" min="0.2" max="3" step="0.1">
+            </div>
+          </div>    
           <!--水印===================================================================================================== -->
           <div>
             <div class="content-item-sub-title">
@@ -126,6 +135,8 @@ export default {
   components: {VueSlideBar},
   data () {
     return {
+      durationScaleTimeoutStamp: null,
+      durationScaleTimeout: null,
       msg: 'options',
       wartermarkPositions: [
         {
@@ -244,6 +255,36 @@ export default {
         this.$store.commit('updateWatermark');
       }
     },
+    durationScale: {
+      get() {
+        return this.project.durationScale;
+      },
+      set(val) {
+        try{
+          let _this = this;
+          if(_this.durationScaleTimeoutStamp && ((Date.now() - _this.durationScaleTimeoutStamp) > 1000) ) {
+            _this.durationScaleTimeoutStamp = Date.now();
+            this.project.durationScale = val;
+            this.$store.commit('update');
+          } else {
+            if(_this.durationScaleTimeout) {
+              clearTimeout(_this.durationScaleTimeout);
+            }
+            _this.durationScaleTimeout = setTimeout(()=>{
+              _this.durationScaleTimeoutStamp = Date.now();
+              this.project.durationScale = val;
+              this.$store.commit('update');
+            }, 500)
+          }
+        }catch(e){
+          console.warn(e);
+        }
+        
+        
+        
+        // alert(val);
+      }
+    }
 
   },
   methods: {

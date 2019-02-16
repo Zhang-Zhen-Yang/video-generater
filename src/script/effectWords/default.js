@@ -121,7 +121,8 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 	// bar 
 	var bar = new createjs.Shape();
-	bar.graphics.beginFill('#eeeeee').drawRect(0, 0, 100 * 2, 3 * 2);
+	let textWidth = price3.getMeasuredWidth();
+	bar.graphics.beginFill('#eeeeee').drawRect(0, 0, textWidth, 3 * 2);
 	bar.set({
 		x: -50 * 2,
 		y: 110 * 2,
@@ -172,6 +173,10 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		value: price,
 		callback: (e)=>{
 			price3.text = e.target.value;
+			let textWidth = price3.getMeasuredWidth();
+			let graphics = new c.Graphics();
+			graphics.beginFill('#eeeeee').drawRect(0, 0, textWidth, 3 * 2);
+			bar.graphics = graphics;
 		}
 	})
 

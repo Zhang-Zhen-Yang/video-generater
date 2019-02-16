@@ -93,7 +93,7 @@ export default {
     },
     data() {
       let data = [];
-      for(let i = 0; i < this.duration / 100; i++) {
+      for(let i = 0; i <= this.duration / 100; i++) {
         data.push(i/10);
       }
       // console.log(data);

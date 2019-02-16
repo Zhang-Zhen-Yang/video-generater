@@ -1,8 +1,9 @@
 import util from '../util.js';
-const fun = function({stage, timeline, item, index, wait }) {
+const fun = function({stage, timeline, item, index, wait, project = {}}) {
 	let pic_url = item.pic_url;
 		let canvas = stage.canvas;
-		let duration = item.duration;
+		let { durationScale, durationDefault, durationFirst } = project;
+		let duration = index == 0 ? (durationFirst * durationScale) : (durationDefault * durationScale);
 
 		let img = util.NImage(pic_url);
 		

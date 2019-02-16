@@ -14,28 +14,11 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 
 
 
-
-
-	let star = new c.Shape();
-	
-	star.graphics.beginFill("#FF0").drawPolyStar(0, 0, maxS, 5, 0.6, -90);
-
-	star.set({
-		regX: 0,
-		regY: 0,
-		x: maxS / 2,
-		y: maxS / 2,
-		scaleX: 2.2,
-		scaleY: 2.2,
-		rotation: 0,
-	})
-	star.cache(0, 0, cw, ch);
-
 	let img = util.NImage(pic_url);
 	
 	let bitmap = new c.Bitmap(img);
 
-	stage.addChildAt(bitmap, 1);
+	stage.addChild(bitmap,);
 	let scale = 1;
 	img.onload = function(){
 		scale = util.getImageScale({img, cw, ch, type: 'cover'});
@@ -48,25 +31,37 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 			regY: ih / 2,
 			x: cw / 2,
 			y: ch / 2,
-			scaleX: scale, 
-			scaleY: scale, 
+			scaleX: index == 0 ? scale : 0, 
+			scaleY: index == 0 ? scale : 0, 
+			rotation: index == 0 ? 360 : 0
 		})
-		if(index == 0) {
+		/*if(index == 0) {
 			let baseBitmap = bitmap.clone();
 			stage.addChildAt(baseBitmap, 1);
-		}
-		bitmap.mask= star;
+		}*/
+        // bitmap.mask= shape;
+        
+        
+
+        let bitmapTween = c.Tween.get(bitmap)
+        .wait(wait + duration * (index == 0 ? 0 : 0.3))
+        .to({
+			rotation: 360,
+			scaleX: scale,
+			scaleY: scale,
+
+		}, duration * 0.3, c.Ease.easeOut)
+		.to({
+			scaleX: scale * 1.1,
+			scaleY: scale * 1.1 
+		}, duration * 0.4)
+        
+        timeline.addTween(bitmapTween);
+    
+       
 	}
 
-	let starTween = c.Tween.get(star)
-	.wait(wait)
-	.to({
-		scaleX: 0,
-		scaleY: 0,
-		rotation: 360,
-	}, duration, c.Ease.cubicOut);
-
-	timeline.addTween(starTween);
+	
 	// stage.addChild(star);
 
 }

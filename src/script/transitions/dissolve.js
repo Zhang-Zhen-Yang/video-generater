@@ -18,16 +18,16 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 
 	let star = new c.Shape();
 	
-	star.graphics.beginFill("#FF0").drawPolyStar(0, 0, maxS, 5, 0.6, -90);
+	star.graphics.beginLinearGradientFill(["#000", "rgba(0,0,0,0)", "#000"], [0, 0.2, 1], 0, 0, 0, ch).drawRect(0, 0, cw, ch);
 
 	star.set({
 		regX: 0,
 		regY: 0,
-		x: maxS / 2,
-		y: maxS / 2,
-		scaleX: 2.2,
-		scaleY: 2.2,
-		rotation: 0,
+		x: 0,
+		y: 0,
+		scaleX: 1,
+		scaleY: 1,
+		rotation: 45,
 	})
 	star.cache(0, 0, cw, ch);
 
@@ -36,6 +36,7 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 	let bitmap = new c.Bitmap(img);
 
 	stage.addChildAt(bitmap, 1);
+
 	let scale = 1;
 	img.onload = function(){
 		scale = util.getImageScale({img, cw, ch, type: 'cover'});
@@ -53,20 +54,31 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 		})
 		if(index == 0) {
 			let baseBitmap = bitmap.clone();
-			stage.addChildAt(baseBitmap, 1);
+			// stage.addChildAt(baseBitmap, 1);
 		}
-		bitmap.mask= star;
+		// bitmap.mask = star;
+		bitmap.filters= [
+			new c.AlphaMaskFilter(star.cacheCanvas)
+		];
+		bitmap.cache(0, 0, cw, ch);
+
+		let starTween = c.Tween.get(star)
+		.wait(wait)
+		.to({
+			y: 600,
+		}, duration, c.Ease.cubicOut)
+		.call(()=>{
+			star.updateCache();
+			bitmap.filters= [
+				new c.AlphaMaskFilter(star.cacheCanvas)
+			];
+			bitmap.cache(0, 0, cw, ch);
+		})
+
+		timeline.addTween(starTween);
 	}
 
-	let starTween = c.Tween.get(star)
-	.wait(wait)
-	.to({
-		scaleX: 0,
-		scaleY: 0,
-		rotation: 360,
-	}, duration, c.Ease.cubicOut);
-
-	timeline.addTween(starTween);
+	
 	// stage.addChild(star);
 
 }

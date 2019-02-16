@@ -16,21 +16,7 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 
 
 
-	let star = new c.Shape();
 	
-	star.graphics.beginFill("#FF0").drawPolyStar(0, 0, maxS, 5, 0.6, -90);
-
-	star.set({
-		regX: 0,
-		regY: 0,
-		x: maxS / 2,
-		y: maxS / 2,
-		scaleX: 2.2,
-		scaleY: 2.2,
-		rotation: 0,
-	})
-	star.cache(0, 0, cw, ch);
-
 	let img = util.NImage(pic_url);
 	
 	let bitmap = new c.Bitmap(img);
@@ -55,18 +41,20 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 			let baseBitmap = bitmap.clone();
 			stage.addChildAt(baseBitmap, 1);
 		}
-		bitmap.mask= star;
+		let bitmapTween = c.Tween.get(bitmap)
+		.wait(wait)
+		.to({
+			scaleX: scale* 1.05,
+			scaleY: scale * 1.05,
+		}, 0.5 * duration, c.Ease.easeOut)
+		.to({
+			alpha: 0
+		}, 0.5 * duration)
+
+		timeline.addTween(bitmapTween);
 	}
 
-	let starTween = c.Tween.get(star)
-	.wait(wait)
-	.to({
-		scaleX: 0,
-		scaleY: 0,
-		rotation: 360,
-	}, duration, c.Ease.cubicOut);
-
-	timeline.addTween(starTween);
+	
 	// stage.addChild(star);
 
 }
