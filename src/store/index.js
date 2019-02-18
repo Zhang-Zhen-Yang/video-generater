@@ -42,7 +42,7 @@ const store = {
 		playing: true,
 		recording: false,
 		// 
-		project: {...templates[12].data},
+		project: {...templates[15].data},
 		audio: null,
 
 		snackbar: {

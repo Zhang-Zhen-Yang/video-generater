@@ -152,6 +152,9 @@ export default {
     md() {
       return this.$store.state.dialogImage;
     },
+    key() {
+      return this.md.key;
+    },
     tabIndex: {
       get() {
         return this.md.tabIndex;
@@ -282,11 +285,12 @@ export default {
       if(replace) {
         // alert(this.selectedPic);
         if(this.selectedPic){
-          if(typeof this.itemData.watermark != 'undefined') {
+          /*if(typeof this.itemData.watermark != 'undefined') {
             this.itemData.watermark = this.selectedPic;
           } else {
             this.itemData.pic_url = this.selectedPic;
-          }
+          }*/
+          this.itemData[this.key] = this.selectedPic;
           this.$store.commit('update');
         }
         // this.$store.dispatch('addStep');

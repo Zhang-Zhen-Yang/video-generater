@@ -23,6 +23,7 @@ const store = {
 		allowCount: 1,
 		selectedPic: '',
 		tabIndex: 0,
+		key: '',
 
 		color: '所有颜色',
 		industry: '所有主题',

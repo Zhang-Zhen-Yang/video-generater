@@ -66,6 +66,7 @@ export default {
         // 图片类型
         if(item.type == 'image') {
           let transition = item.transition;
+          
           let wordEffect = item.wordEffect;
           let currentDuration = index == 0 ? durationFirst * durationScale : durationDefault * durationScale;
           // console.log('upDownAndScale', transition);

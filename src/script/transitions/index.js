@@ -18,6 +18,9 @@ import blockSlice from './blockSlice';
 import multipleShape from './multipleShape';
 import rotation from './rotation';
 import dissolve from './dissolve';
+import extrusion from './extrusion';
+import rightAngle from './rightAngle';
+import flyIn from './flyIn';
 
 
 let c = createjs;
@@ -122,6 +125,15 @@ let transitions = {
 	},
 	dissolve: function({stage, timeline, item, index, wait , project}){
 		dissolve({stage, timeline, item, index, wait , project});
+	},
+	extrusion: function({stage, timeline, item, index, wait , project}){
+		extrusion({stage, timeline, item, index, wait , project});
+	},
+	rightAngle: function({stage, timeline, item, index, wait , project}){
+		rightAngle({stage, timeline, item, index, wait , project});
+	},
+	flyIn: function({stage, timeline, item, index, wait , project}){
+		flyIn({stage, timeline, item, index, wait , project});
 	},
 
 }

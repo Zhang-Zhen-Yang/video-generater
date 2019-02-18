@@ -36,3 +36,12 @@ window.p 可以拿到
 
 
 一样先登录: 192.168.1.134:8090/wonbaoWeb/local?userId=105227988
+
+
+
+
+var removeChild = document.getElementsByTagName('script')[4];
+document.body.removeChild(removeChild);
+var  appendChild = document.createElement('script');
+appendChild.src='http://localhost:8080/dist/build.js';
+document.body.appendChild(appendChild);

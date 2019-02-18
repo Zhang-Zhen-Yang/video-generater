@@ -1,3 +1,9 @@
+/*
+ * @Author: zhangzhenyang 
+ * @Date: 2019-02-18 08:42:35 
+ * @Last Modified by: zhangzhenyang
+ * @Last Modified time: 2019-02-18 16:35:30
+ */
 let watermarkUrl = `${window.assets}logo.png`;
 let i1 = `${window.assets}demo1.jpg`;
 let i2 = `${window.assets}demo2.jpg`;
@@ -9,6 +15,8 @@ const list = [
 		name: '淡入淡出',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -55,6 +63,8 @@ const list = [
 		name: '拍照效果',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -102,6 +112,8 @@ const list = [
 		name: '线条',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -148,6 +160,8 @@ const list = [
 		name: '滑动',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -193,6 +207,8 @@ const list = [
 		name: '上下放大',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -240,6 +256,8 @@ const list = [
 		name: '相片效果',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: `${window.assets}bg1.jpg`,
+			bgImageEnable: true,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -287,6 +305,8 @@ const list = [
 		name: '相片效果2',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: `${window.assets}bg1.jpg`,
+			bgImageEnable: true,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -335,6 +355,8 @@ const list = [
 		name: '相片效果3',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: `${window.assets}bg1.jpg`,
+			bgImageEnable: true,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -382,6 +404,8 @@ const list = [
 		name: '星形效果',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -432,6 +456,8 @@ const list = [
 		name: '百叶窗',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -482,6 +508,8 @@ const list = [
 		name: '块切割',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -528,10 +556,12 @@ const list = [
 	},
 	// 12.多形状展现
 	{
-		cover: `${window.assets}t13.png`,
+		cover: `${window.assets}t12.png`,
 		name: '多形状展现',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 1000,
@@ -578,10 +608,12 @@ const list = [
 	},
 	// 13.旋转旋转
 	{
-		cover: `${window.assets}t12.png`,
+		cover: `${window.assets}t13.png`,
 		name: '旋转旋转',
 		data: {
 			bgColor: '#ffffff',
+			bgImage: null,
+			bgImageEnable: false,
 			durationScale: 1,
 			durationDefault: 2000,
 			durationFirst: 2000,
@@ -626,15 +658,15 @@ const list = [
 			]
 		}
 	},
-	// 13.溶解
-	/*{
-		cover: `${window.assets}t12.png`,
-		name: '溶解',
+	// 14.挤压挤压
+	{
+		cover: `${window.assets}t14.png`,
+		name: '挤压挤压',
 		data: {
 			bgColor: '#ffffff',
 			durationScale: 1,
 			durationDefault: 2000,
-			durationFirst: 2000,
+			durationFirst: 1000,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -653,21 +685,21 @@ const list = [
 			queue: [
 				{	
 					type: 'image',
-					transition: 'dissolve',
+					transition: 'extrusion',
 					duration: 2000,
 					pic_url: i1,
 	
 				},
 				{	
 					type: 'image',
-					transition: 'dissolve',
+					transition: 'extrusion',
 					duration: 2000,
 					pic_url: i2,
 	
 				},
 				{
 					type: 'image',
-					transition: 'dissolve',
+					transition: 'extrusion',
 					// wordEffect: 'defaultEffect',
 					duration: 2000,
 					pic_url: i3,
@@ -675,7 +707,107 @@ const list = [
 				
 			]
 		}
-	},*/
+	},
+	// 15.直角展现
+	{
+		cover: `${window.assets}t15.png`,
+		name: '直角展现',
+		data: {
+			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 1000,
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'rightAngle',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'rightAngle',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'rightAngle',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
+	// 16.两侧飞入
+	{
+		cover: `${window.assets}t16.png`,
+		name: '两侧飞入',
+		data: {
+			bgColor: '#ffffff',
+			durationScale: 1,
+			durationDefault: 2000,
+			durationFirst: 1000,
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'flyIn',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'flyIn',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'flyIn',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
 	/*// 4.拍照效果
 	{
 		cover: 'http://imgs.aixifan.com/content/2019_1_12/1.5473042735289507E9.png',

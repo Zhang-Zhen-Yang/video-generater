@@ -1,3 +1,10 @@
+/*
+ * @Author: zhangzhenyang 
+ * @Date: 2019-02-18 08:43:15 
+ * @Last Modified by:   zhangzhenyang 
+ * @Last Modified time: 2019-02-18 08:43:15 
+ */
+
 import util from '../util.js';
 const fun = function({stage, timeline, item, index, wait, project = {} }) {
 	let c = createjs;

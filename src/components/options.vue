@@ -3,7 +3,7 @@
  * @Date: 2019-01-19 15:08:59 
  * @Last Modified by: zhangzhenyang
  * @Last Modified time: yyyy-01-dd 15:09:38
- */
+ */ 
 <template>
   <div id="options">
     <!--title-->
@@ -23,7 +23,25 @@
             <div class="option-block-wrap" style="">
               <input type="range" style="width: 100%;" v-model="durationScale" min="0.2" max="3" step="0.1">
             </div>
-          </div>    
+          </div>
+          <!--背景图片-->
+          <div v-if="project.bgImageEnable">
+            <div>
+              <div class="content-item-sub-title">
+                <span style="vertical-align: -4px;" class="font16 bold">背景图片</span> 
+              </div>
+            </div>
+            <mask-replace
+              :text="'选择图片'"
+              :showImageUpload="true"
+              @select="bgImageSelect"
+              @change="bgImageChange(0, $event)"
+            >
+              <img v-if="project.bgImage" :src="project.bgImage" alt="" class="pic-item">
+              <div v-else class="empty-water-mark">
+              </div>
+            </mask-replace>
+          </div>
           <!--水印===================================================================================================== -->
           <div>
             <div class="content-item-sub-title">
@@ -298,6 +316,7 @@ export default {
       this.$store.state.dialogImage.selectedPic = this.project.watermark;
       this.$store.state.dialogImage.itemData = this.project;
       this.$store.state.dialogImage.show = true;
+      this.$store.state.dialogImage.key = 'watermark';
     },
     // 更改图片
     imageChange(index,e) {
@@ -310,6 +329,21 @@ export default {
         // console.log(file.result);
       }
       // console.log([i,j]);
+    },
+    bgImageSelect() {
+      this.$store.state.dialogImage.selectedPic = this.project.bgImage;
+      this.$store.state.dialogImage.itemData = this.project;
+      this.$store.state.dialogImage.show = true;
+      this.$store.state.dialogImage.key = 'bgImage';
+    },
+    bgImageChange(index, e) {
+      let file = new FileReader();
+      file.readAsDataURL(e.file);
+      file.onload = () => {
+        this.project.bgImage = file.result;
+        this.$store.commit('update');
+        // console.log(file.result);
+      }
     },
     // 水印图来自本地
     watermarkImageChange(index, e) {

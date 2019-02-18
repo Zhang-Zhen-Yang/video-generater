@@ -7,12 +7,13 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 	let ch = canvas.height;
 	let { durationScale, durationDefault, durationFirst } = project;
 	let duration = index == 0 ? (durationFirst * durationScale) : (durationDefault * durationScale);
-
+	let bgImage = project.bgImage;
 
 	// 如果是第一张，加入背景
 	if(index == 0) {
-		let img = util.NImage(`${window.assets}bg1.jpg`);
+		let img = util.NImage(bgImage);
 		let bitmap = new createjs.Bitmap(img);
+		bitmap.name = 'bgImage';
 		stage.addChild(bitmap);
 		img.onload = ()=>{
 			let scale = util.getImageScale({img, cw, ch, type: 'cover'})

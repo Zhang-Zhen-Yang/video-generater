@@ -122,6 +122,7 @@ export default {
       this.$store.state.dialogImage.selectedPic = item.pic_url;
       this.$store.state.dialogImage.itemData = item;
       this.$store.state.dialogImage.show = true;
+      this.$store.state.dialogImage.key = 'pic_url';
     },
     // 更改图片
     imageChange(index,e) {
