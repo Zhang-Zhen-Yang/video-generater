@@ -18,10 +18,21 @@
           <!--时长========================================-->
           <div>
             <div class="content-item-sub-title">
-              <span style="vertical-align: -4px;" class="font16 bold">时长</span> 
+              <span style="vertical-align: -4px;" class="font16 bold">动画时长</span> 
             </div>
             <div class="option-block-wrap" style="">
               <input type="range" style="width: 100%;" v-model="durationScale" min="0.2" max="3" step="0.1">
+            </div>
+          </div>
+          <!--背景颜色-->
+          <div v-if="project.bgColorEnable">
+            <div>
+              <div class="content-item-sub-title">
+                <span style="vertical-align: -4px;" class="font16 bold">背景颜色</span> 
+              </div>
+            </div>
+            <div class="option-block-wrap">
+              <color-picker v-model="project.bgColor" title="颜色" @input="setBgColor"></color-picker>
             </div>
           </div>
           <!--背景图片-->
@@ -100,9 +111,9 @@
             </div>
  
             <div v-if="useEffectWord" class="option-block-wrap">
-              <div  class="effect-word-item-wrap" v-for="item, index in wordEffectItems">
-                <div :class="['effect-word-item', 'pointer', wordEffect == item ? 'is-current-word-effect': '']" @click="setEffectWords(item)">
-                    {{ item }}
+              <div  class="effect-word-item-wrap" v-for="item, key in effectWords">
+                <div :class="['effect-word-item', 'pointer', wordEffect == key ? 'is-current-word-effect': '']" @click="setEffectWords(key)">
+                    {{ item.name }}
                 </div>
               </div>
               <div v-for="item, index in wordEffectOptions">
@@ -202,6 +213,9 @@ export default {
     },
     project() {
       return this.$store.state.project;
+    },
+    effectWords() {
+      return effectWords;
     },
     wordEffectOptions() {
       return this.project.wordEffectOptions;
@@ -366,6 +380,15 @@ export default {
     // 设置价格标签
     setEffectWords(item) {
       this.$store.dispatch('setEffectWords', {type: item});
+    },
+    setBgColor(e) {
+      let stage = this.$store.state.stage;
+      let rect = stage.children[0];
+      let w = stage.canvas.width;
+      let h = stage.canvas.height;
+      rect.graphics.c().f(e).drawRect(0, 0, w, h);
+      
+      console.log(stage);
     }
   },
   created() {

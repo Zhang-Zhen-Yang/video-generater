@@ -21,6 +21,7 @@ import dissolve from './dissolve';
 import extrusion from './extrusion';
 import rightAngle from './rightAngle';
 import flyIn from './flyIn';
+import centerExpand from './centerExpand';
 
 
 let c = createjs;
@@ -132,8 +133,13 @@ let transitions = {
 	rightAngle: function({stage, timeline, item, index, wait , project}){
 		rightAngle({stage, timeline, item, index, wait , project});
 	},
+	// 左右飞入
 	flyIn: function({stage, timeline, item, index, wait , project}){
 		flyIn({stage, timeline, item, index, wait , project});
+	},
+	// 中间展开
+	centerExpand: function({stage, timeline, item, index, wait , project}){
+		centerExpand({stage, timeline, item, index, wait , project});
 	},
 
 }

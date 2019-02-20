@@ -11,6 +11,7 @@ import util from '../script/util';
 import templates from '../script/templates/templates';
 import {convertStreams, accessWorder, convertImageToVideo} from '../script/convert.js';
 import watermark from '../script/watermark';
+import Vue from 'vue';
 
 // import {convertStreamsNew, accessWorderNew} from '../script/convertNew.js';
 
@@ -23,6 +24,7 @@ import dialogTemplate from './dialogTemplate';
 import dialogAudio from './dialogAudio';
 import dialogGenerate from './dialogGenerate';
 import dialogSetting from './dialogSetting';
+import dialogDownload from './dialogDownload';
 
 const store = {
 	state: {
@@ -42,7 +44,7 @@ const store = {
 		playing: true,
 		recording: false,
 		// 
-		project: {...templates[15].data},
+		project: {...templates[16].data},
 		audio: null,
 
 		snackbar: {
@@ -523,7 +525,7 @@ const store = {
 					let total = width * height;
 					// 比特率
 					// let bit = (total / 1000 * 5) | 0;
-					let bit = (total / 1000 * state.dialogSetting.quality / 10) | 0;
+					let bit = (total / 1000 * state.dialogSetting.quality / 10 * f / 10) | 0;
 					state.dialogGenerate.step = 2;
 					// 转换图片到视频
 					convertImageToVideo(
@@ -544,10 +546,14 @@ const store = {
 								state.dialogGenerate.show = false;
 								setTimeout(()=>{
 									commit('showSnackbar', {
-										text: '视频生成完毕,请点击下方的链接下载！',
+										text: '视频生成完毕,请点击链接下载！',
 									});
 									// alert();
 								},0)
+								state.dialogDownload.show = true;
+								Vue.nextTick(()=>{
+
+								})
 							}
 						}
 					);
@@ -669,6 +675,7 @@ const store = {
 		dialogAudio,
 		dialogGenerate,
 		dialogSetting,
+		dialogDownload,
 	}
 }
 export default store;

@@ -103,7 +103,7 @@ export default {
       // 价格标签
       let wordEffect = this.$store.state.project.wordEffect;
       if(wordEffect && effectWords[wordEffect] && this.$store.state.project.useEffectWord) {
-        effectWords[wordEffect]({
+        effectWords[wordEffect].fun({
           stage,
           timeline,
           item: {duration: 2000},

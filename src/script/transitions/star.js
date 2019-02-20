@@ -12,10 +12,6 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 	let bitmapContainer = new c.Container();
 
 
-
-
-
-
 	let star = new c.Shape();
 	
 	star.graphics.beginFill("#FF0").drawPolyStar(0, 0, maxS, 5, 0.6, -90);
@@ -63,7 +59,7 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 	.to({
 		scaleX: 0,
 		scaleY: 0,
-		rotation: 360,
+		rotation: index % 2 == 0 ? 360 : -360,
 	}, duration, c.Ease.cubicOut);
 
 	timeline.addTween(starTween);

@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-18 08:42:35 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-02-18 16:35:30
+ * @Last Modified time: 2019-02-19 17:42:08
  */
 let watermarkUrl = `${window.assets}logo.png`;
 let i1 = `${window.assets}demo1.jpg`;
@@ -18,8 +18,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'defaultEffect',
@@ -66,8 +66,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -115,8 +115,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -163,8 +163,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -210,8 +210,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -259,8 +259,8 @@ const list = [
 			bgImage: `${window.assets}bg1.jpg`,
 			bgImageEnable: true,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -308,8 +308,8 @@ const list = [
 			bgImage: `${window.assets}bg1.jpg`,
 			bgImageEnable: true,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'badgeEffect',
@@ -358,8 +358,8 @@ const list = [
 			bgImage: `${window.assets}bg1.jpg`,
 			bgImageEnable: true,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			wordEffect: 'bottomBar',
@@ -407,8 +407,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -459,8 +459,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -511,8 +511,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -615,8 +615,8 @@ const list = [
 			bgImage: null,
 			bgImageEnable: false,
 			durationScale: 1,
-			durationDefault: 2000,
-			durationFirst: 2000,
+			durationDefault: 1800,
+			durationFirst: 1800,
 			width: 600,
 			height: 600,
 			// 价格标签
@@ -800,6 +800,57 @@ const list = [
 				{
 					type: 'image',
 					transition: 'flyIn',
+					// wordEffect: 'defaultEffect',
+					duration: 2000,
+					pic_url: i3,
+				},
+				
+			]
+		}
+	},
+	// 17.中间展开
+	{
+		cover: `${window.assets}t17.png`,
+		name: '中间展开',
+		data: {
+			bgColor: '#DECEB5',
+			bgColorEnable: true,
+			durationScale: 1,
+			durationDefault: 1800,
+			durationFirst: 1800,
+			width: 600,
+			height: 600,
+			// 价格标签
+			wordEffect: 'badgeEffect',
+			useEffectWord: true,
+			useWatermark: false,
+			watermarkPosition: 'SouthEast',
+			watermarkScale: 0.2,
+			watermarkAlpha: 1,
+			reverse: true,
+			wordEffectOptions: [
+
+			],
+			// 水印
+			watermark: watermarkUrl,
+			queue: [
+				{	
+					type: 'image',
+					transition: 'centerExpand',
+					duration: 2000,
+					pic_url: i1,
+	
+				},
+				{	
+					type: 'image',
+					transition: 'centerExpand',
+					duration: 2000,
+					pic_url: i2,
+	
+				},
+				{
+					type: 'image',
+					transition: 'centerExpand',
 					// wordEffect: 'defaultEffect',
 					duration: 2000,
 					pic_url: i3,

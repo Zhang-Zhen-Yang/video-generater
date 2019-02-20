@@ -27,5 +27,5 @@ window.p = new Vue({
   store,
   render: h => h(App)
 })
-console.log('2019-02-15 16:50:35');
+console.log('2019-02-19 11:29:35');
 // alert(typeof(Worker));
