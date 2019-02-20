@@ -29,3 +29,9 @@ window.p = new Vue({
 })
 console.log('2019-02-19 11:29:35');
 // alert(typeof(Worker));
+
+// alert('serviceWorker' in window.navigator);
+// alert(window.importScripts);
+if(navigator.userAgent.indexOf('compatible')>-1){
+  alert('您的浏览器可能无法支持现代浏览器的某些特性;请更换浏览器，如果是兼容模式，请切换到极速模式！');
+}

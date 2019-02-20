@@ -162,6 +162,14 @@ export default {
     setTimeout(()=>{
       this.slider.value = 1;
     })
+  },
+  watch: {
+    duration(nval, oval) {
+      if(nval != oval && nval > 60000) {
+        this.$store.commit('showSnackbar', {text: '时长超过60秒，已超出主图视频长度限制！'});
+      }
+      // console.log([oval, nval]); //CSSNamespace
+    }
   }
 }
 </script>

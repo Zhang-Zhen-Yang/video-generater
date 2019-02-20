@@ -31,11 +31,11 @@
               <aspect>
                 <div
                   style="display:block;width: 100%;height: 100%;"
-                  :class="['pointer', `m-icon-mute` ,'m-icon']"
+                  :class="['pointer', `m-icon-mute` ,'m-icon',audioFrom == 'net' && !selectedAudioID?'audio-item-selected' : 'audio-item-unselected']"
                   @click="setMute"
                 ></div>
               </aspect>
-              <div style="padding: 0 5px;text-align: center;font-weight: bold;">
+              <div style="padding: 2px 5px 0;text-align: center;font-weight: bold;">
                 无声
               </div>
             </div>
@@ -44,12 +44,12 @@
               <aspect>
                 <div
                   style="width: 100%;height: 100%;"
-                  :class="['pointer', `m-icon-${item.icon}` ,'m-icon']"
+                  :class="[audioFrom == 'net' && selectedAudioID== item.id?'audio-item-selected' : 'audio-item-unselected', 'pointer', `m-icon-${item.icon}` ,'m-icon']"
                   @click="selectAudio(item)"
                 >
                 </div>
               </aspect>
-              <div style="padding: 0 5px;">
+              <div style="padding: 2px 5px 0;">
                 {{ item.name }}
               </div>
             </div>
@@ -64,7 +64,8 @@
     <!--footer-->
     <table slot="footer">
       <tr>
-        <td class="left">
+        <td class="left font14">
+          线上提供的音频只有9秒，您可以使用本地音频来满足特定需求！
         </td>
         <td>
         </td>
@@ -92,6 +93,15 @@ export default {
     },
     list() {
       return this.modal.list;
+    },
+    audioFrom() {
+      return this.modal.audioFrom;
+    },
+    audioData() {
+      return this.modal.audioData;
+    },
+    selectedAudioID() {
+      return this.modal.selectedAudioID;
     }
 
   },
@@ -213,5 +223,11 @@ export default {
   }
   .m-icon-mute{
     background-image: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cstyle/%3E%3C/defs%3E%3Cpath d='M512.341 59.477a25.941 25.941 0 1 0 .086 51.798 25.941 25.941 0 0 0 0-51.798m0 110.678a84.907 84.907 0 0 1 0-169.558 84.907 84.907 0 0 1 0 169.558M85.333 765.525c0-45.653 39.595-82.858 88.32-82.858h41.472c20.736 0 25.43 15.018 25.43 34.56 0 19.456-4.694 36.01-25.43 36.01h-41.472c-7.168 0-13.141 5.632-13.141 12.288 0 6.656 5.973 12.288 13.141 12.288 20.736 0 37.547 15.872 37.547 35.328 0 19.456-16.81 35.243-37.547 35.243-48.64 0-88.32-37.12-88.32-82.773zM503.211 1024c-98.987 0-179.542-75.605-179.542-168.448 0-25.088 5.718-49.152 17.067-71.68l68.01 30.037a91.99 91.99 0 0 0-9.898 41.643c0 53.93 46.848 97.877 104.363 97.877s104.277-43.946 104.277-97.877c0-15.19-3.584-29.781-10.667-43.264l67.414-31.147c12.202 23.296 18.432 48.299 18.432 74.411 0 92.843-80.555 168.448-179.456 168.448' fill='%239394A1'/%3E%3Cpath d='M296.619 853.333c-22.443 0-40.619-16.213-40.619-36.352 0-20.053 18.176-36.266 40.619-36.266h546.645c7.68 0 14.165-5.803 14.165-12.715 0-6.827-6.485-12.715-14.165-12.715h-23.21c-22.443 0-40.62-16.213-40.62-36.266s18.177-36.352 40.62-36.352h23.21c52.736 0 95.403 38.314 95.403 85.333s-42.752 85.333-95.403 85.333H296.619z' fill='%239394A1'/%3E%3Cpath d='M209.92 768a39.253 39.253 0 0 1-39.253-39.339V512.853c0-91.05 35.584-176.896 100.266-241.664A338.432 338.432 0 0 1 512 170.667c70.827 0 139.093 21.845 196.95 63.146a39.424 39.424 0 0 1-45.483 64.171A259.755 259.755 0 0 0 512 249.344a263.424 263.424 0 0 0-262.827 263.51v215.893A39.253 39.253 0 0 1 209.92 768m604.16 0a39.253 39.253 0 0 1-39.253-39.339V512.853a262.656 262.656 0 0 0-43.35-144.384 39.253 39.253 0 1 1 65.536-43.349 341.76 341.76 0 0 1 56.32 187.733v215.894A39.253 39.253 0 0 1 814.08 768' fill='%239394A1'/%3E%3Cpath d='M182.87 929.11a38.144 38.144 0 0 1-2.817-52.907l609.11-693.078a36.437 36.437 0 0 1 52.053-2.901c15.019 13.739 16.213 37.547 2.73 52.907L234.838 926.208a36.437 36.437 0 0 1-52.053 2.901' fill='%239394A1'/%3E%3C/svg%3E");
+  }
+  .audio-item-unselected{
+    outline: 2px solid rgba(0,0,0,0.1);
+  }
+  .audio-item-selected{
+    outline: 2px solid #1284e7;
   }
 </style>

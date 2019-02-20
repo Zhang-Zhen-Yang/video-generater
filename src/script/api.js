@@ -51,5 +51,5 @@ export default {
 	// 旧
 	// uploadPage: `marketing/wirelessnew/activitypage/uploadPage`,// 无线活动页上传本地图片到图片空间(y)
 	// 美工保存模板时上传图片（y）
-	uploadPage2: 'marketing/wirelessnew/activitypage/uploadPage',
+	uploadPage: 'marketing/mpicvideonew/uploadPage',
 }

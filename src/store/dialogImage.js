@@ -209,13 +209,13 @@ const store = {
 						if(res.success){
 							// alert('上传成功');
 							commit('showSnackbar', {text: '上传成功'});
-							// 如果是 我的空间 重新加载数据（应该还得判断当前是否无线活动页 及是否有 无线活动页这个目录 待做）
+							// 如果是 我的空间 重新加载数据（应该还得判断当前是否主图视频 及是否有 主图视频这个目录 待做）
 
-							if (JSON.stringify(state.pictureCategory || {}).indexOf('无线活动页') < 0) {
-								console.log('无线活动页一项，重新获取');
+							if (JSON.stringify(state.pictureCategory || {}).indexOf('主图视频') < 0) {
+								console.log('主图视频一项，重新获取');
 								dispatch('getPictureCategory');
 							}
-							if(state.pictureCategoryId == -1 ||state.pictureCategoryName == '无线活动页') {
+							if(state.pictureCategoryId == -1 ||state.pictureCategoryName == '主图视频') {
 								dispatch('getPictureItems', {pageSize: 1});
 							} else{
 								

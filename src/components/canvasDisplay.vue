@@ -50,7 +50,7 @@ export default {
       bg.graphics.beginFill(this.project.bgColor).drawRect(0,0,this.canvas.width, this.canvas.height);
       stage.addChild(bg);
 
-      console.log('stage', stage);
+      // console.log('stage', stage);
       // 时间轴
       let timeline = new createjs.Timeline([], 'g', {loop: true});
       let wait = 0;
@@ -191,9 +191,7 @@ export default {
     }, 40);
     this.$store.state.update = this.render;
 
-
-
-    console.log(this.canvas.captureStream);
+    // console.log(this.canvas.captureStream);
   },
   watch:{
     project:{

@@ -33,6 +33,7 @@ export default {
       } else if(this.$store.state.dialogAudio.audioFrom == 'local'){
         let audioData = this.$store.state.dialogAudio.audioData;
         let audioType = this.$store.state.dialogAudio.audioType;
+
         this.checkPaused();
         aurl =  `${audioType},${audioData}`;
       }
@@ -54,7 +55,12 @@ export default {
     checkPaused(){
       try{
         if(this.playing) {
-          this.audio.play();
+          try{
+            // console.log(this.audio.currentSrc);
+            this.audio.play();
+          }catch(e){
+            console.log(e);
+          }
         } else {
           this.audio.pause();
         }
@@ -74,10 +80,14 @@ export default {
     // 监听是否播放
     playing(nVal, oVal) {
       if(!this.src) return;
-      if(nVal) {
-        this.audio.play();
-      } else {
-        this.audio.pause();
+      try{
+        if(nVal) {
+          this.audio.play();
+        } else {
+          this.audio.pause();
+        }
+      }catch(e){
+        console.log(e);
       }
     },
     // 监听播放位置的改变
@@ -87,16 +97,24 @@ export default {
       }
       let audioDuration = this.audio.duration * 1000;
       let shouldPosition = this.position % audioDuration;
-      // console.log(shouldPosition);
-      let audiocurrentTime = this.audio.currentTime * 1000;
-      if((Math.abs(shouldPosition - audiocurrentTime) > 500) || (nVal < oVal)) {
-        this.audio.currentTime =  shouldPosition / 1000;
+      try{
+        // console.log(shouldPosition);
+        let audiocurrentTime = this.audio.currentTime * 1000;
+        if((Math.abs(shouldPosition - audiocurrentTime) > 500) || (nVal < oVal)) {
+          this.audio.currentTime =  shouldPosition / 1000;
+        }
+        // console.log(this.audio.currentTime);
+      }catch(e){
+
       }
-      // console.log(this.audio.currentTime);
     },
+    // 监听音频的改变
     src(nVal, oVal) {
       setTimeout(()=>{
-        this.checkPaused();
+        // console.log(nVal);
+        if(nVal) {
+          this.checkPaused();
+        }
       }, 100)
     }
   }

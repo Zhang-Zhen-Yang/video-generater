@@ -23,6 +23,7 @@ const store = {
 
 		audioFrom: 'net',
 		audioData: '',
+		audioUrl: '',
 		audioType: 'audio/mp3',
 
 	},
@@ -142,6 +143,9 @@ const store = {
 			let sn = document.getElementById(id);
 			if(sn) {
 				document.body.removeChild(sn);
+			}
+			if(!rootState.playing) {
+				commit('togglePlayState')
 			}
 		}
 		

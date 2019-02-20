@@ -35,6 +35,7 @@ const store = {
 
 			listInited: false,
 			promotionPriceInited: false,
+			title: 'video',
 		},
 		asmInitedStatus: 'initing',
 		activeIndex: 0,
@@ -123,6 +124,7 @@ const store = {
 		// 将宝贝图片填充
 		fillGoods(state) {
 			if(state.goods.list.length > 0) {
+				console.warn([state.goods.price, state.goods.promotionPrice]);
 				let newQueue = state.goods.list.map((item, index)=>{
 					return {
 						...state.project.queue[state.project.queue.length - 1],
@@ -182,22 +184,27 @@ const store = {
 		getItemInfoRoot({state, commit, dispatch, getters},{numIid}) {
 			let req = {
 				numIid: numIid,
-				fields: 'pic_url,item_img,product_id,price',
+				fields: 'pic_url,item_img,product_id,price,title',
 			}
 			http.post(api.getItemInfo, req).then((res)=>{
-				state.goods.listInited = true;
+				
 				if(res.status == 200) {
 					
 					console.log(res.data);
 					if(res.data.success) {
 						state.goods.list = res.data.item.itemImgs;
 						state.goods.price = res.data.item.price;
+						state.goods.title = res.data.item.title;
+						if(!state.goods.promotionPriceInited) {
+							state.goods.promotionPrice = res.data.item.price;
+						}
 					} else {
 						alert(res.data.msg || '获取宝贝信息出错');
 					}
 					
 				} else {
 				}
+				state.goods.listInited = true;
 				if(state.goods.promotionPriceInited) {
 					commit('fillGoods');
 					// commit('update');
@@ -210,21 +217,35 @@ const store = {
 				numIid: numIid,
 			}
 			http.post(api.getPromotion, req).then((res)=>{
-				state.goods.promotionPriceInited = true;
-
+			
 				if(res.status == 200) {
+					
 					if(res.data.success) {
 						let promotionPrice = res.data.promotionPrice;
-						// alert(typeof promotionPrice);
+						// alert((typeof promotionPrice) == 'undefined');
 						if(typeof promotionPrice != 'undefined'){
-							state.goods.promotionPrice = promotionPrice;
+							state.goods.promotionPrice = promotionPrice || state.goods.price;
+							// alert(promotionPrice || state.goods.price);
+						} else {
+							if(state.goods.listInited) {
+								// alert('dddd');
+								state.goods.promotionPrice = state.goods.price;
+							}
 						}
 					} else {
+						// alert(state.goods.price);
+						if(state.goods.listInited) {
+							state.goods.promotionPrice = state.goods.price;
+						}
 						// commit('showSnackbar',{text:'获取宝贝促销价出错', timeout: 1000});
 					}
 				} else {
+					if(state.goods.listInited) {
+						state.goods.promotionPrice = state.goods.price;
+					}
 					commit('showSnackbar',{text:'获取宝贝促销价出错(net)', timeout: 1000});
 				}
+				state.goods.promotionPriceInited = true;
 				if(state.goods.listInited) {
 					commit('fillGoods');
 					// commit('update');
