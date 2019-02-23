@@ -48,6 +48,7 @@ export default {
     line-height: 40px;
     padding-left: 10px;
     color: white;
+    background-color: #232c33;
   }
   #log{
     display: inline-block;

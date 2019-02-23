@@ -12,11 +12,11 @@
     <table slot="subHeader">
       <tr>
         <td class="left">
-          <dialog-tab :tabs="['海报素材','我的海报','图片空间']" :tabIndex="tabIndex" @setTabIndex="(index)=>{tabIndex = index;}"></dialog-tab>
+          <dialog-tab :tabs="['海报素材','我的海报','图片空间', '图片链接']" :tabIndex="tabIndex" @setTabIndex="(index)=>{tabIndex = index;}"></dialog-tab>
         </td>
         <td style="width:350px;">
           <!--手动输入图片链接-->
-          <div class="left img-input">
+          <div class="left img-input" v-if="false">
             <input type="text" v-model="selectedPic"><button class="btn primary" @click="confirmImgLink">确定</button>
           </div>
         </td>
@@ -27,7 +27,11 @@
         </td>
       </tr>
     </table>
-
+    <!--4 -->
+    <div class="dialog-image-content-wrap" v-if="tabIndex==3" slot="content" style="padding-left:0;">
+      <dialogImageNetwork />
+    </div>
+    <!--3-->
     <!--图片空间  content-->
     <div class="dialog-image-content-wrap" slot="content" v-if="tabIndex == 2">
       <!--图片空间列表-->
@@ -52,12 +56,14 @@
         <!--{{ itemData }}-->
       </div>
     </div>
+
+    <!--2-->
     <!--我的海报-->
     <dialogImageMyposter slot="content" v-if="tabIndex == 1"></dialogImageMyposter>
 
 
 
-
+    <!--1-->
     <!--海报 content-->
     <div class="dialog-image-content-wrap" slot="content" v-if="tabIndex == 0" style="padding-left:0;padding-bottom: 90px;">
       <div class="left" style="padding-left:15px;">
@@ -133,10 +139,11 @@ import imageSpace from './dialogImageSpace';
 // import goodslist from '../../script/fakegoodslist';
 import dialogImageUpload from './dialogImageUpload';
 import dialogImageMyposter from './dialogImageMyposter';
+import dialogImageNetwork from './dialogImageNetwork';
 
 export default {
   name: 'temp',
-  components: {imageSpace, dialogImageUpload, dialogImageMyposter},
+  components: {imageSpace, dialogImageUpload, dialogImageMyposter, dialogImageNetwork},
   data () {
     return {
       posterSort:[{

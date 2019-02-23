@@ -11,6 +11,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `¥ ${goodsPrice}`;
 	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPromotionPrice}`;
+	let themeColor = project.wordEffectOptions[2] ? project.wordEffectOptions[2].value : `rgba(255,207,79,1)`;
 
 	let currentWait = wait + 0.2 * duration;
 	let currentDuration = 0.8 * duration;
@@ -154,7 +155,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	project.wordEffectOptions = [];
 
 	project.wordEffectOptions.push({
-		name: '价格',
+		name: '促销价',
 		tag: 'promotionPrice',
 		type: 'input',
 		value: promotionPrice,
@@ -167,7 +168,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 
 	project.wordEffectOptions.push({
-		name: '原价',
+		name: '价格',
 		tag: 'price',
 		type: 'input',
 		value: price,
@@ -177,6 +178,23 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 			let graphics = new c.Graphics();
 			graphics.beginFill('#eeeeee').drawRect(0, 0, textWidth, 3 * 2);
 			bar.graphics = graphics;
+		}
+	})
+	project.wordEffectOptions.push({
+		name: '颜色',
+		tag: 'color',
+		type: 'hidden',
+		value: themeColor,
+		callback: (e)=>{
+			console.log(e);
+			/* let rGraphics = new c.Graphics();
+			rGraphics.f(e).drawRect(0, 0, cw, ch*0.15);
+			rect.graphics = rGraphics; 
+
+			let rLGraphics = new c.Graphics();
+			rLGraphics.f(e).drawRect(0, 0, cw, ch*0.008);
+			rectLine.graphics = rLGraphics;
+			*/
 		}
 	})
 

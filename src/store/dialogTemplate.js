@@ -43,7 +43,10 @@ const store = {
 				watermark,
 				watermarkPosition,
 				watermarkScale,
-				watermarkAlpha} = rootState.project;
+				watermarkAlpha,
+				wordEffect,
+				wordEffectOptions
+				} = rootState.project;
 			let newProject = {...JSON.parse(JSON.stringify(temp.data))};
 
 			let saveItems = {useWatermark,
@@ -63,9 +66,14 @@ const store = {
 				}
 				newProject.queue[index].pic_url = item;
 			})
-			newProject.queue =  newProject.queue.splice(0, currentProjectPics.length)
+			newProject.queue =  newProject.queue.splice(0, currentProjectPics.length);
+			newProject.wordEffect = wordEffect;
+			newProject.wordEffectOptions = wordEffectOptions;
 			rootState.project = newProject;
 			commit('update');
+			if(!rootState.playing) {
+				commit('togglePlayState')
+			}
 		}
 		
 	}// end actions 

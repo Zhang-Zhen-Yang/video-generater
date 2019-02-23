@@ -11,6 +11,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `促销价 ¥ ${goodsPrice}`;
 	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPromotionPrice}`;
+	let themeColor = project.wordEffectOptions[2] ? project.wordEffectOptions[2].value : `rgba(255,207,79,1)`;
 
 	let currentWait = wait + 0.2 * duration;
 	let currentDuration = 0.8 * duration;
@@ -24,14 +25,14 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 	let rect = new c.Shape();
 	let bottomBarHeight = ch*0.15;
-	rect.graphics.f('orange').drawRect(0, 0, cw, ch*0.15);
+	rect.graphics.f(themeColor).drawRect(0, 0, cw, ch*0.15);
 	rect.set({
 		alpha: 0.6
 	})
 	priceContainer.addChild(rect);
 
 	let rectLine = new c.Shape();
-	rectLine.graphics.f('orange').drawRect(0, 0, cw, ch*0.008);
+	rectLine.graphics.f(themeColor).drawRect(0, 0, cw, ch*0.008);
 	priceContainer.addChild(rectLine);
 
 
@@ -160,7 +161,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 
 	project.wordEffectOptions.push({
-		name: '标价',
+		name: '价格',
 		tag: 'price',
 		type: 'input',
 		value: price,
@@ -176,7 +177,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		name: '颜色',
 		tag: 'color',
 		type: 'color',
-		value: '#FFA500',
+		value: themeColor,
 		callback: (e)=>{
 			console.log(e);
 			let rGraphics = new c.Graphics();

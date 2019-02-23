@@ -70,7 +70,7 @@
         <td>
         </td>
         <td class="right">
-          <button class="btn white" @click="dismiss(false)">取消</button>
+          <button class="btn red" @click="dismiss(false)">关闭</button>
           <button v-if="false" class="btn primary" @click="confirm(true)">确定</button>
         </td>
       </tr>

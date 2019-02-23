@@ -109,21 +109,19 @@
             <div class="content-item-sub-title">
               <toggle v-model="useEffectWord"></toggle>&emsp;<span style="vertical-align: -4px;" class="bold">价格标签</span>
             </div>
- 
             <div v-if="useEffectWord" class="option-block-wrap">
               <div  class="effect-word-item-wrap" v-for="item, key in effectWords">
                 <div :class="['effect-word-item', 'pointer', wordEffect == key ? 'is-current-word-effect': '']" @click="setEffectWords(key)">
-                    {{ item.name }}
+                  {{ item.name }}
                 </div>
               </div>
-              <div v-for="item, index in wordEffectOptions">
+              <div v-if="item.type != 'hidden'" v-for="item, index in wordEffectOptions">
                 <div class="content-item-sub-title" v-if="item.type!='color'">
                   {{ item.name }}
                 </div>
                 <input class="content-item-input" type="text" v-model="item.value"  v-if="item.type == 'input'" @input="optionsCallback(index, $event)">
                 <color-picker v-if="item.type == 'color'" v-model="item.value" title="颜色" @input="optionsCallback(index, $event)"></color-picker>
               </div>
-            
             </div>
           
           </div>
@@ -322,12 +320,12 @@ export default {
   methods: {
     // 选择图片（弹出图片选择弹窗）
     select(e) {
-      this.$store.state.dialogImage.selectedPic = this.item.pic_url;
+      this.$store.state.dialogImage.selectedPic = this.item.pic_url.indexOf('data:image') > -1 ? '' : this.item.pic_url;
       this.$store.state.dialogImage.itemData = this.item;
       this.$store.state.dialogImage.show = true;
     },
     watermarkImageSelect() {
-      this.$store.state.dialogImage.selectedPic = this.project.watermark;
+      this.$store.state.dialogImage.selectedPic = this.project.watermark.indexOf('data:image') > -1 ? '' : this.project.watermark;
       this.$store.state.dialogImage.itemData = this.project;
       this.$store.state.dialogImage.show = true;
       this.$store.state.dialogImage.key = 'watermark';
@@ -345,7 +343,7 @@ export default {
       // console.log([i,j]);
     },
     bgImageSelect() {
-      this.$store.state.dialogImage.selectedPic = this.project.bgImage;
+      this.$store.state.dialogImage.selectedPic = this.project.bgImage.indexOf('data:image') > -1 ? '' : this.project.bgImage;
       this.$store.state.dialogImage.itemData = this.project;
       this.$store.state.dialogImage.show = true;
       this.$store.state.dialogImage.key = 'bgImage';
@@ -438,13 +436,17 @@ export default {
     .effect-word-item{
       width: 100%;
       height: 100%;
-      background-color: #efefef;
+      background-color: #bbbbbb;
       border: 1px solid transparent;
       text-align: center;
-      line-height: 100px;
+      line-height: 110px;
+      font-size: 20px;
+      color: #efefef;
+      border-radius: 10px;
     }
     .is-current-word-effect{
       border: 1px solid #1284e7;
+      background-color: #1284e7;
     }
   }
   .empty-water-mark{

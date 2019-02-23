@@ -106,14 +106,16 @@ function convertStreams(videoBlob, audioBlob, {t}) {
 	worker.onmessage = function(event) {
 		var message = event.data;
 		if (message.type == "ready") {
-			log('<a href="'+ workerPath +'" download="ffmpeg-asm.js">ffmpeg-asm.js</a> file has been loaded.');
+			// log('<a href="'+ workerPath +'" download="ffmpeg-asm.js">ffmpeg-asm.js</a> file has been loaded.');
+			log('ffmpeg-asm.js file has been loaded');
 			workerReady = true;
 			if (buffersReady)
 				postMessage();
 		} else if (message.type == "stdout") {
 			log(message.data);
 		} else if (message.type == "start") {
-			log('<a href="'+ workerPath +'" download="ffmpeg-asm.js">ffmpeg-asm.js</a> file received ffmpeg command.');
+			// log('<a href="'+ workerPath +'" download="ffmpeg-asm.js">ffmpeg-asm.js</a> file received ffmpeg command.');
+			log('file received ffmpeg command');
 		} else if (message.type == "done") {
 			log(JSON.stringify(message));
 			var result = message.data[0];
@@ -190,11 +192,12 @@ function convertStreams(videoBlob, audioBlob, {t}) {
 }
 
 // 生成下载链接
-function PostBlob(blob) {
+function PostBlob(blob, name) {
 	var h2 = document.querySelector('#log');
 	var downloadWrap  = document.getElementById('download-wrap');
+	let downloadName = name || 'file' + '.mp4';
 	// h2.innerHTML = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="Recorded Audio+Canvas File.mp4">Download Recorded Audio+Canvas file in MP4 container and play in VLC player!</a>';
-	let link = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="file.mp4">点击下载视频文件!<div id="video-download-icon"></div></a>';
+	let link = '<a href="' + URL.createObjectURL(blob) + '" target="_blank" download="'+ downloadName+'">点击下载视频文件!<div id="video-download-icon"></div></a>';
 	h2.innerHTML = link;
 	downloadWrap.innerHTML = link;
 	h2.setAttribute('contenteditable', 'false');
@@ -207,13 +210,13 @@ function log(message) {
 }
 
 // 将图片生成视频
-function convertImageToVideo(imagesArray, audio, {f, t, b}, callback) {
+function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'}, callback) {
 	var worker;	
 	if (!worker) {
 		worker = processInWebWorker();
 	}
 	let files = imagesArray.map((item, index)=>{
-		console.log(`input${index}.jpeg`);
+		// console.log(`input${index}.jpeg`);
 		return {
 			name: `input${index}.jpeg`,
 			data: item,
@@ -257,7 +260,7 @@ function convertImageToVideo(imagesArray, audio, {f, t, b}, callback) {
 				type: 'video/mp4'
 			});
 			log(JSON.stringify(blob));
-			PostBlob(blob);
+			PostBlob(blob, goodsName);
 			worker = null;
 		}
 	};

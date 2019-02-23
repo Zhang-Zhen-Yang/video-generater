@@ -57,6 +57,6 @@ export default {
   .generate-range{
     width: 50%;
     height: 100%;
-    background-color: yellow;
+    /*background-color: yellow;*/
   }
 </style>

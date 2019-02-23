@@ -19,6 +19,8 @@
     <dialogGenerate v-if="dialogGenerate.show"></dialogGenerate>
     <dialogSetting v-if="dialogSetting.show"></dialogSetting>
     <dialogDownload v-show="dialogDownload.show"></dialogDownload>
+    <dialogFeedBack v-show="dialogFeedBack.show"/>
+    <dialogHelp v-show="dialogHelp.show"/>
     <bottom-bar></bottom-bar>
     <audio-play></audio-play>
     <snackbar ref="snackbar"></snackbar>
@@ -34,6 +36,8 @@ import dialogAudio from './components/dialogAudio/dialogAudio';
 import dialogGenerate from './components/dialogGenerate/dialogGenerate';
 import dialogSetting from './components/dialogSetting/dialogSetting';
 import dialogDownload from './components/dialogDownload/dialogDownload';
+import dialogFeedBack from './components/dialogFeedBack/dialogFeedBack';
+import dialogHelp from './components/dialogHelp/dialogHelp';
 import bottomBar from './components/bottomBar';
 import audioPlay from './components/audioPlay';
 export default {
@@ -47,6 +51,8 @@ export default {
     dialogGenerate,
     dialogSetting,
     dialogDownload,
+    dialogFeedBack,
+    dialogHelp,
     bottomBar,
     audioPlay
   },
@@ -71,6 +77,12 @@ export default {
     },
     dialogDownload() {
       return this.$store.state.dialogDownload;
+    },
+    dialogFeedBack() {
+      return this.$store.state.dialogFeedBack;
+    },
+    dialogHelp() {
+      return this.$store.state.dialogHelp;
     }
   },
   data () {

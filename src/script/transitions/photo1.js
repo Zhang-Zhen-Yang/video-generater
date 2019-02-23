@@ -82,6 +82,7 @@ const fun = function({stage, timeline, item, index, wait, project = {} }) {
 		.wait(duration * 0.4)
 		.to({
 			x: -cw / 2,
+			visible: false,
 			// alpha: 0.1
 		}, duration * 0.3)
 

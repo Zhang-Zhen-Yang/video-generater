@@ -25,6 +25,8 @@ import dialogAudio from './dialogAudio';
 import dialogGenerate from './dialogGenerate';
 import dialogSetting from './dialogSetting';
 import dialogDownload from './dialogDownload';
+import dialogFeedBack from './dialogFeedBack';
+import dialogHelp from './dialogHelp';
 
 const store = {
 	state: {
@@ -45,7 +47,7 @@ const store = {
 		playing: true,
 		recording: false,
 		// 
-		project: {...templates[16].data},
+		project: {...templates[5].data},
 		audio: null,
 
 		snackbar: {
@@ -370,7 +372,8 @@ const store = {
 		// 生成（new）
 		generateNew({state, commit, dispatch, getters}) {
 			let datas = [];
-			console.log('new');
+			let goodsName = state.goods.title;
+			// console.log('new');
 
 			state.timeline.removeAllEventListeners();
 			
@@ -389,7 +392,7 @@ const store = {
 			state.recording = true;
 			var tickHandler = state.timeline.on('change', () => {
 				const thisPosition = state.timeline.position;
-				console.log('positon', thisPosition);
+				// console.log('positon', thisPosition);
 				//刷新 动画画面
 				state.stage.update();
 
@@ -555,7 +558,8 @@ const store = {
 						{
 							f: f,
 							t: state.timeline.duration / 1000,
-							b: bit
+							b: bit,
+							goodsName,
 						},
 						(msg)=>{
 							if (msg.type == "ready") {
@@ -659,10 +663,10 @@ const store = {
 				// 删除
 				case 'delete':
 					if(state.project.queue.length == 1) {
-						alert('不能少于一个模块');
+						commit('showSnackbar', {text: '不能少于一张图片'});
 						return;
 					}
-					if(confirm('确定要删除该模块')) {
+					if(confirm('确定要删除该图片')) {
 						// dispatch('addStep');
 						if(index + 1 == state.project.queue.length) {
 							commit('setActiveIndex',{activeIndex: index - 1});
@@ -697,6 +701,8 @@ const store = {
 		dialogGenerate,
 		dialogSetting,
 		dialogDownload,
+		dialogFeedBack,
+		dialogHelp,
 	}
 }
 export default store;

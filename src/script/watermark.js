@@ -15,7 +15,7 @@ let fun = ({stage,timeline,project})=>{
 	let promise;
 	if(prevWaterVall) {
 		promise = new Promise((resolve, reject)=>{
-			console.log(prevWaterVall);
+			// console.log(prevWaterVall);
 			resolve(prevWaterVall.image);
 		})
 

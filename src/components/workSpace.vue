@@ -6,7 +6,7 @@
  */
 <template>
   <div id="work-space">
-    <div style="height: 100%;border-bottom: 170px solid yellow;position: relative;">
+    <div style="height: 100%;border-bottom: 170px solid white;position: relative;">
       <!--画布显示-->
       <div class="canvas-wrap">
         <canvasDisplay></canvasDisplay>
@@ -56,7 +56,7 @@ export default {
     width: 100%;
     height: 100%;
     border-right: 500px solid transparent;
-    border-left: 50px solid transparent;
+    border-left: 70px solid transparent;
     border-bottom: 60px solid transparent;
     position: relative;
     background-color: transparent;

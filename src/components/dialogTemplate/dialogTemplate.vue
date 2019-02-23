@@ -16,8 +16,8 @@
 
           <div class="template-item-wrap" v-for="item,index in list">
             <div class="template-item pointer"  @click="setTemplate(item)">
-              <aspect>
-                <div :style="{height:'100%',backgroundSize: 'contain', backgroundImage: `url(${item.cover})`}">
+              <aspect :ratio="0.9">
+                <div class="template-item-show" :style="{backgroundImage: `url(${item.cover})`}">
                 
                 </div>
               </aspect>
@@ -36,7 +36,7 @@
         <td>
         </td>
         <td class="right">
-          <button class="btn white" @click="dismiss(false)">取消</button>
+          <button class="btn red" @click="dismiss(false)">关闭</button>
           <button v-if="false" class="btn primary" @click="confirm(true)">确定</button>
         </td>
       </tr>
@@ -92,7 +92,7 @@ export default {
     padding: 50px 0 50px 0;
   }
   .template-item-wrap{
-    width: 25%;
+    width: 16.5%;
     padding: 10px;
     display: inline-block;
     text-align: center;
@@ -110,5 +110,11 @@ export default {
   }
   .modal-dialog-footer{
     background-color: white;
+  }
+  .template-item-show{
+    height:100%;
+    background-position: center; 
+    background-size: 90% auto;
+    background-repeat: no-repeat;
   }
 </style>
