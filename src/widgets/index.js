@@ -23,6 +23,7 @@ import aspect from './aspect/aspect.vue';
 import snackbar from './snackbar/snackbar.vue';
 import progressBar from './progressBar/progressBar.vue';
 import toggle from './toggle/toggle.vue';
+import blockSlice from './blockSlice/blockSlice.vue';
 
 const options = {
 	pageBottom,
@@ -43,6 +44,7 @@ const options = {
 	snackbar,
 	progressBar,
 	toggle,
+	blockSlice,
 };
 options.install = (Vue) => {
     for (let component in options) {

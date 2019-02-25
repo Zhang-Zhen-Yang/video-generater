@@ -13,16 +13,19 @@
           </tr>
         </table>
       </div>
-      <img class="selected-image-display" :src="selectedPic" alt="">
+      <img v-if="!error" class="selected-image-display" :src="selectedPic" alt="">
+      <div v-else class="image-network-error-msg">无法使用该图片,可能是链接错误或图片不允许被外部调用。</div>
   </div>
 </template>
 
 <script>
+import util from '../../script/util.js';
 export default {
   name: 'dialog-image-network',
   data () {
     return {
-      msg: 'dialog-image-network'
+      msg: 'dialog-image-network',
+      error: false,
     }
   },
   computed: {
@@ -32,10 +35,27 @@ export default {
     // 选中的图片
     selectedPic: {
       get() {
+        if(this.md.selectedPic) {
+          var img = util.NImage(this.md.selectedPic);
+          img.onerror = (e)=>{
+            // alert('ddd');
+            // console.log(img.src);
+            if(img.src.indexOf(this.md.selectedPic) > -1) {
+              this.error = true;
+            }
+          }
+          img.onload = () =>{
+            if(img.src.indexOf(this.md.selectedPic) > -1) {
+              this.error = false;
+            }
+          }
+          // console.log('ddddd');
+        }
         return this.md.selectedPic;
       },
       set(url) {
         this.md.selectedPic = url;
+        
       }
     }
   },
@@ -47,6 +67,11 @@ export default {
   created() {
     
   },
+  watch: {
+    selectedPic(nVal, oVal) {
+      
+    }
+  }
 }
 </script>
 
@@ -73,6 +98,10 @@ export default {
     }
     .dismiss:hover{
       color: red;
+    }
+    .image-network-error-msg{
+      color: red;
+      margin-top: 10px;
     }
   }
 </style>

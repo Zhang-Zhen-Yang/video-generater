@@ -30,6 +30,7 @@ import dialogHelp from './dialogHelp';
 
 const store = {
 	state: {
+		showOptionsPanel: true,
 		goods: {
 			list: [],
 			price: 200,

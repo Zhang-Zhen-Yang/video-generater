@@ -19,7 +19,7 @@
       </slide-bar>
       <div class="currernt-time" style="">{{ position.toFixed(1) }}</div>
     </div>
-    <img :src="sliderHandle">
+    <img v-if="false" :src="sliderHandle">
   </div>
 </template>
 
@@ -93,15 +93,24 @@ export default {
     },
     data() {
       let data = [];
-      for(let i = 0; i <= this.duration / 100; i++) {
-        data.push(i/10);
+      let ten_seconds = Math.ceil(this.duration / 10000);
+      if(ten_seconds < 1) {
+        ten_seconds = 1;
+      }
+      let distance = 100 * ten_seconds;
+      for(let i = 0; i <= this.duration / distance; i++) {
+        data.push(i/(1000 / distance));
       }
       // console.log(data);
       return data;
     },
     range() {
       return this.data.map((item, index)=>{
-        if (item % 1  == 0 ) {
+      let ten_seconds = Math.ceil(this.duration / 10000);
+      if(ten_seconds < 1) {
+        ten_seconds = 1;
+      }
+        if (item % ten_seconds  == 0 ) {
           return {
             label: `${item} s`,
             isHide: false
@@ -182,8 +191,8 @@ export default {
     position: absolute;
     left: 0;
     bottom:0;
-    padding-left: 80px;
-    padding-right: 540px
+    padding-left: 10px;
+    padding-right: 40px
   }
   #time-line{
     width: 100%;
@@ -191,6 +200,7 @@ export default {
     // background-color: #1284e7;
     background-clip: content-box;
     position: relative;
+    margin-top: -10px; 
   }
   .vue-slide-bar-separate{
     width: 1px!important;

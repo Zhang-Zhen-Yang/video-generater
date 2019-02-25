@@ -8,7 +8,18 @@
   <div id="options">
     <!--title-->
     <div class="options-title">
-      配置
+      <table cellspacing="0" cellpadding="0" style="width: 100%;vertical-align: middle;">
+        <tr>
+          <td>
+            <span>配置</span>
+          </td>
+          <td style="text-align: right;" @click="closeOptionPanel" title="隐藏配置面板">
+            <div class="right-icon pointer">
+            </div>
+          </td>
+        </tr>
+      </table>
+      
     </div>
     <!--body-->
     <div class="options-body">
@@ -387,6 +398,9 @@ export default {
       rect.graphics.c().f(e).drawRect(0, 0, w, h);
       
       console.log(stage);
+    },
+    closeOptionPanel() {
+      this.$store.state.showOptionsPanel = false;
     }
   },
   created() {
@@ -461,5 +475,16 @@ export default {
     background-color: #fefefe;
     padding: 10px;
     border: 1px solid #dddddd;
+  }
+  .right-icon{
+    background-image: url("data:image/svg+xml,%3Csvg class='icon' viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cdefs%3E%3Cstyle/%3E%3C/defs%3E%3Cpath d='M432 736c-8 0-16-3.2-22.4-9.6-12.8-12.8-12.8-32 0-44.8L579.2 512 409.6 342.4c-12.8-12.8-12.8-32 0-44.8 12.8-12.8 32-12.8 44.8 0l192 192c12.8 12.8 12.8 32 0 44.8l-192 192C448 732.8 440 736 432 736z' fill='%231296db'/%3E%3Cpath d='M512 960C265.6 960 64 758.4 64 512S265.6 64 512 64s448 201.6 448 448-201.6 448-448 448zm0-832c-211.2 0-384 172.8-384 384s172.8 384 384 384 384-172.8 384-384-172.8-384-384-384z' fill='%231296db'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 30px;
+    height: 30px;
+    display: inline-block; 
+    vertical-align: -7px;
+    margin-right: 10px; 
   }
 </style>

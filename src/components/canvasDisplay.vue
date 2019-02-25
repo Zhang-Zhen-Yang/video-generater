@@ -1,9 +1,10 @@
 <template>
   <div id="canvas-display">
+    <!--视频尺寸-->
     <div id="canvas-size-tag" class="canvas-size-tag pointer" title="尺寸" @click="toggleSizeOptions">
       {{ project.width }}&times;{{ project.height }}
     </div>
-    <canvasSizeOptions v-if="this.showOptions"></canvasSizeOptions>
+    <canvasSizeOptions v-show="this.showOptions"></canvasSizeOptions>
     <div style="width:0px;height: 100%;display: inline-block;background-color: red;vertical-align: middle"></div>
     <canvas width="800" height="800" ref="canvas" id="canvas" class="pointer" @click="togglePlayState">
     </canvas>
@@ -145,7 +146,7 @@ export default {
     togglePlayState() {
       this.$store.commit('togglePlayState');
     },
-    toggleSizeOptions() {
+    toggleSizeOptions(e) {
       this.showOptions = !this.showOptions;
     }
   },
