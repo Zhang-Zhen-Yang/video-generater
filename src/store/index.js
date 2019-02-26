@@ -570,12 +570,11 @@ const store = {
 							} else if (msg.type == "start") {
 							} else if (msg.type == "done") {
 								state.dialogGenerate.show = false;
-								setTimeout(()=>{
+								/*setTimeout(()=>{
 									commit('showSnackbar', {
 										text: '视频生成完毕,请点击链接下载！',
 									});
-									// alert();
-								},0)
+								},0)*/
 								state.dialogDownload.show = true;
 								Vue.nextTick(()=>{
 
@@ -621,7 +620,7 @@ const store = {
 				if(count > 3) {
 					convertImageToVideo({images});
 					console.log('images.length', images.length);
-					console.log(images[0]);
+					// console.log(images[0]);
 					/* util.blobToUint8Array(window.atob(canvas.toDataURL('image/png').slice(22))).then((res)=>{
 						console.log(res);
 					})*/

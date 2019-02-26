@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-19 10:24:09 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-02-19 10:53:46
+ * @Last Modified time: 2019-02-26 14:28:36
  */
 
 <template>
@@ -17,7 +17,11 @@
     
     <div class="dialog-download-content" slot="content" >
       <v-center :css="{width: '100%', height: '200px'}">
-        <div id="download-wrap">
+        <div class="font14">
+          视频生成完毕，请点击下方按钮下载！
+        </div>
+        <p></p>
+        <div id="download-wrap" class="btn primary font14 relative" style="">
 
         </div> 
       </v-center>
@@ -74,7 +78,14 @@ export default {
 </script>
 
 <style lang="scss">
-
-
-
+  .dialog-download-content{
+    .video-download-icon{
+      position: absolute;
+      top: 0px;
+      right: 5px;
+    }
+    .video-download-text{
+      margin-right: 1em;
+    }
+  }
 </style>

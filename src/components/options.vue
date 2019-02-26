@@ -31,8 +31,9 @@
             <div class="content-item-sub-title">
               <span style="vertical-align: -4px;" class="font16 bold">动画时长</span> 
             </div>
-            <div class="option-block-wrap" style="">
+            <div class="option-block-wrap relative" style="">
               <input type="range" style="width: 100%;" v-model="durationScale" min="0.2" max="3" step="0.1">
+              <div v-if="true" class="font14 absolute" style="right: 0;bottom:105%;">当前时长 {{ duration.toFixed(1) }}秒</div>
             </div>
           </div>
           <!--背景颜色-->
@@ -80,23 +81,29 @@
                         @select="watermarkImageSelect"
                         @change="watermarkImageChange(0, $event)"
                       >
-                        <img v-if="project.watermark":src="project.watermark" alt="" class="pic-item">
+                        <img v-if="project.watermark" :src="project.watermark" alt="" class="pic-item">
                         <div v-else class="empty-water-mark">
                         </div>
                       </mask-replace>
                     </div>
                   </td>
                   <td style="padding:0 0 0 10px;">
-                    <span class="font14">大小</span>
+                    <div>
+                      <span class="font14">大小缩放</span>
+                      <span style="float:right">{{(watermarkScale*100).toFixed(0)}}%</span>
+                    </div>
                     <div class="relative">
-                      <input type="range" style="width: 100%;" min="0.01" max="1" step="0.01" v-model="watermarkScale">
+                      <input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkScale">
                       
                     </div>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:0 0 0 10px;">
-                    <span class="font14">不透明度</span>
+                    <div class="font14">
+                      <span>不透明度</span>
+                      <span style="float:right">{{(watermarkAlpha*100).toFixed(0)}}%</span>
+                    </div>
                     <div class="relative">
                       <input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkAlpha">
                     </div>
@@ -217,6 +224,15 @@ export default {
     }
   },
   computed: {
+    timeline() {
+      return this.$store.state.timeline;
+    },
+    duration() {
+      if(this.timeline) {
+        return this.timeline.duration / 1000;
+      }
+      return 0;
+    },
     activeIndex() {
       return this.$store.state.activeIndex;
     },
@@ -301,9 +317,10 @@ export default {
         return this.project.durationScale;
       },
       set(val) {
+        // this.$store.state.project.durationScale = val;
         try{
           let _this = this;
-          if(_this.durationScaleTimeoutStamp && ((Date.now() - _this.durationScaleTimeoutStamp) > 1000) ) {
+          if(_this.durationScaleTimeoutStamp && ((Date.now() - _this.durationScaleTimeoutStamp) > 500) ) {
             _this.durationScaleTimeoutStamp = Date.now();
             this.project.durationScale = val;
             this.$store.commit('update');

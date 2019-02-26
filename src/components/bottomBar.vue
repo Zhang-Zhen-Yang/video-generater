@@ -60,7 +60,7 @@ export default {
     top:0;
     padding-right: 10px;
   }
-  #video-download-icon{
+  .video-download-icon{
     display: inline-block;
     background-size: contain;
     background-position:center;

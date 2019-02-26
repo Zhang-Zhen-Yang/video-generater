@@ -13,7 +13,7 @@
           </tr>
         </table>
       </div>
-      <img v-if="!error" class="selected-image-display" :src="selectedPic" alt="">
+      <img  v-if="!error" class="selected-image-display" crossorigin="anonymous" :src="selectedPic" alt="">
       <div v-else class="image-network-error-msg">无法使用该图片,可能是链接错误或图片不允许被外部调用。</div>
   </div>
 </template>
