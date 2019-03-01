@@ -262,10 +262,15 @@ function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'},
 			log(JSON.stringify(blob));
 			PostBlob(blob, goodsName);
 			worker = null;
+			if(callback) {
+				callback({
+					type: 'blob',
+					blob: blob,
+				})
+			}
 		}
 	};
 
 
 }
-
 export { convertStreams, accessWorder, convertImageToVideo };

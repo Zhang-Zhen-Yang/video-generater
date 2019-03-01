@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-10 16:43:16 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-02-11 10:09:42
+ * @Last Modified time: 2019-02-28 15:17:30
  */
 
 <template>
@@ -20,24 +20,44 @@
           <div>
             视频质量
           </div>
-          <div  class="relative">
-            <VueSlideBar
+          <div class="relative" style="padding-top: 32px;">
+            <!--<VueSlideBar
               v-model="quality"
               :lineHeight="8"
               :min="1"
-            ></VueSlideBar>
+            ></VueSlideBar>-->
+            
+            <vue-slider
+              v-model="quality"
+              :min="1"
+              :max="100"
+              :interval="1"
+              :piecewise="false"
+              :processStyle="{backgroundColor: '#1284e7'}"
+              :sliderStyle="{backgroundColor: '#1284e7'}"
+              :speed="0"></vue-slider>
           </div>
           <p></p>
           <div>
             帧数
           </div>
-          <VueSlideBar
+          <!--<VueSlideBar
               v-model="frames"
               :lineHeight="8"
               :min="1"
               :max="24"
-          ></VueSlideBar>
-          
+          ></VueSlideBar>-->
+          <div style="padding-top: 32px;">
+            <vue-slider
+                v-model="frames"
+                :min="1"
+                :max="24"
+                :interval="1"
+                :piecewise="false"
+                :processStyle="{backgroundColor: '#1284e7'}"
+                :sliderStyle="{backgroundColor: '#1284e7'}"
+                :speed="0"></vue-slider>
+          </div>
           
         </div>
 
@@ -64,9 +84,10 @@
 
 <script>
 import VueSlideBar from 'vue-slide-bar';
+import vueSlider from 'vue-slider-component';
 export default {
   name: 'dialog-setting',
-  components: { VueSlideBar },
+  components: { VueSlideBar, vueSlider },
   data () {
     return {
     
@@ -125,6 +146,7 @@ export default {
     overflow: auto;
     text-align: left;
     padding: 20px;
+    padding-bottom: 0;
   }
   
   .modal-setting-footer{

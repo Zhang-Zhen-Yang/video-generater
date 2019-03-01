@@ -579,6 +579,10 @@ const store = {
 								Vue.nextTick(()=>{
 
 								})
+							} else if(msg.type == 'blob') {
+								let blob = msg.blob;
+								// console.warn('blok');
+								dispatch('uploadFile', {blob})
 							}
 						}
 					);
@@ -691,6 +695,33 @@ const store = {
 			// console.log(project);
 			var blob = new Blob([project]);
 			util.funDownload('', blob, 'project.temp');
+		},
+		// 上传文件
+		uploadFile({state, commit}, {blob}){
+			let formData = new FormData();
+			formData.append("file", blob);
+			var XHR=new XMLHttpRequest();
+		   	XHR.open('post',`${window.romote}PosterDesignServlet?action=upload`)
+		    XHR.send(formData)
+			var message='图片上传中...'
+		    XHR.onreadystatechange=function(e){	              
+		        if(XHR.readyState==4){                    
+		            if((XHR.status >=200 && XHR.status < 300 ) || XHR.status == 304){
+		            	//判读是否有错误
+		    			if(XHR.responseText.indexOf('"msg"')>-1){
+		    				// alert('保存失败：'+XHR.responseText); 
+		    			}else{
+							var resultImgName = JSON.parse(XHR.response)[0].content;
+							callback(resultImgName);
+		    			} 
+		               
+		            }else{
+		            	// alert('上传失败');
+		            }
+		        }
+		                
+		    };
+
 		}
 	},
 	modules: {

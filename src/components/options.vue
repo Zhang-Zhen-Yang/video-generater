@@ -32,8 +32,19 @@
               <span style="vertical-align: -4px;" class="font16 bold">动画时长</span> 
             </div>
             <div class="option-block-wrap relative" style="">
-              <input type="range" style="width: 100%;" v-model="durationScale" min="0.2" max="3" step="0.1">
+              <!--<input type="range" style="width: 100%;" v-model="durationScale" min="0.2" max="3" step="0.1">-->
               <div v-if="true" class="font14 absolute" style="right: 0;bottom:105%;">当前时长 {{ duration.toFixed(1) }}秒</div>
+              <vue-slider
+                v-model="durationScale"
+                :min="0.2"
+                :max="3"
+                :interval="0.1"
+                :tooltip="false"
+                :piecewise="false"
+                
+                :processStyle="{backgroundColor: '#1284e7'}"
+                :sliderStyle="{backgroundColor: '#1284e7'}"
+                :speed="0"></vue-slider>
             </div>
           </div>
           <!--背景颜色-->
@@ -89,29 +100,48 @@
                   </td>
                   <td style="padding:0 0 0 10px;">
                     <div>
-                      <span class="font14">大小缩放</span>
+                      <span class="font14">&nbsp;大小缩放</span>
                       <span style="float:right">{{(watermarkScale*100).toFixed(0)}}%</span>
                     </div>
                     <div class="relative">
-                      <input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkScale">
-                      
+                      <!--<input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkScale">-->
+                      <vue-slider
+                        v-model="watermarkScale"
+                        :min="0"
+                        :max="1"
+                        :interval="0.01"
+                        :tooltip="false"
+                        :piecewise="false"
+                        :processStyle="{backgroundColor: '#1284e7'}"
+                        :sliderStyle="{backgroundColor: '#1284e7'}"
+                        :speed="0"></vue-slider>
                     </div>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:0 0 0 10px;">
                     <div class="font14">
-                      <span>不透明度</span>
+                      <span>&nbsp;不透明度</span>
                       <span style="float:right">{{(watermarkAlpha*100).toFixed(0)}}%</span>
                     </div>
                     <div class="relative">
-                      <input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkAlpha">
+                      <!--<input type="range" style="width: 100%;" min="0" max="1" step="0.01" v-model="watermarkAlpha">-->
+                      <vue-slider
+                        v-model="watermarkAlpha"
+                        :min="0"
+                        :max="1"
+                        :interval="0.01"
+                        :tooltip="false"
+                        :piecewise="false"
+                        :processStyle="{backgroundColor: '#1284e7'}"
+                        :sliderStyle="{backgroundColor: '#1284e7'}"
+                        :speed="0"></vue-slider>
                     </div>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding:0 0 0 10px;">
-                    <span  class="font14">位置</span>
+                    <span  class="font14">&nbsp;位置</span>
                     <select name="" id="" style="margin-top: 8px;" v-model="watermarkPosition">
                       <option v-for="item in wartermarkPositions" :value="item.value">{{ item.name }}</option>
                     </select>
@@ -137,15 +167,18 @@
                 <div class="content-item-sub-title" v-if="item.type!='color'">
                   {{ item.name }}
                 </div>
+                <!--输入框类型-->
                 <input class="content-item-input" type="text" v-model="item.value"  v-if="item.type == 'input'" @input="optionsCallback(index, $event)">
+                <!--拾色器类型-->
                 <color-picker v-if="item.type == 'color'" v-model="item.value" title="颜色" @input="optionsCallback(index, $event)"></color-picker>
+                <!--select 类型-->
+                <select v-if="item.type=='select'" name="" v-model="item.value"  id="" @change="optionsCallback(index, $event)">
+                  <option v-for="option in item.options" :value="option.value">{{ option.name }}</option>
+                </select>
               </div>
             </div>
           
           </div>
-
-          
-          
           <p>
           </p>
 
@@ -175,9 +208,10 @@
 <script>
 import VueSlideBar from 'vue-slide-bar';
 import effectWords from '../script/effectWords/index';
+import vueSlider from 'vue-slider-component';
 export default {
   name: 'options',
-  components: {VueSlideBar},
+  components: {VueSlideBar, vueSlider},
   data () {
     return {
       durationScaleTimeoutStamp: null,

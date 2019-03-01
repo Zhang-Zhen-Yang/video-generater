@@ -179,7 +179,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		type: 'color',
 		value: themeColor,
 		callback: (e)=>{
-			console.log(e);
+			// console.log(e);
 			let rGraphics = new c.Graphics();
 			rGraphics.f(e).drawRect(0, 0, cw, ch*0.15);
 			rect.graphics = rGraphics; // .f('orange').drawRect(0, 0, cw, ch*0.15);

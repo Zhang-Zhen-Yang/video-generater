@@ -12,6 +12,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `¥ ${goodsPrice}`;
 	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPromotionPrice}`;
 	let themeColor = project.wordEffectOptions[2] ? project.wordEffectOptions[2].value : `rgba(255,207,79,1)`;
+	let position = project.wordEffectOptions[3] ? project.wordEffectOptions[3].value : 'northWest';
 
 	let currentWait = wait + 0.2 * duration;
 	let currentDuration = 0.8 * duration;
@@ -20,14 +21,41 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	stage.addChild(priceContainer);
 
 	priceContainer.set({
-		y: 0.1 * ch,
+		// y: 0.1 * ch,
 		scaleX: ms / 1000,
 		scaleY: ms / 1000,
 	});
+	switch(position) {
+		case 'northWest':
+			priceContainer.set({
+				x: 0,
+				y: Math.min(cw, ch) * 0.1,
+			})
+			break;
+		case 'southWest':
+			priceContainer.set({
+				x: 0,
+				y: 0.9 * ch - 130,
+			})
+			break;
+		/*case 'northEast':
+			priceContainer.set({
+				x: cw - rectSize,
+				y: 0,
+			})
+			break;
+		case 'southEast':
+			priceContainer.set({
+				x: cw - rectSize,
+				y: ch - rectSize,
+			})
+			break;*/
+		default: break;
+	}
 
 	// 1
 	var rect1 = new c.Shape();
-	rect1.graphics.beginFill('#c31311').drawRect(0, 0, 200 * 2, 40*2);
+	rect1.graphics.beginFill(themeColor).drawRect(0, 0, 200 * 2, 40*2);
 	rect1.set({
 		x: -200 *2,
 		y: 0,
@@ -93,7 +121,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	// price 2
 	var price2 = new createjs.Text(promotionPrice, 'bold 70px Impact');
 	price2.set({
-		color: '#c31311',
+		color: themeColor, // '#c31311',
 		x: 10 * 2,
 		y: 45 * 2,
 		alpha: 0,
@@ -160,8 +188,8 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		type: 'input',
 		value: promotionPrice,
 		callback: (e)=>{
-			console.log(e.target.value);
-			console.log(price2)
+			// console.log(e.target.value);
+			// console.log(price2)
 			price2.text = e.target.value;
 		}
 	})
@@ -183,18 +211,62 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	project.wordEffectOptions.push({
 		name: '颜色',
 		tag: 'color',
-		type: 'hidden',
+		type: 'color',
 		value: themeColor,
 		callback: (e)=>{
-			console.log(e);
-			/* let rGraphics = new c.Graphics();
-			rGraphics.f(e).drawRect(0, 0, cw, ch*0.15);
-			rect.graphics = rGraphics; 
+			// console.log(e);
+			price2.set({
+				color: e,
+			})
 
-			let rLGraphics = new c.Graphics();
-			rLGraphics.f(e).drawRect(0, 0, cw, ch*0.008);
-			rectLine.graphics = rLGraphics;
-			*/
+			let rGraphics = new c.Graphics();
+			rGraphics.f(e).drawRect(0, 0, 200 * 2, 40*2);
+			rect1.graphics = rGraphics;		
+		}
+	})
+
+	// 位置
+	project.wordEffectOptions.push({
+		name: '位置',
+		tag: 'position',
+		type: 'select',
+		options: [
+			{name: '左上',value: 'northWest'},
+			{name: '左下',value: 'southWest'},
+			/* {name: '右上',value: 'northEast'},
+			{name: '右下',value: 'southEast'},*/
+		],
+		value: position,
+		callback: (e)=>{
+			// console.log(e);
+			let position = e.target.value;
+			switch(position) {
+				case 'northWest':
+					priceContainer.set({
+						x: 0,
+						y: Math.min(cw, ch) * 0.1,
+					})
+					break;
+				case 'southWest':
+					priceContainer.set({
+						x: 0,
+						y: 0.9 * ch - 130,
+					})
+					break;
+				/*case 'northEast':
+					priceContainer.set({
+						x: cw - rectSize,
+						y: 0,
+					})
+					break;
+				case 'southEast':
+					priceContainer.set({
+						x: cw - rectSize,
+						y: ch - rectSize,
+					})
+					break;*/
+				default: break;
+			}
 		}
 	})
 
