@@ -55,7 +55,7 @@ export default {
   },
   computed: {
     emptyImg() {
-      return `${window.assets}empty.jpg`;
+      return 'https://img.alicdn.com/imgextra/i2/105227988/O1CN01RODt6p28sYHB9HBe6-105227988.jpg';//`${window.assets}empty.jpg`;
     },
     modal(){
       return this.$store.state.dialogTemplate;

@@ -110,7 +110,7 @@ export default {
     },
     // 添加图片
     addImage() {
-      let img = `${window.assets}empty.jpg`;
+      let img = 'https://img.alicdn.com/imgextra/i2/105227988/O1CN01RODt6p28sYHB9HBe6-105227988.jpg'; // `${window.assets}empty.jpg`;
       let queue = this.$store.state.project.queue;
       queue.push({
         ...queue[queue.length - 1],

@@ -14,7 +14,7 @@
         </table>
       </div>
       <img  v-if="!error" class="selected-image-display" crossorigin="anonymous" :src="selectedPic" alt="">
-      <div v-else class="image-network-error-msg">无法使用该图片,可能是链接错误或图片不允许被外部调用。</div>
+      <div v-else class="image-network-error-msg">无法使用该图片,可能是链接错误或不支持该网站图片链接，您可以下载该图片上传到淘宝图片空间后使用。</div>
   </div>
 </template>
 
@@ -45,6 +45,7 @@ export default {
             }
           }
           img.onload = () =>{
+            // alert('load');
             if(img.src.indexOf(this.md.selectedPic) > -1) {
               this.error = false;
             }
