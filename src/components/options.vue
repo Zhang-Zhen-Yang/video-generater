@@ -168,7 +168,7 @@
                   {{ item.name }}
                 </div>
                 <!--输入框类型-->
-                <input class="content-item-input" type="text" v-model="item.value"  v-if="item.type == 'input'" @input="optionsCallback(index, $event)">
+                <input class="content-item-input" type="text" v-model="item.value"  v-if="item.type == 'input'" @input="optionsCallback(index, $event)" maxlength="10">
                 <!--拾色器类型-->
                 <color-picker v-if="item.type == 'color'" v-model="item.value" title="颜色" @input="optionsCallback(index, $event)"></color-picker>
                 <!--select 类型-->

@@ -4,7 +4,7 @@
     <div class="content-item-sub-title"><div class="color-tip" :style="{backgroundColor: value}"></div>{{title}}</div>
     <div v-clickoutside="closePopup" @click="openPopup" class="relative">
       <input type="text" class="content-item-input" :value="value" readonly="readonly" @focus="focus">
-      <div class="absolute" style="z-index: 1;">
+      <div class="absolute" style="z-index: 6;">
         <chrome-picker :value="value" @input="colorChange" v-show="showPicker"/>
       </div>
     </div>

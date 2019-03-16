@@ -13,7 +13,6 @@
       <workSpace></workSpace>
     </div>
     <!-- <page-bottom></page-bottom>-->
-    <dialogImage v-if="dialogImage.show"></dialogImage>
     <dialogTemplate v-if="dialogTemplate.show"></dialogTemplate>
     <dialogAudio v-if="dialogAudio.show"></dialogAudio>
     <dialogGenerate v-if="dialogGenerate.show"></dialogGenerate>
@@ -23,6 +22,8 @@
     <dialogHelp v-show="dialogHelp.show"/>
     <bottom-bar></bottom-bar>
     <audio-play></audio-play>
+    <dialogImage v-if="dialogImage.show"></dialogImage>
+    <dialogLoading v-if="uploading"></dialogLoading>
     <snackbar ref="snackbar"></snackbar>
   </div>
 </template>
@@ -38,6 +39,7 @@ import dialogSetting from './components/dialogSetting/dialogSetting';
 import dialogDownload from './components/dialogDownload/dialogDownload';
 import dialogFeedBack from './components/dialogFeedBack/dialogFeedBack';
 import dialogHelp from './components/dialogHelp/dialogHelp';
+import dialogLoading from './components/dialogLoading/dialogLoading';
 import bottomBar from './components/bottomBar';
 import audioPlay from './components/audioPlay';
 export default {
@@ -54,7 +56,8 @@ export default {
     dialogFeedBack,
     dialogHelp,
     bottomBar,
-    audioPlay
+    audioPlay,
+    dialogLoading,
   },
   computed: {
     dialogImage() {
@@ -83,6 +86,10 @@ export default {
     },
     dialogHelp() {
       return this.$store.state.dialogHelp;
+    },
+    // 是否在上传
+    uploading() {
+      return this.$store.state.dialogDownload.uploading;
     }
   },
   data () {

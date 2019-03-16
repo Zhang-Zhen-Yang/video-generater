@@ -23,10 +23,11 @@ let fun = ({stage,timeline,project})=>{
 		promise = new Promise((resolve, reject)=>{
 			let watermark = project.watermark;
 			let img = util.NImage(watermark);
+			let bitmap = new c.Bitmap(img);
+			bitmap.name = 'waterfall';
+			stage.addChild(bitmap);
 			img.onload = ()=> {
-				let bitmap = new c.Bitmap(img);
-				bitmap.name = 'waterfall';
-				stage.addChild(bitmap);
+				// alert('dddd');
 				prevWaterVall = bitmap;
 				resolve(img);
 			}

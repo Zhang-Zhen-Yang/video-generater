@@ -13,11 +13,52 @@
 </head>
 <body>
 	
-<div style="height: 500px;width: 100%;border-right: 100px solid red;border-bottom: 100px solid green;position: absolute;">
+<div style="height: 500px;width: 100%;border-right: 100px solid red;border-bottom: 10px solid green;position: absolute;">
 	<div style="width: 100%; height: 100%;background-color: pink;">
 
 	</div>
 </div>
 
+<script>
+	var link = 'https://detail.1688.com/offer/525308057081.html\
+	https://detail.1688.com/offer/525308057082.html\
+	https://detail.1688.com/offer/525308057083.html\
+	https://detail.1688.com/offer/525308057084.html\
+	https://detail.1688.com/offer/525308057085.html';
+
+
+	var matchArray = link.match(/.*?https:\/\/detail\.1688\.com\/offer\/([0-9]+).html.*?/mig);
+	console.log(matchArray);
+	var dist = [];
+	matchArray.forEach(function (item){
+		var regx = /.*?https:\/\/detail\.1688\.com\/offer\/([0-9]+).html.*?/mig;
+		var result = regx.exec(item);
+		if(result && result[1]) {
+			dist.push(result[1]);
+		}
+	})
+	console.log(dist);
+
+
+
+
+
+
+	/* var dist = []
+	matchResult.forEach(function(item){
+		
+		console.log(item);
+		var result = regx.exec(item);
+		console.log(result);
+		if(result && result[1]) {
+			dist.push(result[1]);
+			console.log(result[1]);
+		}
+		// 
+	})
+	console.log(dist);*/
+	
+
+</script>
 </body>
 </html>

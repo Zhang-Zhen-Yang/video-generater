@@ -33,6 +33,9 @@ const store = {
 		showOptionsPanel: true,
 		goods: {
 			list: [],
+			InitedPriceVlaue: '',
+			InitedPromotionPriceValue: '',
+
 			price: 200,
 			promotionPrice: 100,
 
@@ -127,6 +130,7 @@ const store = {
 		// 将宝贝图片填充
 		fillGoods(state) {
 			if(state.goods.list.length > 0) {
+				console.warn(JSON.stringify(state.goods));
 				console.warn([state.goods.price, state.goods.promotionPrice]);
 				let newQueue = state.goods.list.map((item, index)=>{
 					return {
@@ -143,7 +147,7 @@ const store = {
 						item.value = item.value.replace(/[0-9]+\.?[0-9]*/, state.goods.promotionPrice);
 					}
 				})
-
+				// alert(state.goods.);
 				state.update();
 			}
 		},
@@ -197,18 +201,25 @@ const store = {
 					if(res.data.success) {
 						state.goods.list = res.data.item.itemImgs;
 						state.goods.price = res.data.item.price;
+						state.goods.InitedPriceValue = res.data.item.price;
 						state.goods.title = res.data.item.title;
+						state.dialogDownload.title = res.data.item.title;
+						state.dialogDownload.coverUrl = res.data.item.itemImgs[0].url;
 						if(!state.goods.promotionPriceInited) {
 							state.goods.promotionPrice = res.data.item.price;
 						}
 					} else {
 						alert(res.data.msg || '获取宝贝信息出错');
 					}
-					
+					state.goods.listInited = true;
+					// alert(state.goods.price);
 				} else {
 				}
-				state.goods.listInited = true;
 				if(state.goods.promotionPriceInited) {
+					if(!state.goods.InitedPromotionPriceValue) {
+						// alert(state.goods.price);
+						state.goods.promotionPrice = state.goods.price;
+					}
 					commit('fillGoods');
 					// commit('update');
 				}
@@ -227,17 +238,19 @@ const store = {
 						let promotionPrice = res.data.promotionPrice;
 						// alert((typeof promotionPrice) == 'undefined');
 						if(typeof promotionPrice != 'undefined'){
-							state.goods.promotionPrice = promotionPrice || state.goods.price;
+							state.goods.promotionPrice = promotionPrice;
+							state.goods.InitedPromotionPriceValue = promotionPrice;
 							// alert(promotionPrice || state.goods.price);
 						} else {
 							if(state.goods.listInited) {
 								// alert('dddd');
-								state.goods.promotionPrice = state.goods.price;
+
+								
 							}
 						}
 					} else {
-						// alert(state.goods.price);
 						if(state.goods.listInited) {
+							// alert(state.goods.price);
 							state.goods.promotionPrice = state.goods.price;
 						}
 						// commit('showSnackbar',{text:'获取宝贝促销价出错', timeout: 1000});
@@ -250,6 +263,7 @@ const store = {
 				}
 				state.goods.promotionPriceInited = true;
 				if(state.goods.listInited) {
+
 					commit('fillGoods');
 					// commit('update');
 				}
@@ -581,6 +595,7 @@ const store = {
 								})
 							} else if(msg.type == 'blob') {
 								let blob = msg.blob;
+								state.dialogDownload.blob = blob;
 								// console.warn('blok');
 								// dispatch('uploadFile', {blob})
 							}
