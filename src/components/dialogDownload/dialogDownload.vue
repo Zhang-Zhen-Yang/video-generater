@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-19 10:24:09 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-03-12 17:47:58
+ * @Last Modified time: 2019-03-19 15:59:50
  */
 
 <template>
@@ -231,7 +231,8 @@ export default {
       this.$store.state.dialogImage.key = 'coverUrl';
     },
     uploadFile(type) {
-      this.$store.dispatch('uploadVideoFile', {type});
+      // this.$store.dispatch('uploadVideoFile', {type});
+      this.$store.dispatch('uploadFileOSS', {type});
     },
     toggleMoreOptions() {
       this.showMore = !this.showMore;

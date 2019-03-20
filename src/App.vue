@@ -103,6 +103,10 @@ export default {
       this.$store.dispatch('jsonpCallback', data);
     }
   },
+  mounted() {
+    // console.log('this.$api', OSS.Wrapper);
+    this.$store.dispatch('initOSSinitConfig');
+  },
   methods:{
     dragover(e) {
       e.preventDefault();
