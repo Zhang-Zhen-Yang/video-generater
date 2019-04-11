@@ -2,12 +2,12 @@
  * @Author: zhangzhenyang 
  * @Date: 2018-10-31 15:41:23 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2018-12-01 10:44:17
+ * @Last Modified time: 2019-03-27 17:08:07
  */
 <template>
   <table class="dialog-tab">
     <tr>
-      <td v-for="item, index in tabs">
+      <td  v-for="item, index in tabs" v-if="hideIndex != index">
         <div :class="{pointer: true, 'active-tab': tabIndex == index}" @click="setTabIndex(index)">
           {{ item }}
         </div>
@@ -39,6 +39,10 @@ export default {
     modalIndex: {
       type: Number,
       default: 0,
+    },
+    hideIndex: {
+      type: Number,
+      default: -1
     }
   },
   data () {

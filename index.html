@@ -9,8 +9,8 @@
   <body>
     <div id="app"></div>
     <script>
-        // var remote = './';
-        window.remote = 'http://192.168.1.134:8090/wonbaoWeb/';
+        var remote = './';
+        //window.remote = 'http://192.168.1.134:8090/wonbaoWeb/';
         // window.remote = 'http://2015.wonbao.net/';
         // window.romote='./';
         // 图片目录地址
@@ -23,19 +23,21 @@
         window.user = {
           id: 105227988,
           name: '海洋数码商城',
-          appkey: '12020783'
+          appkey: '12020783',
+          numIid: 'dddddd',
         }
         /*window.user = {
           id: '${taobaoUser.userId}',
           name: '${taobaoUser.userNick}',
           appkey: '12020783'
         }*/
+        window.app = 'wb'; // 'wn';
     </script>
     <!--<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>-->
     <script src="./script/createjs-2015.11.26.min.js"></script>
     <!--<script src="/script/RecordRTC.js?v=2"></script>
     <script src="/script/screenshot.js"></script>-->
     <!--<script src="./script/upload.js"></script>-->
-    <script src="/dist/build.js"></script>
+    <script src="/dist/video.build.js"></script>
   </body>
 </html>

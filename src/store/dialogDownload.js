@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-19 10:29:12 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-03-20 16:22:56
+ * @Last Modified time: 2019-04-11 15:41:50
  */
 
 
@@ -54,8 +54,8 @@ const store = {
 			let title = state.title.trim();
 			let label = state.label.trim();
 			let coverUrl = state.coverUrl.trim();
-			let numIid = getters.queryObj.numIid;
-			let linkToUrl = 'https://2015.wonbao.net/marketing/mpicvideonew/list';
+			let numIid = window.user.numIid || getters.queryObj.numIid;
+			let linkToUrl = window.app == 'wb' ? 'https://2015.wonbao.net/marketing/mpicvideonew/list' : 'https://wnsp.wonbao.net/mpicvideonew/video/index';
 			console.log([title, label, coverUrl]);
 			if(!title) {
 				commit('showSnackbar', {text: '请输入标题'});
@@ -75,8 +75,11 @@ const store = {
 				formData.append('numIid', numIid);
 			}
 			var XHR=new XMLHttpRequest();
-		   	XHR.open('post',`${window.remote}marketing/mpicvideonew/uploadideospace`)
-		    XHR.send(formData)
+		
+
+
+		   	XHR.open('post',`${window.remote}${api.uploadideospace}`);
+		    XHR.send(formData);
 			state.uploading = true;
 		    XHR.onreadystatechange=function(e){	              
 		        if(XHR.readyState==4){
@@ -85,13 +88,17 @@ const store = {
 						//判读是否有错误
 						if(XHR.responseText.indexOf('true') > -1){
 							commit('showSnackbar', {text: '上传成功'});
-							commit('linkTo', {link: linkToUrl, timeout: 1000});
+							if(window.app == 'wb') {
+								commit('linkTo', {link: linkToUrl, timeout: 1000});
+							}
 							
 						} else if(XHR.responseText.indexOf('"msg"')>-1){
 							commit('showSnackbar',{text: '上传失败：'+XHR.responseText});
 		    			}else{
 							commit('showSnackbar',{text: '上传成功'});
-							commit('linkTo', {link: linkToUrl, timeout: 1000});
+							if(window.app == 'wb') {
+								commit('linkTo', {link: linkToUrl, timeout: 1000});
+							}
 							
 							/*var resultImgName = JSON.parse(XHR.response)[0].content;
 							callback(resultImgName);*/
@@ -109,7 +116,7 @@ const store = {
 			let title = state.title.trim();
 			let label = state.label.trim();
 			let coverUrl = state.coverUrl.trim();
-			let numIid = getters.queryObj.numIid;
+			let numIid = window.user.numIid || getters.queryObj.numIid;
 			let linkToUrl = 'https://2015.wonbao.net/marketing/mpicvideonew/list';
 			console.log([title, label, coverUrl]);
 			if(!title) {

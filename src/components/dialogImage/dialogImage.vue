@@ -12,7 +12,11 @@
     <table slot="subHeader">
       <tr>
         <td class="left">
-          <dialog-tab :tabs="['海报素材','我的海报','图片空间', '图片链接']" :tabIndex="tabIndex" @setTabIndex="(index)=>{tabIndex = index;}"></dialog-tab>
+          <dialog-tab :tabs="['海报素材','我的海报','图片空间', '图片链接']"
+            :hideIndex="app == 'wb'? -1 : 1"
+            :tabIndex="tabIndex"
+            @setTabIndex="(index)=>{tabIndex = index;}">
+          </dialog-tab>
         </td>
         <td style="width:350px;">
           <!--手动输入图片链接-->
@@ -156,6 +160,9 @@ export default {
     }
   },
   computed: {
+    app() {
+      return window.app;
+    },
     md() {
       return this.$store.state.dialogImage;
     },

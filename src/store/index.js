@@ -180,7 +180,7 @@ const store = {
 				state.asmInitedStatus = 'error';
 			})
 			// 如果有numIid
-			let numIid = getters.queryObj.numIid
+			let numIid = window.user.numIid || getters.queryObj.numIid;
 			if(numIid) {
 				dispatch('getItemInfoRoot', {numIid});
 				dispatch('getPromotionRoot', {numIid})
