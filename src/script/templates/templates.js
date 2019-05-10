@@ -2,13 +2,13 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-18 08:42:35 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-03-04 09:00:41
+ * @Last Modified time: 2019-04-16 16:29:20
  */
 let watermarkUrl = `${window.assets}logo.png`;
-let i1 = `${window.assets}demo1.jpg`;
-let i2 = `${window.assets}demo2.jpg`;
-let i3 = `${window.assets}demo3.jpg`;
-let bg1 = 'https://img.alicdn.com/imgextra/i3/105227988/O1CN01bOA9Ta28sYH7wHPHd-105227988.jpg';
+let i1 = 'https://img.alicdn.com/imgextra/i3/414224286/O1CN01sT4cLg1hX23TluznV-414224286.png';//`${window.assets}demo1.jpg`;
+let i2 = 'https://img.alicdn.com/imgextra/i3/414224286/O1CN01sT4cLg1hX23TluznV-414224286.png';//`${window.assets}demo2.jpg`;
+let i3 = 'https://img.alicdn.com/imgextra/i3/414224286/O1CN01sT4cLg1hX23TluznV-414224286.png';//`${window.assets}demo3.jpg`;
+let bg1 = 'https://img.alicdn.com/imgextra/i3/414224286/O1CN01C7Bpxo1hX23SqxFuL-414224286.png';
 const list = [
 	// 1.淡入淡出
 	{

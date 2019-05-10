@@ -27,7 +27,7 @@ window.p = new Vue({
   store,
   render: h => h(App)
 })
-console.log('2019-04-12 15:31:35');
+console.log('2019-05-04 15:47:35');
 // alert(typeof(Worker));
 
 // alert('serviceWorker' in window.navigator);

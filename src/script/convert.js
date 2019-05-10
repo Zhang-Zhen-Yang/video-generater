@@ -207,6 +207,8 @@ function log(message) {
 	var h2 = document.querySelector('#log');
 	h2.innerHTML = message;
 	console.log(message);
+	var generateTip = document.getElementById('generate-tip');
+	generateTip.innerHTML = message;
 }
 
 // 将图片生成视频
@@ -228,6 +230,7 @@ function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'},
 	})
 
 	let commands = `-r ${f}  -f image2 -i input%d.jpeg ${audio? '-i input.wav' :  '' }  -strict -2 -b:v ${b}k -t ${t} output.mp4`;
+	// let commands = `-r ${f}  -f image2 -i input%d.jpeg ${audio? '-i input.wav' :  '' }  -strict -2 output.mp4`;
 
 	let args = util.parseArguments(commands);
 
@@ -270,7 +273,13 @@ function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'},
 			}
 		}
 	};
-
-
+	worker.onerror = function(e) {
+		if(callback) {
+			callback({
+				type: 'error',
+				e: e,
+			})
+		}
+	}
 }
 export { convertStreams, accessWorder, convertImageToVideo };

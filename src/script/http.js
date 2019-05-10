@@ -49,7 +49,7 @@ function checkCode (res) {
     }
   }
   if(res.data && res.data.author) {
-    location.href = 'https://oauth.taobao.com/authorize?response_type=code&client_id=12020783&redirect_uri=http://2015.wonbao.net/authorize/web&scope=promotion,item,usergrade&view=web&state=%2Fmain';
+    location.href = 'https://oauth.taobao.com/authorize?response_type=code&client_id=12020783&redirect_uri=https://wdb.wonbao.net/authorize/web&scope=promotion,item,usergrade&view=web&state=%2Fmain';
   }
   if (res.data && (!res.data.success)) {
     // alert(res.data.error_msg)

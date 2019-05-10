@@ -45,3 +45,6 @@ document.body.removeChild(removeChild);
 var  appendChild = document.createElement('script');
 appendChild.src='http://localhost:8080/dist/build.js';
 document.body.appendChild(appendChild);
+
+
+

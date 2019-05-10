@@ -9,7 +9,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	let goodsPromotionPrice = goods.promotionPrice;
 	// alert();
 
-	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `促销价 ¥ ${goodsPrice}`;
+	let promotionPrice = project.wordEffectOptions[0] ? project.wordEffectOptions[0].value : `RMB ¥ ${goodsPrice}`;
 	let price =  project.wordEffectOptions[1] ? project.wordEffectOptions[1].value : `价格 ${goodsPromotionPrice}`;
 	let themeColor = project.wordEffectOptions[2] ? project.wordEffectOptions[2].value : `rgba(255,207,79,1)`;
 

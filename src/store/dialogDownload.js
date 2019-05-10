@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-19 10:29:12 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-04-11 15:41:50
+ * @Last Modified time: 2019-05-10 09:27:09
  */
 
 
@@ -55,7 +55,7 @@ const store = {
 			let label = state.label.trim();
 			let coverUrl = state.coverUrl.trim();
 			let numIid = window.user.numIid || getters.queryObj.numIid;
-			let linkToUrl = window.app == 'wb' ? 'https://2015.wonbao.net/marketing/mpicvideonew/list' : 'https://wnsp.wonbao.net/mpicvideonew/video/index';
+			let linkToUrl = window.app == 'wb' ? 'https://wdb.wonbao.net/marketing/mpicvideonew/list' : 'https://wnsp.wonbao.net/mpicvideonew/video/index';
 			console.log([title, label, coverUrl]);
 			if(!title) {
 				commit('showSnackbar', {text: '请输入标题'});
@@ -117,7 +117,7 @@ const store = {
 			let label = state.label.trim();
 			let coverUrl = state.coverUrl.trim();
 			let numIid = window.user.numIid || getters.queryObj.numIid;
-			let linkToUrl = 'https://2015.wonbao.net/marketing/mpicvideonew/list';
+			let linkToUrl = 'https://wdb.wonbao.net/marketing/mpicvideonew/list';
 			console.log([title, label, coverUrl]);
 			if(!title) {
 				commit('showSnackbar', {text: '请输入标题'});

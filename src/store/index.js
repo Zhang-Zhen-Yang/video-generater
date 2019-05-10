@@ -178,6 +178,7 @@ const store = {
 				state.asmInitedStatus = 'success';
 			}, ()=>{
 				state.asmInitedStatus = 'error';
+				alert('视频合成库加载失败，可能无法生成视频。');
 			})
 			// 如果有numIid
 			let numIid = window.user.numIid || getters.queryObj.numIid;
@@ -214,6 +215,7 @@ const store = {
 					state.goods.listInited = true;
 					// alert(state.goods.price);
 				} else {
+					
 				}
 				if(state.goods.promotionPriceInited) {
 					if(!state.goods.InitedPromotionPriceValue) {
@@ -386,6 +388,10 @@ const store = {
 		},
 		// 生成（new）
 		generateNew({state, commit, dispatch, getters}) {
+			if(state.asmInitedStatus == 'error') {
+				alert('视频合成库加载失败，可能无法生成视频。');
+				// return;
+			}
 			let datas = [];
 			let goodsName = state.goods.title;
 			// console.log('new');
@@ -598,6 +604,9 @@ const store = {
 								state.dialogDownload.blob = blob;
 								// console.warn('blok');
 								// dispatch('uploadFile', {blob})
+							} else if(msg.type == 'error'){
+								state.dialogGenerate.show = false;
+								alert('出错:' + msg.e.message || '');
 							}
 						}
 					);

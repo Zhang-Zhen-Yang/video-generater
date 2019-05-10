@@ -43,6 +43,8 @@
         </div>
         <div class="font14" style="position: absolute;bottom: 30px;width: 100%;">
             视频合成中···
+            <div id="generate-tip"></div>
+            <div style="color: red;font-size: 12px;">如果一直显示，请尝试升级或更新浏览器</div>
         </div>
       </div>
     </div>

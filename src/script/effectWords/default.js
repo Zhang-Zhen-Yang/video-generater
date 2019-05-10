@@ -104,7 +104,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 
 
 	// price 1
-	var price1 = new createjs.Text('促销价', 'bold 50px Impact');
+	var price1 = new createjs.Text('RMB',/*'促销价',*/ 'normal 60px 黑体');
 	price1.set({
 		color: 'white',
 		x: 10 * 2,
@@ -134,7 +134,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 	}, 500);
 
 	// price 3
-	var price3 = new createjs.Text(price, 'normal 40px Impact');
+	var price3 = new createjs.Text(price, 'normal 50px 黑体');
 	price3.set({
 		color: 'white',
 		x: 10 * 2,

@@ -100,7 +100,7 @@ let fun = function ({stage, wait, item, index, timeline, project, goods}) {
 		// tag ==================================================================================
 		// price
 		let priceC = new c.Container();
-		let priceTag = new c.Text('促销价', `bold ${rectSize * 0.3}px 黑体`);
+		let priceTag = new c.Text('RMB'/*'促销价'*/, `bold ${rectSize * 0.35}px 黑体`);
 		let priceW = priceTag.getMeasuredWidth();
 		let priceH = priceTag.getMeasuredHeight();
 		let priceLH = priceTag.getMeasuredLineHeight ();
