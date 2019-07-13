@@ -4,6 +4,26 @@ var workerPath = window.asm;
 	workerPath = location.href.replace(location.href.split('/').pop(), '') + 'script/ffmpeg_asm.js';
 	// alert(workerPath);
 }*/
+
+/* 
+function binarySearch(arr,key){
+	var low=0; //数组最小索引值
+	var high=arr.length-1; //数组最大索引值
+	while(low<=high){
+		var mid=Math.floor((low+high)/2);
+		if(key==arr[mid]){
+			return mid;
+		}else if(key>arr[mid]){
+			low=mid+1;
+		}else{
+			high=mid-1;
+		}
+	}
+	return -1; //low>high的情况，这种情况下key的值大于arr中最大的元素值或者key的值小于arr中最小的元素值
+} */
+
+
+
 function processInWebWorker() {
 	var blob = URL.createObjectURL(new Blob(
 		[
@@ -23,7 +43,7 @@ function processInWebWorker() {
 						printErr: print,
 						files: message.files || [],
 						arguments: message.arguments || [],
-						TOTAL_MEMORY: 268435456
+						TOTAL_MEMORY: message.totalMemory || 1024*1024*128 ||268435456
 				};
 				postMessage({
 					"type" : "start",
@@ -207,12 +227,12 @@ function log(message) {
 	var h2 = document.querySelector('#log');
 	h2.innerHTML = message;
 	console.log(message);
-	var generateTip = document.getElementById('generate-tip');
-	generateTip.innerHTML = message;
+	/* var generateTip = document.getElementById('generate-tip');
+	generateTip.innerHTML = message;*/
 }
 
 // 将图片生成视频
-function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'}, callback) {
+function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'}, callback, totalMemory) {
 	var worker;	
 	if (!worker) {
 		worker = processInWebWorker();
@@ -238,7 +258,8 @@ function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'},
 		worker.postMessage({
 			type: 'command',
 			arguments:  args,
-			files
+			files,
+			totalMemory: 1024 * 1024 * totalMemory
 		})
 	}
 	// console.log(files);
@@ -274,6 +295,7 @@ function convertImageToVideo(imagesArray, audio, {f, t, b, goodsName = 'video'},
 		}
 	};
 	worker.onerror = function(e) {
+		// alert(typeof e);
 		if(callback) {
 			callback({
 				type: 'error',

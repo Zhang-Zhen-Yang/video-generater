@@ -186,6 +186,51 @@ const store = {
 				dispatch('getItemInfoRoot', {numIid});
 				dispatch('getPromotionRoot', {numIid})
 			}
+
+
+			function testAllowMemory() {
+				let d = 1024 * 1024
+				let low = 1 * d;
+				let high = 256 * d * 100;
+				let count = 0
+				while(low<=high && count < 100 && ((high - low) > (2 * d))){
+					var mid=Math.floor((low+high)/2);
+					let buf;
+					console.log('------------------', mid);
+					try{
+						buf = new ArrayBuffer(mid);
+						low = mid;
+						buf = null;
+						// console.log([low, high]);
+					}catch(e){
+						// console.log(e);
+						high = mid;
+						buf = null;
+						// console.log([low, high]);
+					}
+					count += 1;
+				}
+				return [low, high]
+			}
+
+			/*let testM = testAllowMemory();
+			console.log('allow memory', testM);
+			
+			setTimeout(()=>{
+				testM = testAllowMemory();
+				console.log('allow memory', testM);
+			}, 5000)
+			setTimeout(()=>{
+				testM = testAllowMemory();
+				console.log('allow memory', testM);
+			}, 5000)
+
+			setTimeout(()=>{
+				testM = testAllowMemory();
+				console.log('allow memory', testM);
+			}, 5000)*/
+			
+
 		},
 
 		// 获取宝贝详情
@@ -273,6 +318,26 @@ const store = {
 		},
 		// 开始生成
 		generate({state, commit, dispatch, getters}) {
+			
+			/*
+			let linkToUrl = window.app == 'wb' ? 'https://wdb.wonbao.net/marketing/mpicvideonew/list' : 'https://wnsp.wonbao.net/mpicvideonew/video/index';
+			let querys = util.getQueryString();
+			console.log(querys);
+			let queryList = [];
+			if(querys.pageSize) {
+				queryList.push(`pageSize=${querys.pageSize}`);
+			}
+			if(querys.pageNo) {
+				queryList.push(`pageNo=${querys.pageNo}`);
+			}
+			if(queryList.length > 0) {
+				linkToUrl += `?${queryList.join('&')}`;
+			}
+			location.href = linkToUrl;
+
+			return;
+			*/
+
 			dispatch('generateNew');
 			return;
 
@@ -411,6 +476,10 @@ const store = {
 			// 每帧占用的时间
 			let tseperate = 1000 / f;
 			state.recording = true;
+			let imageQuality = state.dialogSetting.imageQuality;
+			if(imageQuality <= 0 || imageQuality > 100) {
+				imageQuality = 90;
+			}
 			var tickHandler = state.timeline.on('change', () => {
 				const thisPosition = state.timeline.position;
 				// console.log('positon', thisPosition);
@@ -419,10 +488,10 @@ const store = {
 
 				
 				// 获取图片数据(1)
-				const base64str = window.canvas.toDataURL('image/jpeg', 0.9);
+				const base64str = window.canvas.toDataURL('image/jpeg', imageQuality / 100);
 				var imgdata =  base64str.slice(23)
 				var bytes = atob(imgdata);
-				//console.log('ddddddddddddddddddddddddddddddddddddddddddddddddd', bytes.slice(0, 100));
+				//console.log('dddddddddd', bytes.slice(0, 100));
 				//var bytes = base64;
 				var bytesCode = new ArrayBuffer(bytes.length);
 				// 转换为类型化数组
@@ -572,6 +641,7 @@ const store = {
 					// let bit = (total / 1000 * 5) | 0;
 					let bit = (total / 1000 * state.dialogSetting.quality / 10 * f / 10) | 0;
 					state.dialogGenerate.step = 2;
+					let totalMemory = state.dialogSetting.totalMemory;
 					// 转换图片到视频
 					convertImageToVideo(
 						datas,
@@ -606,9 +676,15 @@ const store = {
 								// dispatch('uploadFile', {blob})
 							} else if(msg.type == 'error'){
 								state.dialogGenerate.show = false;
-								alert('出错:' + msg.e.message || '');
+								if((msg.e.message || '').indexOf('allocation failed') > -1) {
+									alert('内存区分配不足，请在左侧 设置 > 内存分配 适当下调数值后使用');
+								} else {
+									// alert(typeof msg.e.message);
+									alert('出错:' + msg.e.message || '');
+								}
 							}
-						}
+						},
+						totalMemory,
 					);
 				}
 				

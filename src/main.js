@@ -14,6 +14,7 @@ import filter from './script/filter.js';
 
 import global from './style/global.scss';
 import fonts from './style/fonts.scss';
+import icon from './style/icon.scss';
 
 
 // 注册全局组件
@@ -27,7 +28,7 @@ window.p = new Vue({
   store,
   render: h => h(App)
 })
-console.log('2019-05-04 15:47:35');
+console.log('2019-05-29 16:35:35');
 // alert(typeof(Worker));
 
 // alert('serviceWorker' in window.navigator);

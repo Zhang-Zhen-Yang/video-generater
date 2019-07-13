@@ -2,14 +2,14 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-10 16:43:16 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-02-28 15:17:30
+ * @Last Modified time: 2019-06-05 09:12:43
  */
 
 <template>
   <modal-dialog
     @dismiss="dismiss"
     @confirm="dismiss"
-    :sty="'width: 500px;height:300px'"
+    :sty="'width: 500px;height:330px'"
     :showFooter="false"
     title="设置">
     
@@ -58,6 +58,12 @@
                 :sliderStyle="{backgroundColor: '#1284e7'}"
                 :speed="0"></vue-slider>
           </div>
+          <p></p>
+          <div>
+            <span>图片帧质量:</span> <input class="setting-input" ref="imageQuality" v-model="imageQuality" type="number" min="1" max="100" value="90">
+            &emsp;
+            <span>内存分配:</span> <input class="setting-input" ref="totalMemory" v-model="totalMemory" type="number" min="10" max="512" value="128">
+          </div>
           
         </div>
 
@@ -67,7 +73,7 @@
 
 
     <!--footer-->
-    <table slot="footer">
+    <table slot="footer" v-if="false">
       <tr>
         <td class="left">
         </td>
@@ -115,7 +121,38 @@ export default {
         this.modal.frames = val;
         localStorage.setItem('setting-frames', val);
       }
-    }
+    },
+    // 图片获取质量
+    imageQuality: {
+      get() {
+        return this.modal.imageQuality;  
+      },
+      set(val) {
+        this.modal.imageQuality = val;
+        localStorage.setItem('setting-imageQuality', val);
+      }
+    },
+    // 内存分配
+    totalMemory: {
+      get() {
+        return this.modal.totalMemory;  
+      },
+      set(val) {
+        if(val < 10) {
+          this.$nextTick(()=>{
+            this.modal.totalMemory = 10;
+            localStorage.setItem('setting-totalMemory', 10);
+          })
+        } else if(val > 512) {
+          this.modal.totalMemory = 512;
+          localStorage.setItem('setting-totalMemory', 512);
+        } else {
+          this.modal.totalMemory = val;
+          localStorage.setItem('setting-totalMemory', val);
+        }
+      }
+    },
+
     
 
   },
@@ -151,6 +188,10 @@ export default {
   
   .modal-setting-footer{
     background-color: white;
+  }
+
+  .setting-input{
+    padding: 2px 0 2px 5px;
   }
  
 </style>

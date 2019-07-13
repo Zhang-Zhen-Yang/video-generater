@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        function log (e) {
+            let node = document.createElement('div');
+            node.innerHTML = e;
+            document.body.appendChild(node);
+        }
+        try{
+            //let TOTAL_MEMORY = 33554432;
+            // let s = 100;
+            // var buffer = new ArrayBuffer(TOTAL_MEMORY * s);
+            // let TOTAL_MEMORY = 1024 * 1024;
+            /*log(33554432 / 1024 / 1024 *100);
+            TOTAL_MEMORY = 1024 * 1024;
+            log(8);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 8);
+            log(16);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 16);
+            log(32);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 32);
+            log(64);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 64);
+            log(128);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 128);
+            log(256);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 256);
+            log(512);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 512);
+            log(1024);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 1024);
+            log('1024 * 4');
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 1024*4);
+            log('1024 * 8');
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 1024*8);
+            log('1024 * 16');
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 1024*16);
+            log('1024 * 32');
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 1024*32);*/
+
+            let TOTAL_MEMORY = 1024 * 1024;
+            /*console.log(512);
+            var buffer = new ArrayBuffer(TOTAL_MEMORY * 512);*/
+            for(var i = 0;i <= 1000;i= i+10) {
+                try{
+                    log(i);
+                    var buffer = new ArrayBuffer(TOTAL_MEMORY * i);
+                }catch(e){
+                    console.log(e);
+                    log(e);
+                }
+            }
+
+        } catch(e) {
+            log(e);
+        }
+    </script>
+</body>
+</html>

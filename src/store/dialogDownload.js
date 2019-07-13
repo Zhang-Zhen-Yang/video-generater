@@ -2,7 +2,7 @@
  * @Author: zhangzhenyang 
  * @Date: 2019-02-19 10:29:12 
  * @Last Modified by: zhangzhenyang
- * @Last Modified time: 2019-05-10 09:27:09
+ * @Last Modified time: 2019-05-29 16:31:57
  */
 
 
@@ -30,13 +30,13 @@ const store = {
 	mutations: {
 		linkTo(state, {link, timeout = 0}) {
 			setTimeout(()=>{
-				console.log(window.history.length)
+				/* console.log(window.history.length)
 				if(window.history > 1) {
 					window.history.back();
 				} else {
 					location.href = link;
-				}
-				
+				}*/
+				location.href = link;
 			}, timeout)
 		}
 	},
@@ -56,6 +56,18 @@ const store = {
 			let coverUrl = state.coverUrl.trim();
 			let numIid = window.user.numIid || getters.queryObj.numIid;
 			let linkToUrl = window.app == 'wb' ? 'https://wdb.wonbao.net/marketing/mpicvideonew/list' : 'https://wnsp.wonbao.net/mpicvideonew/video/index';
+			let querys = util.getQueryString();
+			console.log(querys);
+			let queryList = [];
+			if(querys.pageSize) {
+				queryList.push(`pageSize=${querys.pageSize}`);
+			}
+			if(querys.pageNo) {
+				queryList.push(`pageNo=${querys.pageNo}`);
+			}
+			if(queryList.length > 0) {
+				linkToUrl += `?${queryList.join('&')}`;
+			}
 			console.log([title, label, coverUrl]);
 			if(!title) {
 				commit('showSnackbar', {text: '请输入标题'});
@@ -93,7 +105,12 @@ const store = {
 							}
 							
 						} else if(XHR.responseText.indexOf('"msg"')>-1){
-							commit('showSnackbar',{text: '上传失败：'+XHR.responseText});
+							if(XHR.responseText.indexOf('自然日内，该用户视频保存次数超过(100次)') > -1) {
+								alert('亲，您今天视频发布的次数已超过淘宝限制（每天100次），请明天再发布。如您着急发布，可以点击下载视频文件，保存到电脑上，手动上传至视频空间并关联到对应宝贝。');
+							} else {
+								commit('showSnackbar',{text: '上传失败：'+XHR.responseText});
+
+							}
 		    			}else{
 							commit('showSnackbar',{text: '上传成功'});
 							if(window.app == 'wb') {
@@ -117,6 +134,7 @@ const store = {
 			let label = state.label.trim();
 			let coverUrl = state.coverUrl.trim();
 			let numIid = window.user.numIid || getters.queryObj.numIid;
+			
 			let linkToUrl = 'https://wdb.wonbao.net/marketing/mpicvideonew/list';
 			console.log([title, label, coverUrl]);
 			if(!title) {

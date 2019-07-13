@@ -12,6 +12,7 @@ import maskReplace from './maskReplace/maskReplace.vue';
 import contentNotice from './contentNotice/contentNotice.vue';
 import materialSpinner from './materialSpinner/materialSpinner.vue';
 import modalDialog from './modalDialog/modalDialog.vue';
+import modalTabDialog from './modalTabDialog/modalTabDialog.vue';
 import dialogTab from './dialogTab/dialogTab.vue';
 import dropdown from './dropdown/dropdown.vue';
 import pagination from './pagination/pagination.vue';
@@ -33,6 +34,7 @@ const options = {
 	contentNotice,
 	materialSpinner,
 	modalDialog,
+	modalTabDialog,
 	dialogTab,
 	dropdown,
 	pagination,

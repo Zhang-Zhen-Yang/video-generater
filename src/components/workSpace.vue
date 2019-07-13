@@ -6,6 +6,7 @@
  */
 <template>
   <div id="work-space">
+    <div id="top-bar-box-shadow"></div>
     <block-slice :dir="'horizontal'" :staticIndex="1" :staticValue="showOptionsPanel ? '500px' : '0px'">
       <!--配置-->
       <div v-if="showOptionsPanel" class="options-wrap" slot="s">
@@ -22,10 +23,10 @@
       <div style="width: 100%;height: 100%;" slot="e">
           <block-slice :dir="'vertical'" :staticIndex="1" :staticValue="'170px'">
             <div slot="e" style="width: 100%;height: 100%;">
-              <block-slice :dir="'horizontal'" :staticIndex="0" :staticValue="'70px'">
+              <block-slice :dir="'horizontal'" :staticIndex="0" :staticValue="'0px'">
                 <!--template bar-->
                 <div slot="s">
-                  <templateBar></templateBar>
+                  <!--<templateBar></templateBar>-->
                 </div>
                 <div slot="e" style="width: 100%;height: 100%;">
                   <block-slice :dir="'vertical'" :staticIndex="1" :staticValue="'75px'">
@@ -65,7 +66,7 @@
       
     </div>
     
-
+    
   </div>
 </template>
 
@@ -105,6 +106,15 @@ export default {
 </script>
 
 <style lang="scss">
+  #top-bar-box-shadow{
+  width: 100%;
+  height: 1px;
+  background-color: transparent;
+  box-shadow: 0 3px 10px #000000;
+  position: absolute;
+  z-index: 1;
+  top: -1px;
+}
   .canvas-wrap{
     width: 100%;
     height: 100%;

@@ -10,11 +10,14 @@
   <div id="app" @dragover="dragover" @drop="drop">
     <topBar></topBar>
     <div class="work-space-wrap">
+      
       <workSpace></workSpace>
     </div>
     <!-- <page-bottom></page-bottom>-->
-    <dialogTemplate v-if="dialogTemplate.show"></dialogTemplate>
-    <dialogAudio v-if="dialogAudio.show"></dialogAudio>
+    <!--<dialogTemplate v-if="dialogTemplate.show"></dialogTemplate>-->
+    <dialogTemplateNew v-if="dialogTemplate.show"></dialogTemplateNew>
+    <!--<dialogAudio v-if="dialogAudio.show"></dialogAudio>-->
+    <dialogAudioNew v-if="dialogAudio.show"></dialogAudioNew>
     <dialogGenerate v-if="dialogGenerate.show"></dialogGenerate>
     <dialogSetting v-if="dialogSetting.show"></dialogSetting>
     <dialogDownload v-show="dialogDownload.show"></dialogDownload>
@@ -33,7 +36,9 @@ import topBar from './components/topBar';
 import workSpace from './components/workSpace';
 import dialogImage from './components/dialogImage/dialogImage';
 import dialogTemplate from './components/dialogTemplate/dialogTemplate';
+import dialogTemplateNew from './components/dialogTemplate/dialogTemplate.new.vue';
 import dialogAudio from './components/dialogAudio/dialogAudio';
+import dialogAudioNew from './components/dialogAudio/dialogAudio.new.vue';
 import dialogGenerate from './components/dialogGenerate/dialogGenerate';
 import dialogSetting from './components/dialogSetting/dialogSetting';
 import dialogDownload from './components/dialogDownload/dialogDownload';
@@ -49,7 +54,9 @@ export default {
     workSpace,
     dialogImage,
     dialogTemplate,
+    dialogTemplateNew,
     dialogAudio,
+    dialogAudioNew,
     dialogGenerate,
     dialogSetting,
     dialogDownload,
@@ -157,13 +164,14 @@ export default {
   width: 100%;
   height: 100%;
 }
+
 #app *{
   box-sizing: border-box;
 }
 .work-space-wrap{
   width: 100%;
   height: 100%;
-  border-top: 56px solid transparent;
+  border-top: 90px solid transparent;
   border-bottom:40px solid #35495E;
 
 }
